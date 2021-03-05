@@ -9,7 +9,7 @@ BlockMgr::~BlockMgr()
 {
 }
 
-void BlockMgr::BlockType()
+void BlockMgr::BlockType(std::string tag)
 {
 }
 

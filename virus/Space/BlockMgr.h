@@ -8,7 +8,7 @@ public:
 	int Start;
 	int End;
 
-	void BlockType();
+	void BlockType(std::string tag);
 
 	void Update(float deltaTime, float time);
 	void Render();

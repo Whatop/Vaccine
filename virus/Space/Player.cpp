@@ -38,15 +38,6 @@ void Player::Update(float deltaTime, float Time)
 	{
 		m_Position.x += 40;
 	}
-	if ((m_Position.x / m_GridSize.x) * m_GridSize.x < 0 && (m_Position.y / m_GridSize.y) * m_GridSize.y < 0)
-		SetPosition((int)(m_Position.x / m_GridSize.x) * m_GridSize.x - m_GridSize.x, (int)(m_Position.y / m_GridSize.y) * m_GridSize.y - m_GridSize.y);
-	else if ((m_Position.x / m_GridSize.x) * m_GridSize.x < 0)
-		SetPosition((int)(m_Position.x / m_GridSize.x) * m_GridSize.x - m_GridSize.x, (int)(m_Position.y / m_GridSize.y) * m_GridSize.y);
-	else if ((m_Position.y / m_GridSize.y) * m_GridSize.y < 0)
-		SetPosition((int)(m_Position.x / m_GridSize.x) * m_GridSize.x, (int)(m_Position.y / m_GridSize.y) * m_GridSize.y - m_GridSize.y);
-	else
-		SetPosition((int)(m_Position.x / m_GridSize.x) * m_GridSize.x, (int)(m_Position.y / m_GridSize.y) * m_GridSize.y);
-
 }
 
 void Player::Render()
