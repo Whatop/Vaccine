@@ -1,6 +1,15 @@
 #pragma once
 class MainScene : public Scene
 {
+	Vec2 m_PrevSize;
+	Vec2 m_TileSize;
+	Vec2 m_GridSize;
+
+	bool m_HideGrid;
+	bool m_Pause;
+
+	std::vector<Sprite*>m_Vertical;
+	std::vector<Sprite*>m_Horizontal;
 public:
 	MainScene();
 	~MainScene();
