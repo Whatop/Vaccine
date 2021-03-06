@@ -7,6 +7,8 @@ class Player : public Object
 	float m_Speed;
 	float dtime;
 
+	bool Movement;
+
 	Vec2 m_TileSize;
 	Vec2 m_GridSize;
 public:
