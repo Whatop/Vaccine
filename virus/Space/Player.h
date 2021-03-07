@@ -6,7 +6,7 @@ class Player : public Object
 	int m_direction;
 	float m_Speed;
 	float dtime;
-
+	float jtime;
 	bool Movement;
 
 	Vec2 m_TileSize;

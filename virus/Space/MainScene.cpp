@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
+#include "BlockMgr.h"
 #include "Player.h"
 
 MainScene::MainScene()
@@ -28,7 +29,21 @@ void MainScene::Init()
 		m_Vertical.push_back(v);
 		m_Horizontal.push_back(h);
 	}
-	ObjMgr->AddObject(new Player(Vec2(20,20)), "Player");//백신 왼쪽위
+	ObjMgr->AddObject(new Player(Vec2(60,60)), "Player");//백신 왼쪽위
+	for (int a = 20; a < 1920; a += 40) {
+		ObjMgr->AddObject(new BlockMgr(Vec2(a, 20), "ground"), "Ground");//
+		ObjMgr->AddObject(new BlockMgr(Vec2(a, 1060), "ground"), "Ground");//벽
+	}
+	for (int a = 20; a < 1060; a += 40) {
+		ObjMgr->AddObject(new BlockMgr(Vec2(20, a), "ground"), "Ground");//벽
+		ObjMgr->AddObject(new BlockMgr(Vec2(1900, a), "ground"), "Ground");//벽
+	}
+
+	ObjMgr->AddObject(new BlockMgr(Vec2(220, 140), "speed"), "Speed");//아이템 스피드 3회
+	ObjMgr->AddObject(new BlockMgr(Vec2(220, 180), "ammor"), "Ammor");//아이템 방어 3회
+	ObjMgr->AddObject(new BlockMgr(Vec2(220, 220), "invincible"), "Invincible");//아이템 무적 1회
+	ObjMgr->AddObject(new BlockMgr(Vec2(220, 260), "heal"), "Heal");//아이템 체력회복 +1 풀리면 점수 오름 2회
+	ObjMgr->AddObject(new BlockMgr(Vec2(220, 300), "random"), "Random");//아이템 랜덤 5회
 }
 
 void MainScene::Release()
