@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "BlockMgr.h"
 
-Player::Player(Vec2 Pos)
+Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 {
 	m_Player = Sprite::Create(L"Painting/Block/Player.png");
 	m_Player->SetParent(this);
@@ -10,23 +10,54 @@ Player::Player(Vec2 Pos)
 
 	m_TileSize = Vec2(40, 40);
 	m_GridSize = Vec2(40, 40);
-
+		
 	Movement = false;
 	jtime = 0.f;
+	m_Hp = 5;
 }
 
 Player::~Player()
 {
 }
 
-void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직일대마다 한개씩 조건 더 추가해야 될수도있음
+void Player::CheatKey()
 {
-	jtime += dt;
-	if (INPUT->GetKey(VK_F2) == KeyState::PRESS)
+	if (INPUT->GetKey(VK_F1) == KeyState::PRESS) // 무적
 	{
 		std::cout << m_Position.x << std::endl;
 		std::cout << m_Position.y << std::endl;
 	}
+	if (INPUT->GetKey(VK_F2) == KeyState::PRESS) // 아이템 랜덤 사용
+	{
+		std::cout << m_Position.x << std::endl;
+		std::cout << m_Position.y << std::endl;
+	}
+	if (INPUT->GetKey(VK_F3) == KeyState::PRESS) // 생명력 증가
+	{
+		if (m_Hp < 5)
+			m_Hp += 1;
+	}
+	if (INPUT->GetKey(VK_F4) == KeyState::PRESS) // 메뉴화면 이동
+	{
+		std::cout << m_Position.x << std::endl;
+		std::cout << m_Position.y << std::endl;
+	}
+	if (INPUT->GetKey(VK_F5) == KeyState::PRESS) // 스테이지 1 이동
+	{
+		std::cout << m_Position.x << std::endl;
+		std::cout << m_Position.y << std::endl;
+	}
+	if (INPUT->GetKey(VK_F6) == KeyState::PRESS) // 스테이지 2 이동
+	{
+		std::cout << m_Position.x << std::endl;
+		std::cout << m_Position.y << std::endl;
+	}
+}
+
+void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직일대마다 한개씩 조건 더 추가해야 될수도있음
+{
+	jtime += dt;
+	
 	if (jtime >= 0.2f) {
 		if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > 60)
 		{
@@ -78,4 +109,5 @@ void Player::Render()
 
 void Player::OnCollision(Object* obj)
 {
+	//아이템구현
 }

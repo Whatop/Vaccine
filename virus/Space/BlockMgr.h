@@ -2,6 +2,7 @@
 class BlockMgr : public Object
 {
 	Sprite* m_Blocks;
+	std::string _tag;
 public:
 	BlockMgr(Vec2, std::string tag);
 	~BlockMgr();
