@@ -13,6 +13,8 @@ MainScene::~MainScene()
 //인트로 만들기 -> 메뉴에선 게임소개, 게임방법, 게임랭킹. 크래디 선택
 void MainScene::Init() // 스테이지 1 배경 신체로 하고, 스테이지 2의 배경을 숲으로 한다. 근대 숲이라고 초록초록하면 분위기가 안사니 
 {
+	UI::GetInst()->Init();
+
 	m_HideGrid = false;
 	m_Pause = false; 
 	
@@ -38,11 +40,10 @@ void MainScene::Init() // 스테이지 1 배경 신체로 하고, 스테이지 2의 배경을 숲으�
 		ObjMgr->AddObject(new BlockMgr(Vec2(a, 20), "ground"), "Ground");//
 		ObjMgr->AddObject(new BlockMgr(Vec2(a, 1060), "ground"), "Ground");//벽
 	}
-	for (int a = 20; a < 1060; a += 40) {
+	for (int a = 60; a < 1060; a += 40) {
 		ObjMgr->AddObject(new BlockMgr(Vec2(20, a), "ground"), "Ground");//벽
 		ObjMgr->AddObject(new BlockMgr(Vec2(1900, a), "ground"), "Ground");//벽
 	}
-	UI::GetInst()->Init();
 
 	ObjMgr->AddObject(new BlockMgr(Vec2(220, 140), "speed"), "Speed");//아이템 스피드 3회
 	ObjMgr->AddObject(new BlockMgr(Vec2(220, 180), "ammor"), "Ammor");//아이템 방어 3회
