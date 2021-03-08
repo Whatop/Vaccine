@@ -11,9 +11,9 @@ UI::~UI()
 
 void UI::Init()
 {
-	m_UI = Sprite::Create(L"Painting/Map/UI.png");
+	//m_UI = Sprite::Create(L"Painting/Map/UI.png");
 	m_Text = new TextMgr();
-	m_Text->Init(65, true, false, "±¼¸²");
+	m_Text->Init(45, true, false, "±¼¸²Ã¼");
 	m_Text->SetColor(255, 255, 255, 255);
 }	
 
@@ -33,6 +33,6 @@ void UI::Update()
 void UI::Render()
 {
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print(std::to_string(m_Hp), 100, 200);
+	m_Text->print("HP : "+std::to_string(m_Hp), 1750, 980);
 	Renderer::GetInst()->GetSprite()->End();
 }
