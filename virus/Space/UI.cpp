@@ -6,12 +6,12 @@ UI::UI()
 }
 
 UI::~UI()
-{
+{	
 }
 
 void UI::Init()
 {
-	m_UI = Sprite::Create(L"Painting/Map/UI.png");
+	//m_UI = Sprite::Create(L"Painting/Map/UI.png");
 	m_Text = new TextMgr();
 	m_Text->Init(65, true, false, "±¼¸²");
 	m_Text->SetColor(255, 255, 255, 255);
