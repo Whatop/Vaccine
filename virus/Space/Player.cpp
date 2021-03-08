@@ -13,7 +13,15 @@ Player::Player(Vec2 Pos) // »ý¸í·Â¿¡ µû¶ó Ä³¸¯ÅÍ »ö±òÀÌ º¯ÇÑ´Ù³×¿ä
 		
 	Movement = false;
 	jtime = 0.f;
+	itime = 0.f;
+	limit = 0.2f;
 	m_Hp = 5;
+	m_Speed = 40;
+
+	_Speed = false;
+	_Heal = false;
+	_Invincible = false;
+	_Ammor = false;
 }
 
 Player::~Player()
@@ -54,11 +62,44 @@ void Player::CheatKey()
 	}
 }
 
+void Player::Buff()
+{
+	
+	if (_Speed) {
+		itime += dt;
+		limit= 0.1f;
+		if (itime >= 5.f) {
+			_Speed = false;
+			itime = 0;
+			limit = 0.2f;
+		}
+	}
+	else if (_Ammor) {
+
+	}
+	else if (_Invincible) {
+
+	}
+	else if (_Heal) {
+		if (m_Hp < 5)
+			m_Hp += 1; 
+		//else
+		//score ¿À¸£µµ·Ï
+	}
+	UI::GetInst()->player_Hp = m_Hp; 
+}
+
 void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷ÀÏ´ë¸¶´Ù ÇÑ°³¾¿ Á¶°Ç ´õ Ãß°¡ÇØ¾ß µÉ¼öµµÀÖÀ½
 {
+	ObjMgr->CollisionCheak(this, "Speed");
+	ObjMgr->CollisionCheak(this, "Ammor");
+	ObjMgr->CollisionCheak(this, "Heal");
+	ObjMgr->CollisionCheak(this, "Invincible");
+	ObjMgr->CollisionCheak(this, "Random");
+
 	jtime += dt;
 	
-	if (jtime >= 0.2f) {
+	if (jtime >= limit) {
 		if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > 60)
 		{
 			Movement = true;
@@ -66,7 +107,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "player"), "Clone");
 				Movement = false;
 			}
-			m_Position.y -= 40;
+			m_Position.y -= m_Speed;
 			jtime = 0.f;
 		}
 		else if (INPUT->GetKey('A') == KeyState::PRESS && m_Position.x > 60)
@@ -76,7 +117,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "player"), "Clone");
 				Movement = false;
 			}
-			m_Position.x -= 40;
+			m_Position.x -= m_Speed;
 			jtime = 0.f;
 		}
 		else if (INPUT->GetKey('S') == KeyState::PRESS && m_Position.y < 1020)
@@ -86,7 +127,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "player"), "Clone");
 				Movement = false;
 			}
-			m_Position.y += 40;
+			m_Position.y += m_Speed;
 			jtime = 0.f;
 		}
 		else if (INPUT->GetKey('D') == KeyState::PRESS && m_Position.x < 1840)
@@ -96,10 +137,13 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "player"), "Clone");
 				Movement = false;
 			}
-			m_Position.x += 40;
+			m_Position.x += m_Speed;
 			jtime = 0.f;
 		}
 	}
+
+	CheatKey();
+	Buff();
 }
 
 void Player::Render()
@@ -110,4 +154,16 @@ void Player::Render()
 void Player::OnCollision(Object* obj)
 {
 	//¾ÆÀÌÅÛ±¸Çö
+	if (obj->m_Tag == "Speed") {
+		_Speed = true;
+	}
+	if (obj->m_Tag == "Ammor") {
+		_Ammor = true;
+	}
+	if (obj->m_Tag == "Invincible") {
+		_Invincible = true;
+	}
+	if (obj->m_Tag == "Heal") {
+		_Heal = true;
+	}
 }

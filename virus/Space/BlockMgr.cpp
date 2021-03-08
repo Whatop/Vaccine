@@ -3,6 +3,8 @@
 
 BlockMgr::BlockMgr(Vec2 Pos,std::string tag)
 {
+	type_item = false;
+	type_enemy = false;
 	BlockType(tag,Pos);
 }
 
@@ -23,23 +25,23 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 	//item
 	if (tag == "speed") {
 		m_Blocks = Sprite::Create(L"Painting/Block/Speed.png");
-		m_Blocks->A = 200;
+		type_item = true;
 	}
 	if (tag == "ammor") {
 		m_Blocks = Sprite::Create(L"Painting/Block/Ammor.png");
-		m_Blocks->A = 200;
+		type_item = true;
 	}
 	if (tag == "invincible") {
 		m_Blocks = Sprite::Create(L"Painting/Block/Invincible.png");
-		m_Blocks->A = 200;
+		type_item = true;
 	}
 	if (tag == "heal") {
 		m_Blocks = Sprite::Create(L"Painting/Block/Heal.png");
-		m_Blocks->A = 200;
+		type_item = true;
 	}
 	if (tag == "random") {
 		m_Blocks = Sprite::Create(L"Painting/Block/Random.png");
-		m_Blocks->A = 200;
+		type_item = true;
 	}
 	//obstacle(장애물)
 	if (tag == "column") {
@@ -67,7 +69,7 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 
 void BlockMgr::Update(float deltaTime, float time)
 {
-	// 움직임, 2스테이지로 넘어가면 성능향상
+	//enemy 움직임, 2스테이지로 넘어가면 성능향상
 	if (_tag == "fast") { 
 	}
 	if (_tag == "flash") {
@@ -76,6 +78,7 @@ void BlockMgr::Update(float deltaTime, float time)
 	}
 	if (_tag == "toxino") {
 	}
+	
 }
 
 void BlockMgr::Render()
@@ -85,4 +88,10 @@ void BlockMgr::Render()
 
 void BlockMgr::OnCollision(Object* other)
 {
+	//item
+	if (type_item) {
+		if (other->m_Tag == "Player") {
+			ObjMgr->RemoveObject(this);
+		}
+	}
 }

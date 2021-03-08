@@ -10,6 +10,8 @@ class MainScene : public Scene
 
 	std::vector<Sprite*>m_Vertical;
 	std::vector<Sprite*>m_Horizontal;
+	
+	//TextMgr* m_Text;
 public:
 	MainScene();
 	~MainScene();

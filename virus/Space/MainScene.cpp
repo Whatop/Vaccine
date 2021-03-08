@@ -18,7 +18,11 @@ void MainScene::Init() // 스테이지 1 배경 신체로 하고, 스테이지 2의 배경을 숲으�
 	
 	m_TileSize = Vec2(40, 40);
 	m_GridSize = Vec2(40, 40);
-	
+
+	//m_Text = new TextMgr();
+	//m_Text->Init(32, true, false, "Determination Mono");
+	//m_Text->SetColor(255, 255, 255, 255);
+
 	for (int i = 0; i < 100; i++)
 	{
 		Sprite* v = Sprite::Create(L"Painting/Map/Vertical.png");
@@ -127,5 +131,11 @@ void MainScene::Render()
 		iter->m_Position.x = Camera::GetInst()->m_Position.x + iter->m_Size.x / 2;
 
 		iter->Render();
-	}
+	}/*
+	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y)
+		+ "\n" + std::to_string(dt) + "  " + std::to_string(gt), 250, 900);
+	Renderer::GetInst()->GetSprite()->End();
+
+	*/
 }

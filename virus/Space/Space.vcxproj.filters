@@ -93,6 +93,9 @@
     <ClCompile Include="BlockMgr.cpp">
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -156,6 +159,9 @@
       <Filter>Game\Object\Block</Filter>
     </ClInclude>
     <ClInclude Include="BlockMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
       <Filter>Game\Mgrs</Filter>
     </ClInclude>
   </ItemGroup>
