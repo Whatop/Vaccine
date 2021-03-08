@@ -6,7 +6,7 @@ UI::UI()
 }
 
 UI::~UI()
-{
+{	
 }
 
 void UI::Init()

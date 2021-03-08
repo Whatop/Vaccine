@@ -37,9 +37,9 @@ void SceneDirector::Update(float deltaTime, float time)
 
 void SceneDirector::Render()
 {
+	UI::GetInst()->Render();
 	if (m_CurrentScene)
 		m_CurrentScene->Render();
 	ObjMgr->Render();
-		UI::GetInst()->Render();
 
 }
