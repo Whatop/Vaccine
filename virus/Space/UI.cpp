@@ -30,7 +30,7 @@ void UI::Update()
 	}*/
 }
 
-void UI::Render()
+void UI::Render() // Score
 {
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_Text->print("HP : "+std::to_string(m_Hp), 1750, 980);

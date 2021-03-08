@@ -13,8 +13,6 @@ MainScene::~MainScene()
 //인트로 만들기 -> 메뉴에선 게임소개, 게임방법, 게임랭킹. 크래디 선택
 void MainScene::Init() // 스테이지 1 배경 신체로 하고, 스테이지 2의 배경을 숲으로 한다. 근대 숲이라고 초록초록하면 분위기가 안사니 
 {
-	UI::GetInst()->Init();
-
 	m_HideGrid = false;
 	m_Pause = false; 
 	

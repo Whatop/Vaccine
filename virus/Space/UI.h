@@ -1,5 +1,5 @@
 #pragma once
-class UI : public Singleton<UI>
+class UI : public Singleton<UI>, public Object
 {
 	Sprite* m_UI;
 	TextMgr* m_Text;

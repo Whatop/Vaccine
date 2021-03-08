@@ -26,7 +26,9 @@
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -52,7 +54,9 @@
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="IntroScene.h" />
     <ClInclude Include="MainScene.h" />
+    <ClInclude Include="MenuScene.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectMgr.h" />
     <ClInclude Include="Player.h" />

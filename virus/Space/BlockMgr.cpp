@@ -71,6 +71,7 @@ void BlockMgr::Update(float deltaTime, float time)
 {
 	//enemy 움직임, 2스테이지로 넘어가면 성능향상
 	if (_tag == "fast") { 
+		// 백신선이나 백신에 붙이치면 붉은 Effect나오며 사라짐
 	}
 	if (_tag == "flash") {
 	}
