@@ -15,7 +15,7 @@ void UI::Init()
 	m_Text = new TextMgr();
 	m_Text->Init(65, true, false, "±¼¸²");
 	m_Text->SetColor(255, 255, 255, 255);
-}
+}	
 
 void UI::Release()
 {
@@ -33,6 +33,6 @@ void UI::Update()
 void UI::Render()
 {
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-
+	m_Text->print(std::to_string(m_Hp), 100, 200);
 	Renderer::GetInst()->GetSprite()->End();
 }

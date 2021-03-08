@@ -42,6 +42,7 @@ void MainScene::Init() // 스테이지 1 배경 신체로 하고, 스테이지 2의 배경을 숲으�
 		ObjMgr->AddObject(new BlockMgr(Vec2(20, a), "ground"), "Ground");//벽
 		ObjMgr->AddObject(new BlockMgr(Vec2(1900, a), "ground"), "Ground");//벽
 	}
+	UI::GetInst()->Init();
 
 	ObjMgr->AddObject(new BlockMgr(Vec2(220, 140), "speed"), "Speed");//아이템 스피드 3회
 	ObjMgr->AddObject(new BlockMgr(Vec2(220, 180), "ammor"), "Ammor");//아이템 방어 3회

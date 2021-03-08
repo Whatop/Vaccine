@@ -86,7 +86,7 @@ void Player::Buff()
 		//else
 		//score 오르도록
 	}
-	UI::GetInst()->player_Hp = m_Hp; 
+	UI::GetInst()->m_Hp = m_Hp; 
 }
 
 void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직일대마다 한개씩 조건 더 추가해야 될수도있음
