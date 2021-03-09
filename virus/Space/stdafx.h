@@ -41,6 +41,7 @@ inline void SafeDelete(T*& x);
 #include"Animation.h"
 #include"EffectMgr.h"
 #include"UI.h"
+#include"BackGround.h"
 //
 
 template<class T>

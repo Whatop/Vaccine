@@ -102,7 +102,9 @@
     <ClCompile Include="MenuScene.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Game\Object\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -177,6 +179,8 @@
     <ClInclude Include="MenuScene.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="BackGround.h">
+      <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
