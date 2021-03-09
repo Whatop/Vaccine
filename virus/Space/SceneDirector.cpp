@@ -23,6 +23,11 @@ void SceneDirector::ChangeScene(Scene* newScene)
 	m_CurrentScene->Init();
 }
 
+void SceneDirector::SetScene(SceneState stateScene)
+{
+	m_Scene = stateScene;
+}
+
 void SceneDirector::Update(float deltaTime, float time)
 {
 	Camera::GetInst()->Update(deltaTime, time);
