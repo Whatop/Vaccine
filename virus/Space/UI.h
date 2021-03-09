@@ -1,5 +1,5 @@
 #pragma once
-class UI : public Singleton<UI>, public Object
+class UI : public Singleton<UI>
 {
 	Animation* m_Intro;
 	Animation* m_MenuScene;
@@ -12,6 +12,7 @@ public:
 	~UI();
 
 	int m_Hp;
+	int m_Score;
 	void Init();
 	void Release();
 

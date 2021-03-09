@@ -10,12 +10,14 @@ enum class SceneState {
 	NONE
 };
 
+
 class SceneDirector : public Singleton<SceneDirector>
 {
 	Scene* m_CurrentScene;
 	SceneState m_Scene;
 
 public:
+	
 
 	SceneDirector();
 	~SceneDirector();
