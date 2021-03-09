@@ -8,6 +8,7 @@ public:
 
 	int Start;
 	int End;
+	float ime;
 
 	void Update(float deltaTime, float time);
 	void Render();

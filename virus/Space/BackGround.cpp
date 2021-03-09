@@ -12,6 +12,8 @@ BackGround::BackGround(std::wstring filename, int start, int speed, int end, Vec
 
 	Start = start;
 	End = end;
+
+	m_BackGround->A = 255;
 }
 
 BackGround::~BackGround()

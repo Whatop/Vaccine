@@ -13,8 +13,9 @@ public:
 	~IntroScene();
 
 	float m_Count;
+	float m_Start;
 	int m_Cut;
-
+	bool start;
 	void Init();
 	void Release();
 
