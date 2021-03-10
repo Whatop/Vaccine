@@ -105,6 +105,9 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="GroundMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundMgr.h">
+      <Filter>Game\Mgrs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
