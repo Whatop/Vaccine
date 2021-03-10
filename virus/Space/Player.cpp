@@ -104,7 +104,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 		{
 			Movement = true;
 			if (Movement) {
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "player"), "Clone");
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 				Movement = false;
 			}
 			m_Position.y -= m_Speed;
@@ -114,7 +114,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 		{
 			Movement = true;
 			if (Movement) {
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "player"), "Clone");
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 				Movement = false;
 			}
 			m_Position.x -= m_Speed;
@@ -124,7 +124,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 		{
 			Movement = true;
 			if (Movement) {
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "player"), "Clone");
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 				Movement = false;
 			}
 			m_Position.y += m_Speed;
@@ -134,7 +134,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 		{
 			Movement = true;
 			if (Movement) {
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "player"), "Clone");
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 				Movement = false;
 			}
 			m_Position.x += m_Speed;
