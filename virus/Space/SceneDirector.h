@@ -7,6 +7,8 @@ enum class SceneState {
 	FINAL,
 	DIE,
 	ENDING,
+	STAGE1,
+	STAGE2,
 	NONE
 };
 

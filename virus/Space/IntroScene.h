@@ -6,6 +6,15 @@ public:
 	Sprite* m_IntroCut2;
 	Sprite* m_IntroCut3;
 	Sprite* m_IntroCut4;
+	Sprite* m_IntroCut5;
+	Sprite* m_IntroCut6;
+	Sprite* m_IntroCut7;
+	Sprite* m_IntroCut8;
+	Sprite* m_IntroCut9;
+	Sprite* m_IntroCut10;
+	Sprite* m_IntroCut11;
+	Sprite* m_IntroCut12;
+	Sprite* m_IntroCut13;
 
 	Sprite* m_Skip;
 

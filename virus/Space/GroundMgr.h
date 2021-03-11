@@ -7,7 +7,7 @@ class GroundMgr : public Singleton<GroundMgr>
 	int arr;
 
 public:
-	GroundMgr(Vec2, std::string tag);
+	GroundMgr();
 	~GroundMgr();
 
 	void PlayerPos(Vec2 PlayerPos);

@@ -22,11 +22,11 @@
     <Filter Include="FrameWork\Core">
       <UniqueIdentifier>{94381774-e408-4df3-a1f3-2ae46f6c1ee3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Scene">
-      <UniqueIdentifier>{6a0b488c-024d-464b-b7e5-e43bc432ea1d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Block">
       <UniqueIdentifier>{00a35cc3-1106-484a-9619-ce529d31c265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Scene">
+      <UniqueIdentifier>{6a0b488c-024d-464b-b7e5-e43bc432ea1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +84,7 @@
     <ClCompile Include="TextMgr.cpp">
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
-    <ClCompile Include="MainScene.cpp">
+    <ClCompile Include="Stage2.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -107,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="GroundMgr.cpp">
       <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1.cpp">
+      <Filter>Game\Object\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,7 +167,7 @@
     <ClInclude Include="TextMgr.h">
       <Filter>Game\Mgrs</Filter>
     </ClInclude>
-    <ClInclude Include="MainScene.h">
+    <ClInclude Include="Stage2.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="GroundMgr.h">
       <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1.h">
+      <Filter>Game\Object\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

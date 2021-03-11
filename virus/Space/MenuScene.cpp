@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MenuScene.h"
-#include "MainScene.h"
+#include "Stage1.h"
+#include "Stage2.h"
 #include "MenuScene.h"
 
 MenuScene::MenuScene()
@@ -41,11 +42,12 @@ void MenuScene::Update(float deltaTime, float time)
     if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Start) && INPUT->GetButtonDown() == true)
     {
         ObjMgr->Release();
-        SceneDirector::GetInst()->ChangeScene(new MainScene());
+        SceneDirector::GetInst()->ChangeScene(new Stage1());
     }
     else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Report) && INPUT->GetButtonDown() == true)
     {
         ObjMgr->Release();
+        SceneDirector::GetInst()->ChangeScene(new Stage2());
     }
     else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Way) && INPUT->GetButtonDown() == true)
     {
