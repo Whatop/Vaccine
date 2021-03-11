@@ -11,9 +11,14 @@ Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 	m_Player->SetParent(this);
 	SetPosition(Pos.x,Pos.y);
 
-	m_TileSize = Vec2(40, 40);
-	m_GridSize = Vec2(40, 40);
-		
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1) {
+		m_TileSize = Vec2(60, 60);
+		m_GridSize = Vec2(60, 60);
+	}
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
+		m_TileSize = Vec2(40, 40);
+		m_GridSize = Vec2(40, 40);
+	}
 	Movement = false;
 	jtime = 0.f;
 	itime = 0.f;
@@ -114,7 +119,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 
 	jtime += dt;
 	
-	if (jtime >= limit && SceneDirector::GetInst()->GetScene()==SceneState::STAGE1) {
+	if (jtime >= limit && SceneDirector::GetInst()->GetScene()==SceneState::STAGE2) {
 		if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > 60)
 		{
 			Movement = true;
@@ -156,7 +161,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 			jtime = 0.f;
 		}
 	}
-	else if (jtime >= limit && SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
+	else if (jtime >= limit && SceneDirector::GetInst()->GetScene() == SceneState::STAGE1) {
 	if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > 90)
 	{
 		Movement = true;

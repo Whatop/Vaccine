@@ -8,10 +8,6 @@ public:
 
 	int Start;
 	int End;
-	float ime;
-	float m_Count;
-	int m_Cut;
-	bool m_FrameOne;
 
 	void Update(float deltaTime, float time);
 	void Render();

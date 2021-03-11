@@ -15,7 +15,7 @@ void IntroScene::Init()
 {
 	UI::GetInst()->Init();
 	SoundMgr::GetInst()->Play(L"Intro.wav",false);
-	/*m_IntroCut1 = Sprite::Create(L"Painting/Intro/1.png");
+	m_IntroCut1 = Sprite::Create(L"Painting/Intro/1.png");
 	m_IntroCut1->SetPosition(1920 / 2, 1080 / 2);
 
 	m_IntroCut2 = Sprite::Create(L"Painting/Intro/2.png");
@@ -65,11 +65,10 @@ void IntroScene::Init()
 	m_IntroCut5->A = 0;
 	m_IntroCut4->A = 0;
 	m_IntroCut3->A = 0;
-	m_IntroCut2->A = 0;*/
+	m_IntroCut2->A = 0;
 
 	m_Count = 0;
 	m_Cut = 1;
-	ObjMgr->AddObject(new BackGround(L"Painting/Intro/", 1, 13, 5, Vec2(1920 / 2, 1080 / 2)),"BackGround");
 }
 
 void IntroScene::Release()
@@ -80,123 +79,122 @@ void IntroScene::Update(float deltaTime, float time) //¹é±×¶ó¿îµåÅ¬·¡½º ½á¼­ °£·
 {
 	m_Count += dt;
 
-	/*if (m_Count >= 5.f)
-	{*/
-	//	switch (m_Cut)
-	//	{
-	//	case 1:
-	//		m_IntroCut2->A += 5;
-	//		if (m_IntroCut2->A == 255)
-	//		{
-	//			m_Cut = 2;
-	//			m_Count = 0.f;
-	//		}
-	//		break;
-	//	case 2:
-	//		m_IntroCut3->A += 5;
-	//		m_IntroCut3->A = 0;
-	//		if (m_IntroCut3->A == 255)
-	//		{
-	//			m_Cut = 3;
-	//			m_Count = 0.f;
-	//		}
-	//	case 3:
-	//		m_IntroCut4->A += 5;
-	//		if (m_IntroCut4->A == 255)
-	//		{
-	//			m_Cut = 4;
-	//			m_Count = 0.f;
+	if (m_Count >= 5.f)
+	{
+		switch (m_Cut)
+		{
+		case 1:
+			m_IntroCut2->A += 5;
+			if (m_IntroCut2->A == 255)
+			{
+				m_Cut = 2;
+				m_Count = 0.f;
+			}
+			break;
+		case 2:
+			m_IntroCut3->A += 5;
+			m_IntroCut3->A = 0;
+			if (m_IntroCut3->A == 255)
+			{
+				m_Cut = 3;
+				m_Count = 0.f;
+			}
+		case 3:
+			m_IntroCut4->A += 5;
+			if (m_IntroCut4->A == 255)
+			{
+				m_Cut = 4;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 4:
-	//		m_IntroCut5->A += 5;
-	//		if (m_IntroCut5->A == 255)
-	//		{
-	//			m_Cut = 5;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 4:
+			m_IntroCut5->A += 5;
+			if (m_IntroCut5->A == 255)
+			{
+				m_Cut = 5;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 5:
-	//		m_IntroCut6->A += 5;
-	//		if (m_IntroCut6->A == 255)
-	//		{
-	//			m_Cut = 6;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 5:
+			m_IntroCut6->A += 5;
+			if (m_IntroCut6->A == 255)
+			{
+				m_Cut = 6;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 6:
-	//		m_IntroCut7->A += 5;
-	//		if (m_IntroCut7->A == 255)
-	//		{
-	//			m_Cut = 7;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 6:
+			m_IntroCut7->A += 5;
+			if (m_IntroCut7->A == 255)
+			{
+				m_Cut = 7;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 7:
-	//		m_IntroCut8->A += 5;
-	//		if (m_IntroCut8->A == 255)
-	//		{
-	//			m_Cut = 8;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 7:
+			m_IntroCut8->A += 5;
+			if (m_IntroCut8->A == 255)
+			{
+				m_Cut = 8;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 8:
-	//		m_IntroCut9->A += 5;
-	//		if (m_IntroCut9->A == 255)
-	//		{
-	//			m_Cut = 9;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 8:
+			m_IntroCut9->A += 5;
+			if (m_IntroCut9->A == 255)
+			{
+				m_Cut = 9;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 9:
-	//		m_IntroCut10->A += 5;
-	//		if (m_IntroCut10->A == 255)
-	//		{
-	//			m_Cut = 10;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 9:
+			m_IntroCut10->A += 5;
+			if (m_IntroCut10->A == 255)
+			{
+				m_Cut = 10;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 10:
-	//		m_IntroCut11->A += 5;
-	//		if (m_IntroCut11->A == 255)
-	//		{
-	//			m_Cut = 11;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 10:
+			m_IntroCut11->A += 5;
+			if (m_IntroCut11->A == 255)
+			{
+				m_Cut = 11;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 11:
-	//		m_IntroCut12->A += 5;
-	//		if (m_IntroCut12->A == 255)
-	//		{
-	//			m_Cut = 12;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 11:
+			m_IntroCut12->A += 5;
+			if (m_IntroCut12->A == 255)
+			{
+				m_Cut = 12;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	case 12:
-	//		m_IntroCut13->A += 5;
-	//		if (m_IntroCut13->A == 255)
-	//		{
-	//			m_Cut = 0;
-	//			m_Count = 0.f;
+			}
+			break;
+		case 12:
+			m_IntroCut13->A += 5;
+			if (m_IntroCut13->A == 255)
+			{
+				m_Cut = 0;
+				m_Count = 0.f;
 
-	//		}
-	//		break;
-	//	}
-
-	//}
+			}
+			break;
+		}
+	}
 	if (INPUT->GetKey(VK_SPACE) == KeyState::DOWN)
 	{
 		SoundMgr::GetInst()->Stop();
-		/*m_IntroCut13->A = 0;
+		m_IntroCut13->A = 0;
 		m_IntroCut12->A = 0;
 		m_IntroCut11->A = 0;
 		m_IntroCut10->A = 0;
@@ -208,7 +206,7 @@ void IntroScene::Update(float deltaTime, float time) //¹é±×¶ó¿îµåÅ¬·¡½º ½á¼­ °£·
 		m_IntroCut4->A = 0;
 		m_IntroCut3->A = 0;
 		m_IntroCut2->A = 0;
-		m_IntroCut1->A = 0;*/
+		m_IntroCut1->A = 0;
 
 		start = true;
 	}
@@ -220,10 +218,9 @@ void IntroScene::Update(float deltaTime, float time) //¹é±×¶ó¿îµåÅ¬·¡½º ½á¼­ °£·
 		}
 	}
 }
-
 void IntroScene::Render()
 {
-	/*m_IntroCut1->Render();
+	m_IntroCut1->Render();
 	m_IntroCut2->Render();
 	m_IntroCut3->Render();
 	m_IntroCut4->Render();
@@ -235,5 +232,5 @@ void IntroScene::Render()
 	m_IntroCut10->Render();
 	m_IntroCut11->Render();
 	m_IntroCut12->Render();
-	m_IntroCut13->Render();*/
+	m_IntroCut13->Render();
 }
