@@ -26,17 +26,20 @@ void BackGround::Update(float deltaTime, float time)
 		if (m_Count >= 5.f && m_Cut >= 13)
 		{
 
-			if (m_BackGround->A >= 0)
+			if (m_BackGround->A >= 0&& !m_FrameOne)
 				m_BackGround->A -= 5;
-			else if (m_BackGround->A <= 0) {
+			else if (m_BackGround->A <= 0&& !m_FrameOne) {
+				m_FrameOne = true;
 				m_Cut += 1;
-
-			}
-
-			if () {
 				m_BackGround->m_CurrentFrame += 1;
 			}
-			m_Count = 0;
+			if (!m_FrameOne && m_BackGround->A < 255) {
+				m_BackGround->A += 5;
+			}
+			if (m_BackGround->A >= 255) {
+				m_FrameOne = false;
+				m_Count = 0;
+			}
 		}
 	}
 	if (m_BackGround->m_CurrentFrame >= End - 1)
