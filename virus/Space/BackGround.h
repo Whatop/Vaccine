@@ -9,6 +9,8 @@ public:
 	int Start;
 	int End;
 	float ime;
+	float m_Count;
+	int m_Cut;
 
 	void Update(float deltaTime, float time);
 	void Render();

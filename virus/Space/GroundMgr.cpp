@@ -28,7 +28,7 @@ void GroundMgr::Fill()// 안에 채워주는 친구 생산,위치 설정 코드임
 	if (m_PlayerPos.x > m_LinePos[1].x) {
 			if (m_PlayerPos.y > m_LinePos[1].y) { 
 				
-			}
+			}	
 			else {
 			}
 	}

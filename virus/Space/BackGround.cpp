@@ -12,8 +12,7 @@ BackGround::BackGround(std::wstring filename, int start, int speed, int end, Vec
 
 	Start = start;
 	End = end;
-
-	m_BackGround->A = 255;
+	m_Cut = 0;
 }
 
 BackGround::~BackGround()
@@ -22,6 +21,24 @@ BackGround::~BackGround()
 
 void BackGround::Update(float deltaTime, float time)
 {
+	m_Count += dt;
+	if (SceneDirector::GetInst()->GetScene() == SceneState::INTRO) {
+		if (m_Count >= 5.f && m_Cut >= 13)
+		{
+
+			if (m_BackGround->A >= 0)
+				m_BackGround->A -= 5;
+			else if (m_BackGround->A <= 0) {
+				m_Cut += 1;
+
+			}
+
+			if () {
+				m_BackGround->m_CurrentFrame += 1;
+			}
+			m_Count = 0;
+		}
+	}
 	if (m_BackGround->m_CurrentFrame >= End - 1)
 	{
 		ObjMgr->RemoveObject(this);
