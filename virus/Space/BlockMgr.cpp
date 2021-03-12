@@ -15,6 +15,7 @@ BlockMgr::~BlockMgr()
 void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,무적,생명력),Enemy(속도,크기,점멸,톡시노)
 {
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1) {
+		m_Speed = 60.f;
 		if (tag == "clone") { //클론, 치료되면 이팩트 나오도록 설정 pull 이랑 만났을때 생성 안되도록
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Clone.png");
 			m_Layer = 2;
@@ -69,6 +70,7 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		}
 	}
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
+		m_Speed = 40.f;
 		if (tag == "clone") { //클론, 치료되면 이팩트 나오도록 설정
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Player.png");
 			m_Blocks->A = 200;
@@ -139,8 +141,8 @@ void BlockMgr::Update(float deltaTime, float time)
 	if (_tag == "toxino") {
 	}
 	
-	if (_tag == "pull") {
-
+	if (_tag == "pull") { // 
+		 
 	}
 }
 
@@ -158,7 +160,7 @@ void BlockMgr::OnCollision(Object* other)
 		}
 	}
 	if (_tag == "pull") {
-		if (other->m_Tag == "Player") {
+		if (other->m_Tag == "Clone") {
 			ObjMgr->RemoveObject(this);
 		}
 	}

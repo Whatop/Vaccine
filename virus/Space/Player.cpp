@@ -30,7 +30,7 @@ Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 	_Heal = false;
 	_Invincible = false;
 	_Ammor = false;
-	m_Layer = 1;
+	m_Layer = 3;
 }
 
 Player::~Player()

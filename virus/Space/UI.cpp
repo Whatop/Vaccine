@@ -33,7 +33,7 @@ void UI::Update()
 	
 }
 
-void UI::Render() // Score
+void UI::Render() 
 {
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1 ||
 		SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
