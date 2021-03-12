@@ -30,6 +30,7 @@ Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 	_Heal = false;
 	_Invincible = false;
 	_Ammor = false;
+	m_Layer = 1;
 }
 
 Player::~Player()
@@ -107,9 +108,10 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 		GroundMgr::GetInst()->PlayerPos(m_Position);
 	if (INPUT->GetKey('P') == KeyState::DOWN)
 		GroundMgr::GetInst()->LinePos(m_Position);
-	if (INPUT->GetKey('F') == KeyState::DOWN) {
+	if (INPUT->GetKey('F') == KeyState::DOWN) {//PlayerPos랑 LinePos가 같다면 x나 y 축이 같지 않고 초기 위치로
+												//돌아가거나 벽에 닿는다면 실행 클론과 닿았을때 초기위치를 초기화한다면? 
+												//문제가 될까? 
 		GroundMgr::GetInst()->Fill();
-		std::cout << "생성" << std::endl;
 	}
 	ObjMgr->CollisionCheak(this, "Speed");
 	ObjMgr->CollisionCheak(this, "Ammor");

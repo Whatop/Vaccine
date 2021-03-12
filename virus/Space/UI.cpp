@@ -30,10 +30,7 @@ void UI::Update()
 		if (iter->m_Tag == "Player")
 			PlayerPos = iter->m_Position;
 	}*/
-	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1 ||
-		SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
-
-	}
+	
 }
 
 void UI::Render() // Score
