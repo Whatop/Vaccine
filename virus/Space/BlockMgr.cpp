@@ -138,6 +138,9 @@ void BlockMgr::Update(float deltaTime, float time)
 	if (_tag == "toxino") {
 	}
 	
+	if (_tag == "pull") {
+
+	}
 }
 
 void BlockMgr::Render()
@@ -149,6 +152,11 @@ void BlockMgr::OnCollision(Object* other)
 {
 	//item
 	if (type_item) {
+		if (other->m_Tag == "Player") {
+			ObjMgr->RemoveObject(this);
+		}
+	}
+	if (_tag == "pull") {
 		if (other->m_Tag == "Player") {
 			ObjMgr->RemoveObject(this);
 		}
