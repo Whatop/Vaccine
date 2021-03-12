@@ -23,6 +23,9 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Ground.png");
 			m_Blocks->A = 200;
 		}
+		if (tag == "pull") { //안에 채워주는 친구
+			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Pull.png");
+		}
 		//item
 		if (tag == "speed") {
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Speed.png");
@@ -72,6 +75,9 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		if (tag == "ground") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Ground.png");
 			m_Blocks->A = 200;
+		}
+		if (tag == "pull") { //안에 채워주는 친구
+			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Pull.png");
 		}
 		//item
 		if (tag == "speed") {

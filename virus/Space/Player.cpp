@@ -38,32 +38,32 @@ Player::~Player()
 
 void Player::CheatKey()
 {
-	if (INPUT->GetKey(VK_F1) == KeyState::PRESS) // 무적
+	if (INPUT->GetKey(VK_F1) == KeyState::DOWN) // 무적
 	{
 		std::cout << m_Position.x << std::endl;
 		std::cout << m_Position.y << std::endl;
 	}
-	if (INPUT->GetKey(VK_F2) == KeyState::PRESS) // 아이템 랜덤 사용
+	if (INPUT->GetKey(VK_F2) == KeyState::DOWN) // 아이템 랜덤 사용
 	{
 		std::cout << m_Position.x << std::endl;
 		std::cout << m_Position.y << std::endl;
 	}
-	if (INPUT->GetKey(VK_F3) == KeyState::PRESS) // 생명력 증가
+	if (INPUT->GetKey(VK_F3) == KeyState::DOWN) // 생명력 증가
 	{
 		if (m_Hp < 5)
 			m_Hp += 1;
 	}
-	if (INPUT->GetKey(VK_F4) == KeyState::PRESS) // 메뉴화면 이동
+	if (INPUT->GetKey(VK_F4) == KeyState::DOWN) // 메뉴화면 이동
 	{
 		std::cout << m_Position.x << std::endl;
 		std::cout << m_Position.y << std::endl;
 	}
-	if (INPUT->GetKey(VK_F5) == KeyState::PRESS) // 스테이지 1 이동
+	if (INPUT->GetKey(VK_F5) == KeyState::DOWN) // 스테이지 1 이동
 	{
 		std::cout << m_Position.x << std::endl;
 		std::cout << m_Position.y << std::endl;
 	}
-	if (INPUT->GetKey(VK_F6) == KeyState::PRESS) // 스테이지 2 이동
+	if (INPUT->GetKey(VK_F6) == KeyState::DOWN) // 스테이지 2 이동
 	{
 		std::cout << m_Position.x << std::endl;
 		std::cout << m_Position.y << std::endl;

@@ -7,6 +7,7 @@ class UI : public Singleton<UI>
 	Animation* m_EndScene;
 	Sprite* m_UI;
 	TextMgr* m_Text;
+	float YTT;
 public:
 	UI();
 	~UI();
