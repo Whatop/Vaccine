@@ -19,6 +19,7 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		if (tag == "clone") { //클론, 치료되면 이팩트 나오도록 설정 pull 이랑 만났을때 생성 안되도록
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Clone.png");
 			m_Layer = 2;
+			m_Blocks->A = 100;
 		}
 		if (tag == "ground") {
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Ground.png");
@@ -71,9 +72,9 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 	}
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
 		m_Speed = 40.f;
-		if (tag == "clone") { //클론, 치료되면 이팩트 나오도록 설정
-			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Player.png");
-			m_Blocks->A = 200;
+		if (tag == "clone") { //클론, 치료되면 이팩트 나오도록 설정 pull 이랑 만났을때 생성 안되도록
+			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Clone.png");
+			m_Layer = 2;
 		}
 		if (tag == "ground") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Ground.png");
@@ -142,7 +143,13 @@ void BlockMgr::Update(float deltaTime, float time)
 	}
 	
 	if (_tag == "pull") { // 
-		 
+		ObjMgr->CollisionCheak(this, "Clone");
+		if(player)
+		ObjMgr->CollisionCheak(this, "Player");
+	}
+	if (_tag == "clone") { // 
+		ObjMgr->CollisionCheak(this, "Pull");
+		ObjMgr->CollisionCheak(this, "Player");
 	}
 }
 
@@ -161,7 +168,16 @@ void BlockMgr::OnCollision(Object* other)
 	}
 	if (_tag == "pull") {
 		if (other->m_Tag == "Clone") {
-			ObjMgr->RemoveObject(this);
+		//	ObjMgr->RemoveObject(this);
+			player = true;
 		}
+	}
+	if (_tag == "clone") {
+		if (other->m_Tag == "Pull") {
+			m_Blocks->R = 0;
+			m_Blocks->G = 255;
+			m_Blocks->B = 0;
+			//이팩트 넣어야지
+		} 
 	}
 }

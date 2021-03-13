@@ -26,6 +26,7 @@ public:
 	float
 		DeltaTime,
 		Time;
+	bool m_Pause;
 
 public:
 	HWND GetHwnd() {

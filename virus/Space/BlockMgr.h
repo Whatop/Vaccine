@@ -15,6 +15,8 @@ public:
 	int m_Hp;
 	int player_Hp;// 플레이어의 체력이 적거나 많을때 달라지는것 여유있음 넣자
 	
+	bool player;
+
 	float m_Speed;
 
 	bool left;

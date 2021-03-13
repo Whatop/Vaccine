@@ -6,7 +6,6 @@ class Stage1 : public Scene
 	Vec2 m_GridSize;
 
 	bool m_HideGrid;
-	bool m_Pause;
 
 	std::vector<Sprite*>m_Vertical;
 	std::vector<Sprite*>m_Horizontal;

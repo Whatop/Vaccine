@@ -13,6 +13,7 @@ MenuScene::~MenuScene()
 }
 void MenuScene::Init() 
 {
+    ObjMgr->Release();
     m_Start = Sprite::Create(L"Painting/Button/start.png");
     m_Start->SetPosition(300, 100);
 

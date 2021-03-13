@@ -49,12 +49,23 @@ void App::Run()
 		else
 		{
 			Renderer::GetInst()->Begin();
-			SceneDirector::GetInst()->Update(timeDelta, Time);
-			DeltaTime = timeDelta;
-			Time += timeDelta;
+		INPUT->Update();
+			if (INPUT->GetKey(VK_F8) == KeyState::DOWN)
+			{
+				if (m_Pause)
+					m_Pause = false;
+				else if (!m_Pause)
+					m_Pause = true;
+			}
+			if (!m_Pause)
+			{
+				SceneDirector::GetInst()->Update(timeDelta, Time);
+			}
 			SceneDirector::GetInst()->Render();
 			Renderer::GetInst()->End();
 
+			DeltaTime = timeDelta;
+			Time += timeDelta;
 			lastTime = curTime;
 
 			if (GetAsyncKeyState(VK_ESCAPE))

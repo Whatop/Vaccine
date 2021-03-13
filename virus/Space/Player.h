@@ -1,8 +1,22 @@
 #pragma once
+
+enum class MoveState {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	NONE
+};
+
+#define _left 0
+#define _right 1
+#define _up 2
+#define _down 3
+
 class Player : public Object
 {
 	Sprite* m_Player;
-
+	MoveState m_State;
 	int m_Hp;
 	float m_Speed;
 
@@ -12,7 +26,13 @@ class Player : public Object
 	float limit; // 움직임 제한시간
 	float itime; // 아이템 지속시간
 
-	bool Movement;
+	float xlimit;
+	float ylimit;
+
+	//bool 
+	bool create;
+
+	int Movement;
 	
 	//size
 	Vec2 m_TileSize;
@@ -29,6 +49,7 @@ public:
 
 	void CheatKey();
 	void Buff();
+	void Move();
 
 	void Update(float deltaTime, float Time);
 	void Render();
