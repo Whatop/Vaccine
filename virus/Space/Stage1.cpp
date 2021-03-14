@@ -52,6 +52,14 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	ObjMgr->AddObject(new BlockMgr(Vec2(270, 420 + 30), "heal"), "Heal");//¾ÆÀÌÅÛ Ã¼·ÂÈ¸º¹ +1 Ç®¸®¸é Á¡¼ö ¿À¸§ 2È¸
 	ObjMgr->AddObject(new BlockMgr(Vec2(270, 480) + 30, "random"), "Random");//¾ÆÀÌÅÛ ·£´ý 5È¸
 
+	//Àå¾Ö¹°°ú Àû
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 540 + 30), "column"), "Column");//Àå¾Ö¹°
+
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 600 + 30), "fast"), "Monster");//½ºÇÇµå Àû 1Ä­
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 660 + 30), "flash"), "Monster");//Á¡¸ê Àû 1~ 2Ä­?
+ 	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 780 + 30), "giant"), "Monster");// Å« Àû 2Ä­À¸·Î?
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 900 + 30), "toxino"), "Monster");// Åå½Ã³ë 4Ä­?
+	
 }
 
 void Stage1::Release()

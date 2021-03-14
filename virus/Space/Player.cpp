@@ -206,9 +206,9 @@ void Player::Render()
 {
 	m_Player->Render();
 }
-
+ 
 void Player::OnCollision(Object* obj)
-{
+{ 
 	//아이템구현
 	if (obj->m_Tag == "Speed") {
 		_Speed = true;
@@ -222,7 +222,7 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Heal") {
 		_Heal = true;
 	}
-	if (obj->m_Tag == "Clone") {
+	if (obj->m_Tag == "Clone") {  //클론을 Pull로 아예 바꾸는 형식으로 해야겠음 지금 그냥 클론 발바도 실행되서, Clone이 완성되면 그냥 Pull로 바꾸기
 		create = true;
 		m_State = MoveState::NONE;
 		GroundMgr::GetInst()->PlayerPos(m_Position);

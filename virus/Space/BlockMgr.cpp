@@ -57,16 +57,16 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		}
 
 		//enemy 
-		if (tag == "fast") {
+		if (tag == "fast") { //크기 1 
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Fast.png");
 		}
-		if (tag == "flash") {
+		if (tag == "flash") {//크기 1~2
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Flash.png");
 		}
-		if (tag == "giant") {
+		if (tag == "giant") {//크기 4
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Giant.png");
 		}
-		if (tag == "toxino") {
+		if (tag == "toxino") {//크기 4
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Toxino.png");
 		}
 	}
