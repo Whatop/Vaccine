@@ -55,10 +55,10 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	//Àå¾Ö¹°°ú Àû
 	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 540 + 30), "column"), "Column");//Àå¾Ö¹°
 
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 600 + 30), "fast"), "Monster");//½ºÇÇµå Àû 1Ä­
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 660 + 30), "flash"), "Monster");//Á¡¸ê Àû 1~ 2Ä­?
- 	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 780 + 30), "giant"), "Monster");// Å« Àû 2Ä­À¸·Î?
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 900 + 30), "toxino"), "Monster");// Åå½Ã³ë 4Ä­?
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 300 + 30), "fast"), "Monster");//½ºÇÇµå Àû 1Ä­
+//	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 420 + 60), "flash"), "Monster");//Á¡¸ê Àû 1~ 2Ä­? »çÀÌÁî°¡ ·£´ýÀÌ¶ó À§Ä¡Á¶Á¤ÀÌ µû·Î ÇÊ¿äÇÔ BlockMgr¿¡¼­ Á¶Á¤ÇØ¾ßµÊ
+ 	ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 660 + 60), "giant"), "Monster");// Å« Àû 2Ä­À¸·Î?
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 780 + 60), "toxino"), "Monster");// Åå½Ã³ë 4Ä­?
 	
 }
 

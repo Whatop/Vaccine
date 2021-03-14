@@ -61,7 +61,12 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Fast.png");
 		}
 		if (tag == "flash") {//크기 1~2
+			int random = rand() % 2 + 1;
+			if (random == 1)
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Flash.png");
+
+			if (random == 2)
+				m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/FlashLong.png");
 		}
 		if (tag == "giant") {//크기 4
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Giant.png");
