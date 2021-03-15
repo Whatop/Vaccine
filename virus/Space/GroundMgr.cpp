@@ -38,7 +38,7 @@ void GroundMgr::Fill()// 안에 채워주는 친구 생산,위치 설정 코드임
 	}
 	if (m_PlayerPos.x != m_LinePos[0].x || m_PlayerPos.y != m_LinePos[0].y) {
 		if (m_PlayerPos.x > m_LinePos[0].x) { // 플레이어가 라인보다 클때
-			for (int i = width; m_PlayerPos.x - i > m_LinePos[0].x; i += width) {
+			for (int i = 0; m_PlayerPos.x - i > m_LinePos[0].x; i += width) {
 				if (m_PlayerPos.y > m_LinePos[0].y) { // 플레이어가 라인보다 클때
 					for (int j = 0; m_PlayerPos.y - j > m_LinePos[0].y; j += width) {
 						ObjMgr->AddObject(new BlockMgr(Vec2(m_PlayerPos.x - i, m_PlayerPos.y - j), "pull"), "Pull");//

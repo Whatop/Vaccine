@@ -22,9 +22,9 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	m_TileSize = Vec2(60, 60);
 	m_GridSize = Vec2(60, 60);
 
-	//m_Text = new TextMgr();
-	//m_Text->Init(32, true, false, "Determination Mono");
-	//m_Text->SetColor(255, 255, 255, 255);
+	m_Text = new TextMgr();
+	m_Text->Init(32, true, false, "Determination Mono");
+	m_Text->SetColor(255, 255, 255, 255);
 
 	for (int i = 0; i < 100; i++)
 	{
@@ -59,7 +59,7 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 //	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 420 + 60), "flash"), "Monster");//Á¡¸ê Àû 1~ 2Ä­? »çÀÌÁî°¡ ·£´ýÀÌ¶ó À§Ä¡Á¶Á¤ÀÌ µû·Î ÇÊ¿äÇÔ BlockMgr¿¡¼­ Á¶Á¤ÇØ¾ßµÊ
  	ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 660 + 60), "giant"), "Monster");// Å« Àû 2Ä­À¸·Î?
 	ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 780 + 60), "toxino"), "Monster");// Åå½Ã³ë 4Ä­?
-	
+	//ObjMgr->AddObject(new BackGround(L"Painting/BackGround/Stage1-", 1, 1, 2, Vec2(1920/2, 1080/2)), "BackGround");
 }
 
 void Stage1::Release()
@@ -151,11 +151,9 @@ void Stage1::Render()
 		iter->m_Position.x = Camera::GetInst()->m_Position.x + iter->m_Size.x / 2;
 
 		iter->Render();
-	}/*
+	}
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y)
 		+ "\n" + std::to_string(dt) + "  " + std::to_string(gt), 250, 900);
 	Renderer::GetInst()->GetSprite()->End();
-
-	*/
 }

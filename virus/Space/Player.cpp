@@ -93,30 +93,32 @@ void Player::Buff()
 void Player::Move()
 {
 	jtime += dt;
-	if (jtime >= limit)
+	if (jtime >= limit) {
 		if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > ylimit)
 		{
 			if (!create)
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone"); 
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+
 			if (m_State == MoveState::NONE) {
 				Movement = _up;
 			}
-			if (Movement != _up && Movement != _down) {
-				GroundMgr::GetInst()->LinePos(m_Position);
-				Movement = _up;
-			}
-			if (m_State == MoveState::UP) {
-				Movement = _up;
-			}
-			m_State = MoveState::UP;
+				if (Movement != _up && Movement != _down) {
+					GroundMgr::GetInst()->LinePos(m_Position);
+					Movement = _up;
+				}
+				if (m_State == MoveState::UP) {
+					Movement = _up;
+				}
+				m_State = MoveState::UP;
 
-			m_Position.y -= m_Speed;
-			jtime = 0.f;
+				m_Position.y -= m_Speed;
+				jtime = 0.f;
+			
 		}
 		else if (INPUT->GetKey('A') == KeyState::PRESS && m_Position.x > xlimit)
 		{
 			if (!create)
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone"); 
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 			if (m_State == MoveState::NONE) {
 				Movement = _left;
 			}
@@ -135,7 +137,7 @@ void Player::Move()
 		else if (INPUT->GetKey('S') == KeyState::PRESS && m_Position.y < 1080 - ylimit)
 		{
 			if (!create)
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone"); 
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 			if (m_State == MoveState::NONE) {
 				Movement = _down;
 			}
@@ -153,8 +155,8 @@ void Player::Move()
 		}
 		else if (INPUT->GetKey('D') == KeyState::PRESS && m_Position.x < 1920 - xlimit)
 		{
-			if(!create)
-			ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone"); 
+			if (!create)
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 
 			if (m_State == MoveState::NONE) {
 				Movement = _right;
@@ -171,7 +173,7 @@ void Player::Move()
 			m_Position.x += m_Speed;
 			jtime = 0.f;
 		}
-
+	}
 }
 
 void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직일대마다 한개씩 조건 더 추가해야 될수도있음
@@ -198,8 +200,8 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	ObjMgr->CollisionCheak(this, "Heal");
 	ObjMgr->CollisionCheak(this, "Invincible");
 	ObjMgr->CollisionCheak(this, "Random");
-	//ObjMgr->CollisionCheak(this, "Clone"); BlockMgr 에서 관리함
-
+	ObjMgr->CollisionCheak(this, "Pull");
+	ObjMgr->CollisionCheak(this, "Clone"); 
 	//
 }
 void Player::Render()
@@ -222,10 +224,15 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Heal") {
 		_Heal = true;
 	}
-	if (obj->m_Tag == "Clone") {  //클론을 Pull로 아예 바꾸는 형식으로 해야겠음 지금 그냥 클론 발바도 실행되서, Clone이 완성되면 그냥 Pull로 바꾸기
+	if (obj->m_Tag == "Pull") {  //클론을 Pull로 아예 바꾸는 형식으로 해야겠음 지금 그냥 클론 발바도 실행되서, Clone이 완성되면 그냥 Pull로 바꾸기
 		create = true;
 		m_State = MoveState::NONE;
 		GroundMgr::GetInst()->PlayerPos(m_Position);
 		GroundMgr::GetInst()->ResetArr();
 	}
+	if (obj->m_Tag == "Clone") {  //클론을 Pull로 아예 바꾸는 형식으로 해야겠음 지금 그냥 클론 발바도 실행되서, Clone이 완성되면 그냥 Pull로 바꾸기
+		create = true;
+		GroundMgr::GetInst()->PlayerPos(m_Position);
+	} // 만약 정말로 사각형이라면 그냥 큰 사진을 불러오는 것이 좋을 것 같음 렉이 너무 걸림
+	
 }

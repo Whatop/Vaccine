@@ -9,6 +9,7 @@ BackGround::BackGround(std::wstring filename, int start, int speed, int end, Vec
 	m_BackGround->SetParent(this);
 	m_BackGround->m_Position = Pos;
 
+	m_Layer = -1;
 	Start = start;
 	End = end;
 }
@@ -19,10 +20,11 @@ BackGround::~BackGround()
 
 void BackGround::Update(float deltaTime, float time)
 {
-	if (m_BackGround->m_CurrentFrame >= End - 1)
-	{
-		ObjMgr->RemoveObject(this);
-	}
+	//if (m_BackGround->m_CurrentFrame >= End - 1)
+	//{
+	//	ObjMgr->RemoveObject(this);
+	//}
+	m_BackGround->Update(deltaTime, time);
 }
 
 void BackGround::Render()

@@ -10,7 +10,7 @@ class Stage1 : public Scene
 	std::vector<Sprite*>m_Vertical;
 	std::vector<Sprite*>m_Horizontal;
 
-	//TextMgr* m_Text;
+	TextMgr* m_Text;
 public:
 	Stage1();
 	~Stage1();

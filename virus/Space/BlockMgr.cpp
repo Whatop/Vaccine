@@ -25,8 +25,18 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Ground.png");
 			m_Blocks->A = 200;
 		}
-		if (tag == "pull") { //안에 채워주는 친구
+		if (tag == "pull") { //안에 채워주는 친구 
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Pull.png");
+			m_Blocks->R = 0;
+			m_Blocks->G = 255;
+			m_Blocks->B = 0;
+			m_Layer = 0;
+		}
+		if (tag == "clone-pull") { 
+			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Clone.png");
+			m_Blocks->R = 0;
+			m_Blocks->G = 255;
+			m_Blocks->B = 0;
 			m_Layer = 0;
 		}
 		//item
@@ -45,7 +55,7 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		if (tag == "heal") {
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Heal.png");
 			type_item = true;
-		}
+		}	
 		if (tag == "random") {
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Random.png");
 			type_item = true;
@@ -87,6 +97,13 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		}
 		if (tag == "pull") { //안에 채워주는 친구
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Pull.png");
+		}
+		if (tag == "clone-pull") {
+			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Pull.png");
+			m_Blocks->R = 0;
+			m_Blocks->G = 255;
+			m_Blocks->B = 0;
+			m_Layer = 0;
 		}
 		//item
 		if (tag == "speed") {
@@ -149,8 +166,10 @@ void BlockMgr::Update(float deltaTime, float time)
 	
 	if (_tag == "pull") { // 
 		ObjMgr->CollisionCheak(this, "Clone");
-		if(player)
 		ObjMgr->CollisionCheak(this, "Player");
+	}
+	if (_tag == "clone-pull") { // 
+			ObjMgr->CollisionCheak(this, "Player");
 	}
 	if (_tag == "clone") { // 
 		ObjMgr->CollisionCheak(this, "Pull");
@@ -171,17 +190,10 @@ void BlockMgr::OnCollision(Object* other)
 			ObjMgr->RemoveObject(this);
 		}
 	}
-	if (_tag == "pull") {
-		if (other->m_Tag == "Clone") {
-		//	ObjMgr->RemoveObject(this);
-			player = true;
-		}
-	}
 	if (_tag == "clone") {
 		if (other->m_Tag == "Pull") {
-			m_Blocks->R = 0;
-			m_Blocks->G = 255;
-			m_Blocks->B = 0;
+			ObjMgr->AddObject(new BlockMgr(m_Position, "clone-pull"), "Pull");
+				ObjMgr->RemoveObject(this);
 			//이팩트 넣어야지
 		} 
 	}
