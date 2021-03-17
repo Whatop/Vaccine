@@ -113,6 +113,7 @@
     </ClCompile>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="Ground.cpp">
       <Filter>Game\Object\Block</Filter>
 =======
@@ -120,6 +121,8 @@
       <Filter>Game\Mgrs</Filter>
 >>>>>>> 7ee25f05abfc2790c4ef76bb45213d765653f1bb
     </ClCompile>
+=======
+>>>>>>> parent of 39cf70e (Add)
 =======
 >>>>>>> parent of 39cf70e (Add)
   </ItemGroup>
@@ -207,6 +210,7 @@
     </ClInclude>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClInclude Include="Ground.h">
       <Filter>Game\Object\Block</Filter>
 =======
@@ -214,6 +218,8 @@
       <Filter>Game\Mgrs</Filter>
 >>>>>>> 7ee25f05abfc2790c4ef76bb45213d765653f1bb
     </ClInclude>
+=======
+>>>>>>> parent of 39cf70e (Add)
 =======
 >>>>>>> parent of 39cf70e (Add)
   </ItemGroup>
