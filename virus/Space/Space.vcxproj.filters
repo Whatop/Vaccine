@@ -111,6 +111,9 @@
     <ClCompile Include="Stage1.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Game\Object\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Stage1.h">
       <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Game\Object\Block</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
