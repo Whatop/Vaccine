@@ -112,6 +112,7 @@
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="Ground.cpp">
       <Filter>Game\Object\Block</Filter>
 =======
@@ -119,6 +120,8 @@
       <Filter>Game\Mgrs</Filter>
 >>>>>>> 7ee25f05abfc2790c4ef76bb45213d765653f1bb
     </ClCompile>
+=======
+>>>>>>> parent of 39cf70e (Add)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -203,6 +206,7 @@
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClInclude Include="Ground.h">
       <Filter>Game\Object\Block</Filter>
 =======
@@ -210,5 +214,7 @@
       <Filter>Game\Mgrs</Filter>
 >>>>>>> 7ee25f05abfc2790c4ef76bb45213d765653f1bb
     </ClInclude>
+=======
+>>>>>>> parent of 39cf70e (Add)
   </ItemGroup>
 </Project>
