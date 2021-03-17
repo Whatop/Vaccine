@@ -43,8 +43,6 @@ class Player : public Object
 	bool _Invincible;
 	bool _Heal;
 	bool _Ammor;
-
-	LineMgr* m_Line;
 public:
 	Player(Vec2 Pos);
 	~Player();

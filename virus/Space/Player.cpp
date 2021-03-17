@@ -207,7 +207,6 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 void Player::Render()
 {
 	m_Player->Render();
-	m_Line->DrawLine(GroundMgr::GetInst()->m_LinePos, 5);
 }
  
 void Player::OnCollision(Object* obj)

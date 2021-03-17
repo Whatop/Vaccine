@@ -61,7 +61,7 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 780 + 60), "toxino"), "Monster");// Åå½Ã³ë 4Ä­?
 	//ObjMgr->AddObject(new BackGround(L"Painting/BackGround/Stage1-", 1, 1, 2, Vec2(1920/2, 1080/2)), "BackGround");
 }
-	
+
 void Stage1::Release()
 {
 }

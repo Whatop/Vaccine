@@ -135,19 +135,15 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		//enemy 
 		if (tag == "fast") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Fast.png");
-			 type_enemy = true;
 		}
 		if (tag == "flash") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Flash.png");
-			type_enemy = true;
 		}
 		if (tag == "giant") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Giant.png");
-			type_enemy = true;
 		}
 		if (tag == "toxino") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Toxino.png");
-			type_enemy = true;
 		}
 	}
 	m_Blocks->SetParent(this);
@@ -160,7 +156,6 @@ void BlockMgr::Update(float deltaTime, float time)
 	//enemy 움직임, 2스테이지로 넘어가면 성능향상
 	if (_tag == "fast") { 
 		// 백신선이나 백신에 붙이치면 붉은 Effect나오며 사라짐
-
 	}
 	if (_tag == "flash") {
 	}
@@ -201,11 +196,5 @@ void BlockMgr::OnCollision(Object* other)
 				ObjMgr->RemoveObject(this);
 			//이팩트 넣어야지
 		} 
-	}
-	if (type_enemy) {
-		if (other->m_Tag == "Player") {
-			ObjMgr->RemoveObject(this);
-			//이팩트 넣어야지
-		}
 	}
 }
