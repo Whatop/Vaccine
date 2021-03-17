@@ -43,6 +43,7 @@ inline void SafeDelete(T*& x);
 #include"UI.h"
 #include"BackGround.h"
 #include"GroundMgr.h"
+#include"LineMgr.h"
 //
 
 template<class T>
