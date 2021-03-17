@@ -111,8 +111,13 @@
     <ClCompile Include="Stage1.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Ground.cpp">
       <Filter>Game\Object\Block</Filter>
+=======
+    <ClCompile Include="LineMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+>>>>>>> 7ee25f05abfc2790c4ef76bb45213d765653f1bb
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,8 +202,13 @@
     <ClInclude Include="Stage1.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Ground.h">
       <Filter>Game\Object\Block</Filter>
+=======
+    <ClInclude Include="LineMgr.h">
+      <Filter>Game\Mgrs</Filter>
+>>>>>>> 7ee25f05abfc2790c4ef76bb45213d765653f1bb
     </ClInclude>
   </ItemGroup>
 </Project>
