@@ -5,6 +5,7 @@ public:
 	Object* m_Parent;
 	Matrix m_wMat;
 	Vec2 m_Position;
+	Vec2 m_Pos[256] = {};
 	Vec2 m_Scale;
 	Vec2 m_Size;
 	Vec2 m_RotationCenter;

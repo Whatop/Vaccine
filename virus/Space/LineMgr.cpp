@@ -17,6 +17,7 @@ void LineMgr::Init(float width, bool antialias)
 	m_pLine->SetWidth(width);
 	m_pLine->SetAntialias(antialias);
 	m_pLine->SetPattern(0xffffffff);
+	
 }
 
 void LineMgr::DrawLine(Vec2* vec, int size)

@@ -110,6 +110,10 @@ void GroundMgr::ResetArr()
 	arr = 0;
 }
 
+void GroundMgr::SetLine()
+{
+}
+
 void GroundMgr::Update(float deltaTime, float time)
 {
 }

@@ -38,6 +38,11 @@ Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 	_Ammor = false;
 	m_Layer = 3;
 	m_State = MoveState::NONE;
+
+	m_Line = new LineMgr();
+	m_Line->Init(1, true);
+	m_Line->SetColor(D3DXCOLOR(255, 255, 255, 255));
+
 	GroundMgr::GetInst()->PlayerPos(m_Position);
 }
 
@@ -96,8 +101,8 @@ void Player::Move()
 	if (jtime >= limit) {
 		if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > ylimit)
 		{
-			if (!create)
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+			//if (!create)
+				//ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 
 			if (m_State == MoveState::NONE) {
 				Movement = _up;
@@ -117,8 +122,8 @@ void Player::Move()
 		}
 		else if (INPUT->GetKey('A') == KeyState::PRESS && m_Position.x > xlimit)
 		{
-			if (!create)
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+			///if (!create)
+			//	ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 			if (m_State == MoveState::NONE) {
 				Movement = _left;
 			}
@@ -136,8 +141,8 @@ void Player::Move()
 		}
 		else if (INPUT->GetKey('S') == KeyState::PRESS && m_Position.y < 1080 - ylimit)
 		{
-			if (!create)
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+			//if (!create)
+				//ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 			if (m_State == MoveState::NONE) {
 				Movement = _down;
 			}
@@ -155,8 +160,8 @@ void Player::Move()
 		}
 		else if (INPUT->GetKey('D') == KeyState::PRESS && m_Position.x < 1920 - xlimit)
 		{
-			if (!create)
-				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+			//if (!create)
+			//	ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 
 			if (m_State == MoveState::NONE) {
 				Movement = _right;
@@ -194,6 +199,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	if (INPUT->GetKey('F') == KeyState::DOWN) {
 												//돌아가거나 벽에 닿는다면 실행 클론과 닿았을때 초기위치를 초기화한다면? 
 		GroundMgr::GetInst()->Fill();
+		GroundMgr::GetInst()->PlayerPos(m_Position);
 	}
 	ObjMgr->CollisionCheak(this, "Speed");
 	ObjMgr->CollisionCheak(this, "Ammor");
