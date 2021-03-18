@@ -13,6 +13,7 @@ enum class MoveState {
 #define _up 2
 #define _down 3
 
+
 class Player : public Object
 {
 	Sprite* m_Player;
