@@ -22,11 +22,14 @@
     <Filter Include="FrameWork\Core">
       <UniqueIdentifier>{94381774-e408-4df3-a1f3-2ae46f6c1ee3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Block">
-      <UniqueIdentifier>{00a35cc3-1106-484a-9619-ce529d31c265}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Scene">
       <UniqueIdentifier>{6a0b488c-024d-464b-b7e5-e43bc432ea1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Player">
+      <UniqueIdentifier>{00a35cc3-1106-484a-9619-ce529d31c265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\MGR">
+      <UniqueIdentifier>{c855b8b7-984c-49f4-9774-91acb47f4e35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -88,10 +91,7 @@
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Game\Object\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="BlockMgr.cpp">
-      <Filter>Game\Mgrs</Filter>
+      <Filter>Game\Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Game\Mgrs</Filter>
@@ -113,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="LineMgr.cpp">
       <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMgr.cpp">
+      <Filter>Game\Object\MGR</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockMgr.cpp">
+      <Filter>Game\Object\MGR</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,10 +180,7 @@
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Game\Object\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockMgr.h">
-      <Filter>Game\Mgrs</Filter>
+      <Filter>Game\Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Game\Mgrs</Filter>
@@ -199,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="LineMgr.h">
       <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMgr.h">
+      <Filter>Game\Object\MGR</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockMgr.h">
+      <Filter>Game\Object\MGR</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

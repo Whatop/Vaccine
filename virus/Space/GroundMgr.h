@@ -10,7 +10,6 @@ class GroundMgr : public Singleton<GroundMgr>
 	int arr;
 	int width;//Æø
 public:
-	Vec2 m_LinePos[256] = {};
 
 
 	GroundMgr();
