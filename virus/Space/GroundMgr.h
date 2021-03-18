@@ -7,7 +7,6 @@ struct Vertex {
 #define COLORKEY_GREEN D3DCOLOR_ARGB(255,0,133,0)
 class GroundMgr : public Singleton<GroundMgr>
 {
-	LPDIRECT3DDEVICE9 m_pD3DD;
 	int arr;
 	int width;//Æø
 public:

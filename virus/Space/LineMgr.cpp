@@ -13,7 +13,6 @@ LineMgr::~LineMgr()
 void LineMgr::Init(float width, bool antialias)
 {
 	D3DXCreateLine(Renderer::GetInst()->GetDevice(), &m_pLine);
-
 	m_pLine->SetWidth(width);
 	m_pLine->SetAntialias(antialias);
 	m_pLine->SetPattern(0xffffffff);

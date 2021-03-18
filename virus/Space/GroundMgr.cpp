@@ -5,8 +5,7 @@
 GroundMgr::GroundMgr()
 {
 	arr = 1;
-	memset(m_LinePos, 0, sizeof(m_LinePos));
-	m_pD3DD = Direct3DCreate9(D3D_SDK_VERSION);
+	//memset(m_LinePos, 0, sizeof(m_LinePos));
 }
 
 GroundMgr::~GroundMgr()
@@ -26,11 +25,7 @@ void GroundMgr::LinePos(Vec2 LinePos)
 
 void GroundMgr::Fill()// 안에 채워주는 친구 생산,위치 설정 코드임
 {
-	Vertex  v[4] = {
- {m_LinePos[0].x, m_LinePos[0].y, 1.f, 1.f, COLORKEY_GREEN}, //z에는 아무값이 들어가도 상관없다.
- {m_LinePos[1].x, m_LinePos[1].y, 1.f, 1.f, COLORKEY_GREEN}, //w에도 아무값이 들어가도 상관없지만, 4개의 w값이 다 같아야 한다.
- {m_LinePos[2].x, m_LinePos[2].y, 1.f, 1.f, COLORKEY_GREEN},
- {m_LinePos[3].x, m_LinePos[3].y, 1.f, 1.f, COLORKEY_GREEN}};
+	
 
  //if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1) // 지금 클론을 PUll 로 바꿔야되는 상황이기때문에 width가 필요없어질수도 있음
 	//	width = 60;
@@ -115,7 +110,7 @@ void GroundMgr::ResetArr()
 	arr = 0;
 }
 
-void GroundMgr::SetLine()
+void GroundMgr::SetLine() 
 {
 }
 
@@ -125,12 +120,14 @@ void GroundMgr::Update(float deltaTime, float time)
 
 void GroundMgr::Render()
 {
-	m_pD3DD->SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
-	m_pD3DD->DrawPrimitiveUp(D3DPT_TRIANGLESTRIP, 2, v, sizeof(Vertex)); // 정점 배열을 가지고 삼각형들을 그린다.
+	Renderer::GetInst()->GetDevice()->SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
+	Renderer::GetInst()->GetSprite()->End();
+	Vertex  v[4] = {
+ {m_LinePos[0].x, m_LinePos[0].y, 1.f, 1.f, COLORKEY_GREEN}, //z에는 아무값이 들어가도 상관없다.
+ {m_LinePos[1].x, m_LinePos[1].y, 1.f, 1.f, COLORKEY_GREEN}, //w에도 아무값이 들어가도 상관없지만, 4개의 w값이 다 같아야 한다.
+ {m_LinePos[2].x, m_LinePos[2].y, 1.f, 1.f, COLORKEY_GREEN},
+ {m_LinePos[3].x, m_LinePos[3].y, 1.f, 1.f, COLORKEY_GREEN}};
 
-	HRESULT DrawPrimitiveUP(D3DPRIMITIVETYPE PrimitiveType,
-		UINT PrimitiveCount, 
-		CONST void* pVertexStreamZeroData,
-		UINT VertexStreamZeroStride);
-
+	Renderer::GetInst()->GetDevice()->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, v, sizeof(Vertex));
+	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 }

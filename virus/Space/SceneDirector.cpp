@@ -32,6 +32,7 @@ void SceneDirector::Update(float deltaTime, float time)
 {
 	Camera::GetInst()->Update(deltaTime, time);
     UI::GetInst()->Update();
+	GroundMgr::GetInst()->Update(deltaTime, time);
 	ObjMgr->Update(deltaTime, time);
 
 	if (m_CurrentScene)
@@ -42,6 +43,7 @@ void SceneDirector::Update(float deltaTime, float time)
 void SceneDirector::Render()
 {
 	UI::GetInst()->Render();
+	GroundMgr::GetInst()->Render();
 	if (m_CurrentScene)
 		m_CurrentScene->Render();
 	ObjMgr->Render();
