@@ -23,12 +23,21 @@ void GameMgr::Init()
 
 void GameMgr::RankInit()
 {
-	RankingPlayer* dummy = new RankingPlayer();
-	dummy->name = "UNKNOWN";
-	dummy->score = 0;
-	Ranks.push_back(dummy);
-	Ranks.push_back(dummy);
-	Ranks.push_back(dummy);
+	RankingPlayer* player = new RankingPlayer();
+	player->name = "player";
+	player->score = GameMgr::GetInst()->m_Score;
+	GameMgr::GetInst()->Ranks.push_back(player);
+
+	RankingPlayer* sans = new RankingPlayer();
+	sans->name = "cht";
+	sans->score = 9999;
+	RankingPlayer* papyrus = new RankingPlayer();
+	papyrus->name = "PAPYRUS";
+	papyrus->score = 100;
+
+	GameMgr::GetInst()->Ranks.push_back(player);
+	GameMgr::GetInst()->Ranks.push_back(sans);
+	GameMgr::GetInst()->Ranks.push_back(papyrus);
 	m_Score = 0;
 }
 
@@ -165,8 +174,8 @@ void GameMgr::Draw()
 	Vertex  v[4] = {
  {m_LinePos[0].x, m_LinePos[0].y, 1.f, 1.f, COLORKEY_GREEN}, //z에는 아무값이 들어가도 상관없다.
  {m_LinePos[1].x, m_LinePos[1].y, 1.f, 1.f, COLORKEY_GREEN}, //w에도 아무값이 들어가도 상관없지만, 4개의 w값이 다 같아야 한다.
- {m_LinePos[2].x, m_LinePos[2].y, 1.f, 1.f, COLORKEY_GREEN},
- {m_LinePos[3].x, m_LinePos[3].y, 1.f, 1.f, COLORKEY_GREEN} };
+ {m_LinePos[3].x, m_LinePos[3].y, 1.f, 1.f, COLORKEY_GREEN},
+ {m_LinePos[2].x, m_LinePos[2].y, 1.f, 1.f, COLORKEY_GREEN} };
 
 	Renderer::GetInst()->GetDevice()->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, v, sizeof(Vertex));
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);

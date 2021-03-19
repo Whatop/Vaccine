@@ -11,6 +11,7 @@ public:
 };
 struct RankingPlayer
 {
+public:
 	int score;
 	std::string name;
 };

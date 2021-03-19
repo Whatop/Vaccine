@@ -28,6 +28,7 @@
     <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputScoreScene.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="RankScene.cpp" />
@@ -61,6 +62,7 @@
     <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="InputScoreScene.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="LineMgr.h" />
     <ClInclude Include="RankScene.h" />

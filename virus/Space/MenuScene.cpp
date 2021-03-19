@@ -4,6 +4,8 @@
 #include "Stage2.h"
 #include "MenuScene.h"
 #include "RankScene.h"
+#include "IntroScene.h"
+#include "InputScoreScene.h"
 
 MenuScene::MenuScene()
 {
@@ -14,7 +16,6 @@ MenuScene::~MenuScene()
 }
 void MenuScene::Init() 
 {
-    ObjMgr->Release();
     m_Start = Sprite::Create(L"Painting/Button/start.png");
     m_Start->SetPosition(300, 100);
 
@@ -43,28 +44,23 @@ void MenuScene::Update(float deltaTime, float time)
     //게임시작, 게임소개, 게임방법, 게임랭킹(score), 크래딧(credit)
     if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Start) && INPUT->GetButtonDown() == true)
     {
-        ObjMgr->Release();
         SceneDirector::GetInst()->ChangeScene(new Stage1());
     }
-    if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Report) && INPUT->GetButtonDown() == true)
+    else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Report) && INPUT->GetButtonDown() == true)
     {
-        ObjMgr->Release();
         SceneDirector::GetInst()->ChangeScene(new Stage2());
     }
-    if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Way) && INPUT->GetButtonDown() == true)
+    else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Way) && INPUT->GetButtonDown() == true)
     {
-        ObjMgr->Release();
         SceneDirector::GetInst()->ChangeScene(new RankScene());
     }
-    if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Rank) && INPUT->GetButtonDown() == true)
+    else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Rank) && INPUT->GetButtonDown() == true)
     {
-        ObjMgr->Release();
-        SceneDirector::GetInst()->ChangeScene(new RankScene());
+        SceneDirector::GetInst()->ChangeScene(new InputScoreScene());
     }
-    if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Credit) && INPUT->GetButtonDown() == true)
+    else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Credit) && INPUT->GetButtonDown() == true)
     {
-        ObjMgr->Release();
-        SceneDirector::GetInst()->ChangeScene(new Stage2());
+        SceneDirector::GetInst()->ChangeScene(new IntroScene());
     }
 }
 

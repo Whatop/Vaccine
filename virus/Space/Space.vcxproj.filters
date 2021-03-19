@@ -120,6 +120,9 @@
     <ClCompile Include="RankScene.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="InputScoreScene.cpp">
+      <Filter>Game\Object\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -207,6 +210,9 @@
       <Filter>Game\Object\MGR</Filter>
     </ClInclude>
     <ClInclude Include="RankScene.h">
+      <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="InputScoreScene.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
   </ItemGroup>

@@ -37,9 +37,8 @@ void RankScene::Release()
 void RankScene::Update(float deltaTime, float Time)
 {
 
-	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Back) && INPUT->GetButtonDown())
+	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Back) && INPUT->GetButtonDown() == true)
 	{
-		INPUT->ButtonDown(false);
 		SceneDirector::GetInst()->ChangeScene(new MenuScene());
 	}
 }
@@ -50,8 +49,8 @@ void RankScene::Render()
 	m_Back->Render();
 	m_Rank->Render();
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_First->print("NAME : " + GameMgr::GetInst()->Ranks.at(1)->name + " SCORE : " + std::to_string(GameMgr::GetInst()->Ranks.at(1)->score), 700, 300);
-	m_Secend->print("NAME : " + GameMgr::GetInst()->Ranks.at(2)->name + " SCORE : " + std::to_string(GameMgr::GetInst()->Ranks.at(2)->score), 700, 500);
-	m_Third->print("NAME : " + GameMgr::GetInst()->Ranks.at(3)->name + " SCORE : " + std::to_string(GameMgr::GetInst()->Ranks.at(3)->score), 700, 700);
+	m_First->print("NAME : " + GameMgr::GetInst()->Ranks.at(1)->name + " SCORE : " + std::to_string(GameMgr::GetInst()->Ranks.at(1)->score), 600, 300);
+	m_Secend->print("NAME : " + GameMgr::GetInst()->Ranks.at(2)->name + " SCORE : " + std::to_string(GameMgr::GetInst()->Ranks.at(2)->score), 600, 500);
+	m_Third->print("NAME : " + GameMgr::GetInst()->Ranks.at(3)->name + " SCORE : " + std::to_string(GameMgr::GetInst()->Ranks.at(3)->score), 600, 700);
 	Renderer::GetInst()->GetSprite()->End();
 }
