@@ -18,6 +18,7 @@ void GameMgr::Init()
 	m_CreateUI = false;
 
 	SetPlayerStatus(0, 0);
+	arr = 1;
 }
 
 void GameMgr::RankInit()
@@ -38,7 +39,7 @@ void GameMgr::Release()
 void GameMgr::CreatePlayer()
 {
 	// 벽쪽 랜덤 생성 해야됨 1스테이지 2스테이지 다름
-	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
 		ObjMgr->AddObject(new Player(Vec2(90, 90)), "Player");//백신 왼쪽위
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 		ObjMgr->AddObject(new Player(Vec2(60, 60)), "Player");//백신 왼쪽위

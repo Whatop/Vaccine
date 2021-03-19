@@ -39,6 +39,7 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 		m_Vertical.push_back(v);
 		m_Horizontal.push_back(h);
 	}
+	GameMgr::GetInst()->CreatePlayer();
 
 
 

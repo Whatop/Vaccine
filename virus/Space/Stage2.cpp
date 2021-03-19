@@ -19,6 +19,7 @@ void Stage2::Init() // ╫╨евюлаЖ 1 ╧Х╟Ф ╫ец╪╥н го╟М, ╫╨евюлаЖ 2юг ╧Х╟Фю╩ ╫ёю╦╥н г
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE2);
 	m_Pause = false;
 	GameMgr::GetInst()->CreateUI();
+	GameMgr::GetInst()->CreatePlayer();
 	GameMgr::GetInst()->SetLimit();
 	GameMgr::GetInst()->SpawnItem(Vec2(0, 0)); // ╬хабг╔╢б ╠вЁи юс╫цабг╔ юлдё╠╦╟║ ©╣гБаы╪Ж юж╢б╟мю╨ ╬Ь╢ы
 

@@ -108,7 +108,7 @@ void Player::Move()
 				Movement = _up;
 			}
 			if (Movement != _up && Movement != _down) {
-				//GroundMgr::GetInst()->LinePos(m_Position);
+				GameMgr::GetInst()->LinePos(m_Position);
 				Movement = _up;
 			}
 			if (m_State == MoveState::UP) {
@@ -128,7 +128,7 @@ void Player::Move()
 				Movement = _left;
 			}
 			if (Movement != _left && Movement != _right) {
-				//GroundMgr::GetInst()->LinePos(m_Position);
+				GameMgr::GetInst()->LinePos(m_Position);
 				Movement = _left;
 			}
 			if (m_State == MoveState::LEFT) {
@@ -214,6 +214,7 @@ void Player::Render()
 {
 	m_Player->Render();
 	m_Line->DrawLine(GameMgr::GetInst()->m_LinePos, 5);
+	GameMgr::GetInst()->Draw();
 }
 
 void Player::OnCollision(Object* obj)
