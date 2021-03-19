@@ -117,6 +117,9 @@
     <ClCompile Include="BlockMgr.cpp">
       <Filter>Game\Object\MGR</Filter>
     </ClCompile>
+    <ClCompile Include="RankScene.cpp">
+      <Filter>Game\Object\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="BlockMgr.h">
       <Filter>Game\Object\MGR</Filter>
+    </ClInclude>
+    <ClInclude Include="RankScene.h">
+      <Filter>Game\Object\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
