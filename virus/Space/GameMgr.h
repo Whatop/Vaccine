@@ -1,4 +1,8 @@
 #pragma once
+struct Vertex {
+	float x, y, z, w;
+	D3DCOLOR color;
+};
 struct PlayerStatus
 {
 public:
@@ -10,6 +14,7 @@ struct RankingPlayer
 	int score;
 	std::string name;
 };
+#define COLORKEY_GREEN D3DCOLOR_ARGB(255,0,133,0)
 class GameMgr : public Singleton<GameMgr>
 {
 public:
@@ -27,7 +32,6 @@ public:
 		}
 	};
 
-	float XMAX, XMIN, YMAX, YMIN;
 
 	std::vector<RankingPlayer*> Ranks;
 
@@ -39,6 +43,7 @@ public:
 	Vec2 m_PlayerPos;
 	Vec2 m_LinePos[256] = {};
 
+	int arr;
 	int m_Score;
 
 	void Init();
@@ -52,20 +57,21 @@ public:
 	void ReleaseUI();
 	void GameEnd();
 
+	void PlayerPos(Vec2 playerpos);
+	void LinePos(Vec2 linepos);
+	void Fill();
+
 	void SortRanking();
 
-	void ChangeFireMode();
+	void SetPlayerStatus(int hp, float speed);
+	void SetLimit();
 
-	void SetPlayerStatus(int level, int exp, int hp, float speed, int atk, float rpm);
-	void SetLimit(float xmax, float xmin, float ymax, float ymin);
 	void SpawnItem(Vec2 Pos);
 
-	void SpawnMiddleBoss();
-	void SpawnFinalBoss();
-
-	void SpawnEnemy1(Vec2 Pos);
-	void SpawnEnemy2(Vec2 Pos);
-	void SpawnEliteEnemy1(Vec2 Pos);
-	void SpawnEliteEnemy2(Vec2 Pos);
+	void SpawnFast(Vec2 Pos);
+	void SpawnFlash(Vec2 Pos);
+	void SpawnGiant(Vec2 Pos);
+	void SpawnToxino(Vec2 Pos);
+	void Draw();
 };
 

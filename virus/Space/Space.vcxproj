@@ -27,7 +27,6 @@
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="GameMgr.cpp" />
-    <ClCompile Include="GroundMgr.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="LineMgr.cpp" />
@@ -60,7 +59,6 @@
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="GameMgr.h" />
-    <ClInclude Include="GroundMgr.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="LineMgr.h" />

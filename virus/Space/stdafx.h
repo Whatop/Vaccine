@@ -42,7 +42,7 @@ inline void SafeDelete(T*& x);
 #include"EffectMgr.h"
 #include"UI.h"
 #include"BackGround.h"
-#include"GroundMgr.h"
+#include"GameMgr.h"
 #include"LineMgr.h"
 //
 

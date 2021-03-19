@@ -17,8 +17,11 @@ void Stage2::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 {
 	ObjMgr->Release();
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE2);
-	m_Pause = false; 
-	
+	m_Pause = false;
+	GameMgr::GetInst()->CreateUI();
+	GameMgr::GetInst()->SetLimit();
+	GameMgr::GetInst()->SpawnItem(Vec2(0, 0)); // ¾ÈÁÂÇ¥´Â ±×³É ÀÓ½ÃÁÂÇ¥ ÀÌÄ£±¸°¡ ¿µÇâÁÙ¼ö ÀÖ´Â°ÍÀº ¾ø´Ù
+
 	m_TileSize = Vec2(40, 40);
 	m_GridSize = Vec2(40, 40);
 
@@ -36,25 +39,12 @@ void Stage2::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 		m_Vertical.push_back(v);
 		m_Horizontal.push_back(h);
 	}
-	ObjMgr->AddObject(new Player(Vec2(60,60)), "Player");//¹é½Å ¿ÞÂÊÀ§
-	for (int a = 20; a < 1920; a += 40) {
-		ObjMgr->AddObject(new BlockMgr(Vec2(a, 20), "ground"), "Ground");//
-		ObjMgr->AddObject(new BlockMgr(Vec2(a, 1060), "ground"), "Ground");//º®
-	}
-	for (int a = 60; a < 1060; a += 40) {
-		ObjMgr->AddObject(new BlockMgr(Vec2(20, a), "ground"), "Ground");//º®
-		ObjMgr->AddObject(new BlockMgr(Vec2(1900, a), "ground"), "Ground");//º®
-	}
 
-	ObjMgr->AddObject(new BlockMgr(Vec2(220, 140), "speed"), "Speed");//¾ÆÀÌÅÛ ½ºÇÇµå 3È¸
-	ObjMgr->AddObject(new BlockMgr(Vec2(220, 180), "ammor"), "Ammor");//¾ÆÀÌÅÛ ¹æ¾î 3È¸
-	ObjMgr->AddObject(new BlockMgr(Vec2(220, 220), "invincible"), "Invincible");//¾ÆÀÌÅÛ ¹«Àû 1È¸
-	ObjMgr->AddObject(new BlockMgr(Vec2(220, 260), "heal"), "Heal");//¾ÆÀÌÅÛ Ã¼·ÂÈ¸º¹ +1 Ç®¸®¸é Á¡¼ö ¿À¸§ 2È¸
-	ObjMgr->AddObject(new BlockMgr(Vec2(220, 300), "random"), "Random");//¾ÆÀÌÅÛ ·£´ý 5È¸
 }
 
 void Stage2::Release()
 {
+	GameMgr::GetInst()->ReleaseUI();
 }
 
 void Stage2::Update(float deltaTime, float time)

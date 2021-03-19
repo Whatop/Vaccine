@@ -34,7 +34,7 @@ class Player : public Object
 	bool create;
 
 	int Movement;
-	
+
 	//size
 	Vec2 m_TileSize;
 	Vec2 m_GridSize;

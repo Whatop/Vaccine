@@ -17,6 +17,9 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 {
 	ObjMgr->Release();
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE1);
+	GameMgr::GetInst()->CreateUI();
+	GameMgr::GetInst()->SetLimit();
+	GameMgr::GetInst()->SpawnItem(Vec2(0, 0));
 	m_HideGrid = false;
 
 	m_TileSize = Vec2(60, 60);
@@ -36,42 +39,27 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 		m_Vertical.push_back(v);
 		m_Horizontal.push_back(h);
 	}
-	ObjMgr->AddObject(new Player(Vec2(90, 90)), "Player");//¹é½Å ¿ÞÂÊÀ§
-	for (int a = 30; a < 1920; a += 60) {
-		ObjMgr->AddObject(new BlockMgr(Vec2(a, 30), "ground"), "Ground");//
-		ObjMgr->AddObject(new BlockMgr(Vec2(a, 1050), "ground"), "Ground");//º®
-	}
-	for (int a = 90; a < 1050; a += 60) {
-		ObjMgr->AddObject(new BlockMgr(Vec2(30, a), "ground"), "Ground");//º®
-		ObjMgr->AddObject(new BlockMgr(Vec2(1890, a), "ground"), "Ground");//º®
-	}
 
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 240 + 30), "speed"), "Speed");//¾ÆÀÌÅÛ ½ºÇÇµå 3È¸
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 300 + 30), "ammor"), "Ammor");//¾ÆÀÌÅÛ ¹æ¾î 3È¸
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 360 + 30), "invincible"), "Invincible");//¾ÆÀÌÅÛ ¹«Àû 1È¸
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 420 + 30), "heal"), "Heal");//¾ÆÀÌÅÛ Ã¼·ÂÈ¸º¹ +1 Ç®¸®¸é Á¡¼ö ¿À¸§ 2È¸
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 480) + 30, "random"), "Random");//¾ÆÀÌÅÛ ·£´ý 5È¸
+
+
 
 	//Àå¾Ö¹°°ú Àû
 	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 540 + 30), "column"), "Column");//Àå¾Ö¹°
 
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 300 + 30), "fast"), "Monster");//½ºÇÇµå Àû 1Ä­
-//	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 420 + 60), "flash"), "Monster");//Á¡¸ê Àû 1~ 2Ä­? »çÀÌÁî°¡ ·£´ýÀÌ¶ó À§Ä¡Á¶Á¤ÀÌ µû·Î ÇÊ¿äÇÔ BlockMgr¿¡¼­ Á¶Á¤ÇØ¾ßµÊ
- 	ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 660 + 60), "giant"), "Monster");// Å« Àû 2Ä­À¸·Î?
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 780 + 60), "toxino"), "Monster");// Åå½Ã³ë 4Ä­?
 	//ObjMgr->AddObject(new BackGround(L"Painting/BackGround/Stage1-", 1, 1, 2, Vec2(1920/2, 1080/2)), "BackGround");
 }
-	
+
 void Stage1::Release()
 {
+	GameMgr::GetInst()->ReleaseUI();
 }
 
 void Stage1::Update(float deltaTime, float time)
 {
 	if (INPUT->GetKey(VK_F4) == KeyState::DOWN) // ¸Þ´ºÈ­¸é ÀÌµ¿
 	{
-	SceneDirector::GetInst()->ChangeScene(new MenuScene());
-	std::cout << "¸Þ´º·ÎÀÌµ¿" << std::endl;
+		SceneDirector::GetInst()->ChangeScene(new MenuScene());
+		std::cout << "¸Þ´º·ÎÀÌµ¿" << std::endl;
 	}
 	else if (INPUT->GetKey(VK_F5) == KeyState::DOWN) // ½ºÅ×ÀÌÁö 1 ÀÌµ¿
 	{
@@ -83,7 +71,7 @@ void Stage1::Update(float deltaTime, float time)
 		SceneDirector::GetInst()->ChangeScene(new Stage2());
 		std::cout << "2·ÎÀÌµ¿" << std::endl;
 	}
-	
+
 	m_PrevSize = m_GridSize;
 
 
@@ -120,7 +108,7 @@ void Stage1::Update(float deltaTime, float time)
 	{
 		for (int i = 0; i < 100; i++)
 		{
-			m_Vertical.at(i)->SetPosition(m_GridSize.x * i, App::GetInst()->m_Height / 2);
+			m_Vertical.at(i)->SetPosition(m_GridSize.x * i, App::GetInst()->m_Height / static_cast<float>(2));
 			m_Horizontal.at(i)->SetPosition(App::GetInst()->m_Width / 2, m_GridSize.y * i);
 		}
 	}

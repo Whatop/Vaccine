@@ -6,12 +6,12 @@
 
 Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 {
-	if(SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
 		m_Player = Sprite::Create(L"Painting/Stage1/Block/Player.png");
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 		m_Player = Sprite::Create(L"Painting/Stage2/Block/Player.png");
 	m_Player->SetParent(this);
-	SetPosition(Pos.x,Pos.y);
+	SetPosition(Pos.x, Pos.y);
 
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1) {
 		m_TileSize = Vec2(60, 60);
@@ -43,7 +43,7 @@ Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 	m_Line->Init(1, true);
 	m_Line->SetColor(D3DXCOLOR(255, 255, 255, 255));
 
-	GroundMgr::GetInst()->PlayerPos(m_Position);
+	GameMgr::GetInst()->PlayerPos(m_Position);
 }
 
 Player::~Player()
@@ -66,14 +66,14 @@ void Player::CheatKey()
 	{
 		if (m_Hp < 5)
 			m_Hp += 1;
-	}	
+	}
 }
 
 void Player::Buff()
 {
 	if (_Speed) {
 		itime += dt;
-		limit= 0.1f;
+		limit = 0.1f;
 		if (itime >= 5.f) {
 			_Speed = false;
 			itime = 0;
@@ -88,11 +88,11 @@ void Player::Buff()
 	}
 	else if (_Heal) {
 		if (m_Hp < 5)
-			m_Hp += 1; 
+			m_Hp += 1;
 		//else
 		//score 오르도록
 	}
-	UI::GetInst()->m_Hp = m_Hp; 
+	UI::GetInst()->m_Hp = m_Hp;
 }
 
 void Player::Move()
@@ -107,18 +107,18 @@ void Player::Move()
 			if (m_State == MoveState::NONE) {
 				Movement = _up;
 			}
-				if (Movement != _up && Movement != _down) {
-					GroundMgr::GetInst()->LinePos(m_Position);
-					Movement = _up;
-				}
-				if (m_State == MoveState::UP) {
-					Movement = _up;
-				}
-				m_State = MoveState::UP;
+			if (Movement != _up && Movement != _down) {
+				//GroundMgr::GetInst()->LinePos(m_Position);
+				Movement = _up;
+			}
+			if (m_State == MoveState::UP) {
+				Movement = _up;
+			}
+			m_State = MoveState::UP;
 
-				m_Position.y -= m_Speed;
-				jtime = 0.f;
-			
+			m_Position.y -= m_Speed;
+			jtime = 0.f;
+
 		}
 		else if (INPUT->GetKey('A') == KeyState::PRESS && m_Position.x > xlimit)
 		{
@@ -128,7 +128,7 @@ void Player::Move()
 				Movement = _left;
 			}
 			if (Movement != _left && Movement != _right) {
-				GroundMgr::GetInst()->LinePos(m_Position);
+				//GroundMgr::GetInst()->LinePos(m_Position);
 				Movement = _left;
 			}
 			if (m_State == MoveState::LEFT) {
@@ -147,7 +147,7 @@ void Player::Move()
 				Movement = _down;
 			}
 			if (Movement != _up && Movement != _down) {
-				GroundMgr::GetInst()->LinePos(m_Position);
+				GameMgr::GetInst()->LinePos(m_Position);
 				Movement = _down;
 			}
 			if (m_State == MoveState::DOWN) {
@@ -167,7 +167,7 @@ void Player::Move()
 				Movement = _right;
 			}
 			if (Movement != _left && Movement != _right) {
-				GroundMgr::GetInst()->LinePos(m_Position);
+				GameMgr::GetInst()->LinePos(m_Position);
 				Movement = _right;
 			}
 			if (m_State == MoveState::RIGHT) {
@@ -193,13 +193,13 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 		m_Speed = 40;
 
 	if (INPUT->GetKey('O') == KeyState::DOWN) //클론에게 닿거나 FULL 하고 나서 바로
-		GroundMgr::GetInst()->PlayerPos(m_Position);
+		GameMgr::GetInst()->PlayerPos(m_Position);
 	if (INPUT->GetKey('P') == KeyState::DOWN) //클론, 치료된 부분이랑 만나면 안하도록 설정
-		GroundMgr::GetInst()->LinePos(m_Position);
+		GameMgr::GetInst()->LinePos(m_Position);
 	if (INPUT->GetKey('F') == KeyState::DOWN) {
-												//돌아가거나 벽에 닿는다면 실행 클론과 닿았을때 초기위치를 초기화한다면? 
-		GroundMgr::GetInst()->Fill();
-		GroundMgr::GetInst()->PlayerPos(m_Position);
+		//돌아가거나 벽에 닿는다면 실행 클론과 닿았을때 초기위치를 초기화한다면? 
+		GameMgr::GetInst()->Fill();
+		GameMgr::GetInst()->PlayerPos(m_Position);
 	}
 	ObjMgr->CollisionCheak(this, "Speed");
 	ObjMgr->CollisionCheak(this, "Ammor");
@@ -207,17 +207,17 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	ObjMgr->CollisionCheak(this, "Invincible");
 	ObjMgr->CollisionCheak(this, "Random");
 	ObjMgr->CollisionCheak(this, "Pull");
-	ObjMgr->CollisionCheak(this, "Clone"); 
+	ObjMgr->CollisionCheak(this, "Clone");
 	//
 }
 void Player::Render()
 {
 	m_Player->Render();
-	m_Line->DrawLine(GroundMgr::GetInst()->m_LinePos, 5);
+	m_Line->DrawLine(GameMgr::GetInst()->m_LinePos, 5);
 }
- 
+
 void Player::OnCollision(Object* obj)
-{ 
+{
 	//아이템구현
 	if (obj->m_Tag == "Speed") {
 		_Speed = true;
@@ -234,12 +234,11 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Pull") {  //클론을 Pull로 아예 바꾸는 형식으로 해야겠음 지금 그냥 클론 발바도 실행되서, Clone이 완성되면 그냥 Pull로 바꾸기
 		create = true;
 		m_State = MoveState::NONE;
-		GroundMgr::GetInst()->PlayerPos(m_Position);
-		GroundMgr::GetInst()->ResetArr();
+		GameMgr::GetInst()->PlayerPos(m_Position);
 	}
 	if (obj->m_Tag == "Clone") {  //클론을 Pull로 아예 바꾸는 형식으로 해야겠음 지금 그냥 클론 발바도 실행되서, Clone이 완성되면 그냥 Pull로 바꾸기
 		create = true;
-		GroundMgr::GetInst()->PlayerPos(m_Position);
+		GameMgr::GetInst()->PlayerPos(m_Position);
 	} // 만약 정말로 사각형이라면 그냥 큰 사진을 불러오는 것이 좋을 것 같음 렉이 너무 걸림
-	
+
 }

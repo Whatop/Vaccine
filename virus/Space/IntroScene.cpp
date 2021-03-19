@@ -13,8 +13,7 @@ IntroScene::~IntroScene()
 
 void IntroScene::Init()
 {
-	UI::GetInst()->Init();
-	SoundMgr::GetInst()->Play(L"Intro.wav",false);
+	SoundMgr::GetInst()->Play(L"Intro.wav", false);
 	m_IntroCut1 = Sprite::Create(L"Painting/Intro/1.png");
 	m_IntroCut1->SetPosition(1920 / 2, 1080 / 2);
 
