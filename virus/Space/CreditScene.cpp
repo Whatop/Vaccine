@@ -30,8 +30,9 @@ void CreditScene::Update(float deltaTime, float Time)
 	{
 		SceneDirector::GetInst()->ChangeScene(new MenuScene());
 	}
-	if(stoptime >= 1)
+	if(stoptime >= 0.5f)
 	m_BG->Translate(0, -200 * dt);
+
 }
 
 void CreditScene::Render()
