@@ -25,13 +25,16 @@
     <ClCompile Include="BlockMgr.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
+    <ClCompile Include="CreditScene.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
+    <ClCompile Include="Fill.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InputScoreScene.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="RankScene.cpp" />
+    <ClCompile Include="ReportScene.cpp" />
     <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -51,6 +54,7 @@
     <ClCompile Include="TextMgr.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="WayScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -59,13 +63,16 @@
     <ClInclude Include="BlockMgr.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionMgr.h" />
+    <ClInclude Include="CreditScene.h" />
     <ClInclude Include="EffectMgr.h" />
+    <ClInclude Include="Fill.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputScoreScene.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="LineMgr.h" />
     <ClInclude Include="RankScene.h" />
+    <ClInclude Include="ReportScene.h" />
     <ClInclude Include="Stage2.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="Object.h" />
@@ -83,6 +90,7 @@
     <ClInclude Include="TextMgr.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="WayScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

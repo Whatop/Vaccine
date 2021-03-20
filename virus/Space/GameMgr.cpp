@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "UI.h"
 #include "BlockMgr.h"
+#include "Fill.h"
 
 GameMgr::GameMgr()
 {
@@ -18,26 +19,28 @@ void GameMgr::Init()
 	m_CreateUI = false;
 
 	SetPlayerStatus(0, 0);
-	arr = 1;
+	arr = 0;
+	
+	memset(m_LinePos, 90, sizeof(m_LinePos));
 }
 
 void GameMgr::RankInit()
 {
 	RankingPlayer* player = new RankingPlayer();
 	player->name = "player";
-	player->score = GameMgr::GetInst()->m_Score;
-	GameMgr::GetInst()->Ranks.push_back(player);
+	player->score = 1;
 
 	RankingPlayer* sans = new RankingPlayer();
 	sans->name = "cht";
 	sans->score = 9999;
-	RankingPlayer* papyrus = new RankingPlayer();
-	papyrus->name = "PAPYRUS";
-	papyrus->score = 100;
 
-	GameMgr::GetInst()->Ranks.push_back(player);
-	GameMgr::GetInst()->Ranks.push_back(sans);
-	GameMgr::GetInst()->Ranks.push_back(papyrus);
+	RankingPlayer* dummy = new RankingPlayer();
+	dummy->name = "dummy";
+	dummy->score = -10;
+
+	Ranks.push_back(player);
+	Ranks.push_back(dummy);
+	Ranks.push_back(sans);
 	m_Score = 0;
 }
 
@@ -74,7 +77,11 @@ void GameMgr::ReleaseUI()
 	UI::GetInst()->ReleaseInst();
 	m_CreateUI = false;
 }
-
+//	0-------1
+//	|		|
+//	3-------2	
+//
+//
 void GameMgr::GameEnd()
 {
 	//ReleaseUI();
@@ -87,23 +94,25 @@ void GameMgr::GameEnd()
 void GameMgr::PlayerPos(Vec2 playerpos)
 {
 	m_LinePos[0] = playerpos;
+	m_LinePos[4] = m_LinePos[0];
 }
 
 void GameMgr::LinePos(Vec2 linepos)
 {
+	arr++;
 	m_LinePos[arr] = linepos;
 	std::cout << arr << "몇번째턴" << std::endl;
-	arr++;
 }
 
-void GameMgr::Fill()
-{
-	arr = 1;
-}
+
+//bool Sort(const RankingPlayer* pSour, const RankingPlayer* pDest)
+//{
+//	return (pSour->score > pDest->score);
+//} 이걸로 해도 가능함
 
 void GameMgr::SortRanking()
 {
-	std::sort(Ranks.begin(), Ranks.end());
+	std::sort(Ranks.begin(), Ranks.end(), GameMgr::stVECTORsort());
 }
 
 void GameMgr::SetPlayerStatus(int hp, float speed)
@@ -140,11 +149,22 @@ void GameMgr::SetLimit()
 
 void GameMgr::SpawnItem(Vec2 Pos) //Item에 백신이랑 닿았을때 visible 
 {
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 240 + 30), "speed"), "Speed");//아이템 스피드 3회
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 300 + 30), "ammor"), "Ammor");//아이템 방어 3회
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 360 + 30), "invincible"), "Invincible");//아이템 무적 1회
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 420 + 30), "heal"), "Heal");//아이템 체력회복 +1 풀리면 점수 오름 2회
-	ObjMgr->AddObject(new BlockMgr(Vec2(270, 480) + 30, "random"), "Random");//아이템 랜덤 5회
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
+	{
+		ObjMgr->AddObject(new BlockMgr(Vec2(270, 240 + 30), "speed"), "Speed");//아이템 스피드 3회
+		ObjMgr->AddObject(new BlockMgr(Vec2(270, 300 + 30), "ammor"), "Ammor");//아이템 방어 3회
+		ObjMgr->AddObject(new BlockMgr(Vec2(270, 360 + 30), "invincible"), "Invincible");//아이템 무적 1회
+		ObjMgr->AddObject(new BlockMgr(Vec2(270, 420 + 30), "heal"), "Heal");//아이템 체력회복 +1 풀리면 점수 오름 2회
+		ObjMgr->AddObject(new BlockMgr(Vec2(270, 480) + 30, "random"), "Random");//아이템 랜덤 5회
+	}
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
+	{
+		ObjMgr->AddObject(new BlockMgr(Vec2(300, 240 + 20), "speed"), "Speed");//아이템 스피드 3회
+		ObjMgr->AddObject(new BlockMgr(Vec2(300, 280 + 20), "ammor"), "Ammor");//아이템 방어 3회
+		ObjMgr->AddObject(new BlockMgr(Vec2(300, 320 + 20), "invincible"), "Invincible");//아이템 무적 1회
+		ObjMgr->AddObject(new BlockMgr(Vec2(300, 360 + 20), "heal"), "Heal");//아이템 체력회복 +1 풀리면 점수 오름 2회
+		ObjMgr->AddObject(new BlockMgr(Vec2(300, 400 + 20), "random"), "Random");//아이템 랜덤 5회
+	}
 }
 
 void GameMgr::SpawnFast(Vec2 Pos)
@@ -169,14 +189,22 @@ void GameMgr::SpawnToxino(Vec2 Pos)
 
 void GameMgr::Draw()
 {
-	Renderer::GetInst()->GetDevice()->SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
-	Renderer::GetInst()->GetSprite()->End();
-	Vertex  v[4] = {
- {m_LinePos[0].x, m_LinePos[0].y, 1.f, 1.f, COLORKEY_GREEN}, //z에는 아무값이 들어가도 상관없다.
- {m_LinePos[1].x, m_LinePos[1].y, 1.f, 1.f, COLORKEY_GREEN}, //w에도 아무값이 들어가도 상관없지만, 4개의 w값이 다 같아야 한다.
- {m_LinePos[3].x, m_LinePos[3].y, 1.f, 1.f, COLORKEY_GREEN},
- {m_LinePos[2].x, m_LinePos[2].y, 1.f, 1.f, COLORKEY_GREEN} };
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
+	{
+		float posx = (m_LinePos[0].x + m_LinePos[2].x) / 2;
+		float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
+		float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
+		float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
+		ObjMgr->AddObject(new Fill(Vec2(posx , posy ), Vec2(scalex, scaley)), "Square");
+	}
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
+	{
+		float posx = (m_LinePos[0].x + m_LinePos[2].x) / 2;
+		float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
+		float scalex = (m_LinePos[2].x - m_LinePos[0].x + 30) / 60;
+		float scaley = (m_LinePos[2].y - m_LinePos[0].y + 30) / 60;
+		ObjMgr->AddObject(new Fill(Vec2(posx - 20, posy - 20), Vec2(scalex, scaley)), "Square");
+	}
 
-	Renderer::GetInst()->GetDevice()->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, v, sizeof(Vertex));
-	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+
 }

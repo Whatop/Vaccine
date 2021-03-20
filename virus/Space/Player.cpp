@@ -101,8 +101,8 @@ void Player::Move()
 	if (jtime >= limit) {
 		if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > ylimit)
 		{
-			//if (!create)
-				//ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+			if (!create)
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 
 			if (m_State == MoveState::NONE) {
 				Movement = _up;
@@ -122,8 +122,8 @@ void Player::Move()
 		}
 		else if (INPUT->GetKey('A') == KeyState::PRESS && m_Position.x > xlimit)
 		{
-			///if (!create)
-			//	ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+			if (!create)
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 			if (m_State == MoveState::NONE) {
 				Movement = _left;
 			}
@@ -141,8 +141,8 @@ void Player::Move()
 		}
 		else if (INPUT->GetKey('S') == KeyState::PRESS && m_Position.y < 1080 - ylimit)
 		{
-			//if (!create)
-				//ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+			if (!create)
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 			if (m_State == MoveState::NONE) {
 				Movement = _down;
 			}
@@ -160,8 +160,8 @@ void Player::Move()
 		}
 		else if (INPUT->GetKey('D') == KeyState::PRESS && m_Position.x < 1920 - xlimit)
 		{
-			//if (!create)
-			//	ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
+			if (!create)
+				ObjMgr->AddObject(new BlockMgr(Vec2(m_Position.x, m_Position.y), "clone"), "Clone");
 
 			if (m_State == MoveState::NONE) {
 				Movement = _right;
@@ -183,6 +183,7 @@ void Player::Move()
 
 void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직일대마다 한개씩 조건 더 추가해야 될수도있음
 {
+	GameMgr::GetInst()->m_PlayerPos = m_Position;
 	Move();
 	CheatKey();
 	Buff();
@@ -192,13 +193,15 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 		m_Speed = 40;
 
-	if (INPUT->GetKey('O') == KeyState::DOWN) //클론에게 닿거나 FULL 하고 나서 바로
-		GameMgr::GetInst()->PlayerPos(m_Position);
+	if(GameMgr::GetInst()->arr < 4)
+	GameMgr::GetInst()->PlayerPos(m_Position);
+
+	//if (INPUT->GetKey('O') == KeyState::DOWN) //클론에게 닿거나 FULL 하고 나서 바로
 	if (INPUT->GetKey('P') == KeyState::DOWN) //클론, 치료된 부분이랑 만나면 안하도록 설정
 		GameMgr::GetInst()->LinePos(m_Position);
 	if (INPUT->GetKey('F') == KeyState::DOWN) {
 		//돌아가거나 벽에 닿는다면 실행 클론과 닿았을때 초기위치를 초기화한다면? 
-		GameMgr::GetInst()->Fill();
+		GameMgr::GetInst()->Draw();
 		GameMgr::GetInst()->PlayerPos(m_Position);
 	}
 	ObjMgr->CollisionCheak(this, "Speed");
@@ -208,13 +211,17 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	ObjMgr->CollisionCheak(this, "Random");
 	ObjMgr->CollisionCheak(this, "Pull");
 	ObjMgr->CollisionCheak(this, "Clone");
+
+
+
 	//
 }
 void Player::Render()
 {
 	m_Player->Render();
 	m_Line->DrawLine(GameMgr::GetInst()->m_LinePos, 5);
-	GameMgr::GetInst()->Draw();
+	//GameMgr::GetInst()->Draw();
+
 }
 
 void Player::OnCollision(Object* obj)

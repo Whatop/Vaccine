@@ -71,6 +71,8 @@ void Sprite::Render()
 		transForm = GetMatrix();
 	else
 		transForm = Camera::GetInst()->GetWorld() * GetMatrix();
+
+
 	
 	m_pSp->SetTransform(&transForm);
 

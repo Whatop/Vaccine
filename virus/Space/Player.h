@@ -39,13 +39,15 @@ class Player : public Object
 	Vec2 m_TileSize;
 	Vec2 m_GridSize;
 
+
+
 	//buff
 	bool _Speed;
 	bool _Invincible;
 	bool _Heal;
 	bool _Ammor;
 
-	LineMgr* m_Vertex;
+	//LineMgr* m_Vertex;
 	LineMgr* m_Line;
 public:
 	Player(Vec2 Pos);

@@ -3,6 +3,10 @@ struct Vertex {
 	float x, y, z, w;
 	D3DCOLOR color;
 };
+struct vecTown {
+	Vec2 vPos;
+	Vec2 vSize;
+};
 struct PlayerStatus
 {
 public:
@@ -15,7 +19,7 @@ public:
 	int score;
 	std::string name;
 };
-#define COLORKEY_GREEN D3DCOLOR_ARGB(255,0,133,0)
+#define COLORKEY_GREEN D3DCOLOR_ARGB(255,50,133,50)
 class GameMgr : public Singleton<GameMgr>
 {
 public:
@@ -26,7 +30,7 @@ public:
 	{
 		bool operator() (const RankingPlayer* pObject1, const RankingPlayer* pObject2) const
 		{
-			if (pObject1->score < pObject2->score)
+			if (pObject1->score > pObject2->score)
 				return TRUE;
 
 			return FALSE;
@@ -43,6 +47,11 @@ public:
 
 	Vec2 m_PlayerPos;
 	Vec2 m_LinePos[256] = {};
+	LineMgr* m_Line;
+
+	//
+	Vec2 m_vPoint[256] = {};
+	Vec2 m_vecTown[5] = {};
 
 	int arr;
 	int m_Score;
@@ -60,7 +69,6 @@ public:
 
 	void PlayerPos(Vec2 playerpos);
 	void LinePos(Vec2 linepos);
-	void Fill();
 
 	void SortRanking();
 

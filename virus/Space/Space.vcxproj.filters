@@ -31,6 +31,12 @@
     <Filter Include="Game\Object\MGR">
       <UniqueIdentifier>{c855b8b7-984c-49f4-9774-91acb47f4e35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\Scene\Stage">
+      <UniqueIdentifier>{c87ee243-2a0e-4a73-b9e8-c0ca88d5e1b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Scene\Menu">
+      <UniqueIdentifier>{b0862c62-4c5c-4ac4-a691-3c46bbf60ba2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Space.cpp">
@@ -87,9 +93,6 @@
     <ClCompile Include="TextMgr.cpp">
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
-    <ClCompile Include="Stage2.cpp">
-      <Filter>Game\Object\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object\Player</Filter>
     </ClCompile>
@@ -97,15 +100,6 @@
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
     <ClCompile Include="IntroScene.cpp">
-      <Filter>Game\Object\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuScene.cpp">
-      <Filter>Game\Object\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>Game\Object\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage1.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
     <ClCompile Include="LineMgr.cpp">
@@ -117,11 +111,35 @@
     <ClCompile Include="BlockMgr.cpp">
       <Filter>Game\Object\MGR</Filter>
     </ClCompile>
-    <ClCompile Include="RankScene.cpp">
-      <Filter>Game\Object\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="InputScoreScene.cpp">
       <Filter>Game\Object\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Fill.cpp">
+      <Filter>Game\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1.cpp">
+      <Filter>Game\Object\Scene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2.cpp">
+      <Filter>Game\Object\Scene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Game\Object\Scene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditScene.cpp">
+      <Filter>Game\Object\Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportScene.cpp">
+      <Filter>Game\Object\Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="WayScene.cpp">
+      <Filter>Game\Object\Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>Game\Object\Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="RankScene.cpp">
+      <Filter>Game\Object\Scene\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,9 +197,6 @@
     <ClInclude Include="TextMgr.h">
       <Filter>Game\Mgrs</Filter>
     </ClInclude>
-    <ClInclude Include="Stage2.h">
-      <Filter>Game\Object\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game\Object\Player</Filter>
     </ClInclude>
@@ -189,15 +204,6 @@
       <Filter>Game\Mgrs</Filter>
     </ClInclude>
     <ClInclude Include="IntroScene.h">
-      <Filter>Game\Object\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuScene.h">
-      <Filter>Game\Object\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>Game\Object\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage1.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
     <ClInclude Include="LineMgr.h">
@@ -209,11 +215,35 @@
     <ClInclude Include="BlockMgr.h">
       <Filter>Game\Object\MGR</Filter>
     </ClInclude>
-    <ClInclude Include="RankScene.h">
-      <Filter>Game\Object\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="InputScoreScene.h">
       <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Fill.h">
+      <Filter>Game\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1.h">
+      <Filter>Game\Object\Scene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2.h">
+      <Filter>Game\Object\Scene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>Game\Object\Scene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditScene.h">
+      <Filter>Game\Object\Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="ReportScene.h">
+      <Filter>Game\Object\Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="WayScene.h">
+      <Filter>Game\Object\Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>Game\Object\Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="RankScene.h">
+      <Filter>Game\Object\Scene\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

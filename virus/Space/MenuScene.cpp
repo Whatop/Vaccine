@@ -4,8 +4,9 @@
 #include "Stage2.h"
 #include "MenuScene.h"
 #include "RankScene.h"
-#include "IntroScene.h"
-#include "InputScoreScene.h"
+#include "CreditScene.h"
+#include "WayScene.h"
+#include "ReportScene.h"
 
 MenuScene::MenuScene()
 {
@@ -46,21 +47,21 @@ void MenuScene::Update(float deltaTime, float time)
     {
         SceneDirector::GetInst()->ChangeScene(new Stage1());
     }
-    else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Report) && INPUT->GetButtonDown() == true)
+    else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Report) && INPUT->GetButtonDown() == true)
     {
-        SceneDirector::GetInst()->ChangeScene(new Stage2());
+        SceneDirector::GetInst()->ChangeScene(new ReportScene());
     }
     else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Way) && INPUT->GetButtonDown() == true)
     {
-        SceneDirector::GetInst()->ChangeScene(new RankScene());
+        SceneDirector::GetInst()->ChangeScene(new WayScene());
     }
     else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Rank) && INPUT->GetButtonDown() == true)
     {
-        SceneDirector::GetInst()->ChangeScene(new InputScoreScene());
+        SceneDirector::GetInst()->ChangeScene(new RankScene());
     }
     else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Credit) && INPUT->GetButtonDown() == true)
     {
-        SceneDirector::GetInst()->ChangeScene(new IntroScene());
+        SceneDirector::GetInst()->ChangeScene(new CreditScene());
     }
 }
 
