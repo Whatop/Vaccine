@@ -43,6 +43,9 @@ public:
 	bool m_CreatePlayer;
 	bool m_CreateUI;
 
+	int scalex;
+	int scaley;
+
 	PlayerStatus m_PlayerStatus;
 
 	Vec2 m_PlayerPos;
@@ -55,6 +58,7 @@ public:
 
 	int arr;
 	int m_Score;
+	float dtime;
 
 	void Init();
 	void RankInit();

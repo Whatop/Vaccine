@@ -48,7 +48,6 @@ class Player : public Object
 	bool _Ammor;
 
 	//LineMgr* m_Vertex;
-	LineMgr* m_Line;
 public:
 	Player(Vec2 Pos);
 	~Player();

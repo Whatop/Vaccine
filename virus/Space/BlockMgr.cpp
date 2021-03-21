@@ -25,20 +25,6 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Ground.png");
 			m_Blocks->A = 200;
 		}
-		if (tag == "pull") { //안에 채워주는 친구 
-			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Pull.png");
-			m_Blocks->R = 0;
-			m_Blocks->G = 255;
-			m_Blocks->B = 0;
-			m_Layer = 0;
-		}
-		if (tag == "clone-pull") { 
-			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Clone.png");
-			m_Blocks->R = 0;
-			m_Blocks->G = 255;
-			m_Blocks->B = 0;
-			m_Layer = 0;
-		}
 		//item
 		if (tag == "speed") {
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Speed.png");
@@ -95,16 +81,6 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Ground.png");
 			m_Blocks->A = 200;
 		}
-		if (tag == "pull") { //안에 채워주는 친구
-			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Pull.png");
-		}
-		if (tag == "clone-pull") {
-			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Pull.png");
-			m_Blocks->R = 0;
-			m_Blocks->G = 255;
-			m_Blocks->B = 0;
-			m_Layer = 0;
-		}
 		//item
 		if (tag == "speed") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Speed.png");
@@ -157,27 +133,114 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 
 void BlockMgr::Update(float deltaTime, float time)
 {
+	MoveTime += dt;
 	//enemy 움직임, 2스테이지로 넘어가면 성능향상
-	if (_tag == "fast") { 
+	if (_tag == "fast") { // Fill이랑 닿으면 속도 업 + Clone이랑 닿으면 플레이어 피해 입음
 		// 백신선이나 백신에 붙이치면 붉은 Effect나오며 사라짐
+		if (MoveTime > 0.5f) {
+			int XorY = rand() % 2 + 0;
 
-	}
-	if (_tag == "flash") {
-	}
-	if (_tag == "giant") {
-	}
-	if (_tag == "toxino") {
+			if (XorY) { // X
+				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+					Translate(m_Speed, 0);
+				}
+				else if(GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed){
+					Translate(-m_Speed, 0);
+				}
+			}
+			else if (!XorY) { // Y
+				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+					Translate(0, m_Speed);
+				}
+				else if(GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed){
+					Translate(0, -m_Speed);
+				}
+			}
+			else if(m_Position.x < 1080 - m_Speed && m_Position.y > 0 + m_Speed && m_Position.x > 0 + m_Speed && m_Position.x < 1920 - m_Speed){ //랜덤이동
+
+				int move_xy= rand() % 3 % 0;
+
+				if(!move_xy)
+					Translate(0, -m_Speed);
+				else if(move_xy)
+					Translate(0, m_Speed);
+				else if (move_xy + 1)
+					Translate(m_Speed, 0);
+				else if (move_xy + 2)
+					Translate(-m_Speed, 0);
+			}
+			MoveTime = 0;
+		}
 	}
 	
-	if (_tag == "pull") { // 
-		ObjMgr->CollisionCheak(this, "Clone");
-		ObjMgr->CollisionCheak(this, "Player");
+	if (_tag == "flash") {
+		if (MoveTime > 0.75f) {
+			int XorY = rand() % 1 + 0;
+
+			if (XorY) { // X
+				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x) {
+					Translate(m_Speed*2, 0);
+				}
+				else {
+					Translate(-m_Speed*2, 0);
+				}
+			}
+			if (!XorY) { // Y
+				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y) {
+					Translate(0, m_Speed*2);
+				}
+				else {
+					Translate(0, -m_Speed*2);
+				}
+			}
+		}
 	}
-	if (_tag == "clone-pull") { // 
-			ObjMgr->CollisionCheak(this, "Player");
+	if (_tag == "giant") {
+		if (MoveTime > 1) {
+			int XorY = rand() % 1 + 0;
+
+			if (XorY) { // X
+				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x) {
+					Translate(m_Speed, 0);
+				}
+				else {
+					Translate(-m_Speed, 0);
+				}
+			}
+			if (!XorY) { // Y
+				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y) {
+					Translate(0, m_Speed);
+				}
+				else {
+					Translate(0, -m_Speed);
+				}
+			}
+		}
 	}
+	if (_tag == "toxino") {
+		if (MoveTime > 0.5f) {
+			int XorY = rand() % 1 + 0;
+
+			if (XorY) { // X
+				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x) {
+					Translate(m_Speed, 0);
+				}
+				else {
+					Translate(-m_Speed, 0);
+				}
+			}
+			if (!XorY) { // Y
+				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y) {
+					Translate(0, m_Speed);
+				}
+				else {
+					Translate(0, -m_Speed);
+				}
+			}
+		}
+	}
+
 	if (_tag == "clone") { // 
-		ObjMgr->CollisionCheak(this, "Pull");
 		ObjMgr->CollisionCheak(this, "Player");
 	}
 }
@@ -196,14 +259,13 @@ void BlockMgr::OnCollision(Object* other)
 		}
 	}
 	if (_tag == "clone") {
-		if (other->m_Tag == "Pull") {
-			ObjMgr->AddObject(new BlockMgr(m_Position, "clone-pull"), "Pull");
+		if (other->m_Tag == "FCOLBOX") {
 				ObjMgr->RemoveObject(this);
 			//이팩트 넣어야지
 		} 
 	}
 	if (type_enemy) {
-		if (other->m_Tag == "Player") {
+		if (other->m_Tag == "FCOLBOX") {
 			ObjMgr->RemoveObject(this);
 			//이팩트 넣어야지
 		}

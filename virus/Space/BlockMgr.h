@@ -18,6 +18,8 @@ public:
 	bool player;
 
 	float m_Speed;
+	float MoveTime;
+
 
 	bool left;
 	bool right;

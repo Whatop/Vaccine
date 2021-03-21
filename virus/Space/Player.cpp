@@ -39,11 +39,14 @@ Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 	m_Layer = 3;
 	m_State = MoveState::NONE;
 
-	m_Line = new LineMgr();
-	m_Line->Init(1, true);
-	m_Line->SetColor(D3DXCOLOR(255, 255, 255, 255));
+
 
 	GameMgr::GetInst()->PlayerPos(m_Position);
+
+	std::cout << m_Player->m_Rect.left << std::endl;
+	std::cout << m_Player->m_Rect.right << std::endl;
+	std::cout << m_Player->m_Rect.top << std::endl;
+	std::cout << m_Player->m_Rect.bottom << std::endl;
 }
 
 Player::~Player()
@@ -219,7 +222,6 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 void Player::Render()
 {
 	m_Player->Render();
-	m_Line->DrawLine(GameMgr::GetInst()->m_LinePos, 5);
 	//GameMgr::GetInst()->Draw();
 
 }
