@@ -197,7 +197,7 @@ void GameMgr::Draw()
 		float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
 		float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
 		ObjMgr->AddObject(new Fill(Vec2(posx , posy ), Vec2(scalex, scaley),1), "Fill");
-		ObjMgr->AddObject(new Fill(Vec2(posx , posy ), Vec2(scalex, scaley),0), "FCOLBOX");
+		ObjMgr->AddObject(new Fill(Vec2(posx , posy ), Vec2(scalex, scaley),0), "ColBox");
 	}
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 	{
@@ -206,7 +206,7 @@ void GameMgr::Draw()
 		float scalex = (m_LinePos[2].x - m_LinePos[0].x + 30) / 60;
 		float scaley = (m_LinePos[2].y - m_LinePos[0].y + 30) / 60;
 		ObjMgr->AddObject(new Fill(Vec2(posx - 20, posy - 20), Vec2(scalex, scaley), 0), "Fill");
-			ObjMgr->AddObject(new Fill(Vec2(posx - 20, posy - 20), Vec2(scalex, scaley), 1), "FCOLBOX");
+			ObjMgr->AddObject(new Fill(Vec2(posx - 20, posy - 20), Vec2(scalex, scaley), 1), "ColBox");
 	}
 
 

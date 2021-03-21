@@ -51,27 +51,18 @@ void Sprite::Render()
 {
 	if (m_Parent)
 	{
-			if (m_Parent->m_Scale.x == 1)
-				GameMgr::GetInst()->scalex = 0;
-			else
-				GameMgr::GetInst()->scalex = 1;
-
-			if (m_Parent->m_Scale.y == 1)
-				GameMgr::GetInst()->scaley = 0;
-			else
-				GameMgr::GetInst()->scaley = 1;
-
-			SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x/2 -(GameMgr::GetInst()->scalex * m_Size.x * m_Parent->m_Scale.x)
-				, m_Parent->m_Position.y - m_Size.y / 2 - (GameMgr::GetInst()->scaley * m_Size.y * m_Parent->m_Scale.y),
-				m_Parent->m_Position.x + m_Size.x / 2 + (GameMgr::GetInst()->scalex * m_Size.x * m_Parent->m_Scale.x),
-				m_Parent->m_Position.y + m_Size.y / 2 + (GameMgr::GetInst()->scaley * m_Size.y * m_Parent->m_Scale.y));
+			SetRect(&m_Parent->m_Collision,
+				(m_Parent->m_Position.x - (m_Size.x * m_Parent->m_Scale.x) / 2),
+				(m_Parent->m_Position.y - (m_Size.y * m_Parent->m_Scale.y) / 2),
+				(m_Parent->m_Position.x + (m_Size.x * m_Parent->m_Scale.x) / 2)
+				, (m_Parent->m_Position.y + (m_Size.y * m_Parent->m_Scale.y) / 2));
 
 			m_Parent->m_Size = m_Size;
 		
 	}
 	else
 	{
-		SetRect(&m_Collision, m_Position.x - m_Size.x / 2 -(60), m_Position.y - m_Size.y / 2,
+		SetRect(&m_Collision, m_Position.x - m_Size.x / 2 , m_Position.y - m_Size.y / 2,
 			m_Position.x + m_Size.x / 2, m_Position.y + m_Size.y / 2);
 	}
 

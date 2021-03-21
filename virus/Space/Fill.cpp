@@ -25,17 +25,10 @@ void Fill::Update(float deltaTime, float Time)
 		m_Fill->B = 30;
 	}
 	else{
-		ObjMgr->CollisionCheak(this, "Clone");
-		ObjMgr->CollisionCheak(this, "Monster");
 		m_Fill->A = 0;
 		if (type > 1)
 			ObjMgr->RemoveObject(this);
 
-		std::cout << m_Fill->m_Rect.left << std::endl;
-		std::cout << m_Fill->m_Rect.right << std::endl;
-		std::cout << m_Fill->m_Rect.top << std::endl;
-		std::cout << m_Fill->m_Rect.bottom << std::endl;
-		
 		std::cout << m_Collision.left << std::endl;
 		std::cout << m_Collision.right << std::endl;
 		std::cout << m_Collision.top << std::endl;

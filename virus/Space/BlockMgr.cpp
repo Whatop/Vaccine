@@ -242,6 +242,8 @@ void BlockMgr::Update(float deltaTime, float time)
 
 	if (_tag == "clone") { // 
 		ObjMgr->CollisionCheak(this, "Player");
+		//여따가 if문 넣어서 
+		ObjMgr->CollisionCheak(this, "Fill");
 	}
 }
 
@@ -259,15 +261,16 @@ void BlockMgr::OnCollision(Object* other)
 		}
 	}
 	if (_tag == "clone") {
-		if (other->m_Tag == "FCOLBOX") {
+		if (other->m_Tag == "Fill") {
 				ObjMgr->RemoveObject(this);
 			//이팩트 넣어야지
 		} 
 	}
 	if (type_enemy) {
-		if (other->m_Tag == "FCOLBOX") {
-			ObjMgr->RemoveObject(this);
+		if (other->m_Tag == "ColBox") {
+			//ObjMgr->RemoveObject(this);
 			//이팩트 넣어야지
+			m_Hp -= 1; //피 달고 저거 불 판정 넣고 
 		}
 	}
 }
