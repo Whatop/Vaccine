@@ -18,12 +18,10 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		m_Speed = 60.f;
 		if (tag == "clone") { //클론, 치료되면 이팩트 나오도록 설정 pull 이랑 만났을때 생성 안되도록
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Clone.png");
-			m_Layer = 2;
-			m_Blocks->A = 100;
+			m_Layer = -1;
 		}
 		if (tag == "ground") {
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Block/Ground.png");
-			m_Blocks->A = 200;
 		}
 		//item
 		if (tag == "speed") {
@@ -49,7 +47,6 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		//obstacle(장애물)
 		if (tag == "column") {
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Obstacle/Column.png");
-			m_Blocks->A = 200;
 		}
 
 		//enemy 
@@ -87,7 +84,6 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		}
 		if (tag == "ground") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Block/Ground.png");
-			m_Blocks->A = 200;
 		}
 		//item
 		if (tag == "speed") {
@@ -113,7 +109,6 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		//obstacle(장애물)
 		if (tag == "column") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Obstacle/Column.png");
-			m_Blocks->A = 200;
 		}
 
 		//enemy 

@@ -51,11 +51,64 @@ void GameMgr::Release()
 void GameMgr::CreatePlayer()
 {
 	// 벽쪽 랜덤 생성 해야됨 1스테이지 2스테이지 다름
-	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
-		ObjMgr->AddObject(new Player(Vec2(90, 90)), "Player");//백신 왼쪽위
-	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
-		ObjMgr->AddObject(new Player(Vec2(60, 60)), "Player");//백신 왼쪽위
 
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1) {
+
+		int randomposx = rand() % 1920 + 90;
+		int randomposy = rand() % 1080 + 90;
+		int randomxy = rand() % 1 + 0;
+		if (randomxy) {
+			for (; randomposx % 60 != 0; randomposx--) {
+				int LeftRight = rand() % 1 + 0;
+				if(LeftRight)
+				randomposy = 90;
+				else
+					randomposy = 1080-90;
+
+			}
+			randomposx += 30;
+		}
+		else if (!randomxy) {
+			for (; randomposy % 60 != 0; randomposy--) {
+				int LeftRight = rand() % 1 + 0;
+				if (LeftRight)
+					randomposx = 90;
+				else
+					randomposx = 1920 - 90;
+
+			}
+			randomposy += 30;
+		}
+		ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");//백신 왼쪽위
+	}
+		if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
+			int randomposx = rand() % 1920 + 60;
+			int randomposy = rand() % 1080 + 60;
+			int randomxy = rand() % 1 + 0;
+			if (randomxy) {
+				for (; randomposx % 40 != 0; randomposx--) {
+					int LeftRight = rand() % 1 + 0;
+					if (LeftRight)
+						randomposy = 60;
+					else
+						randomposy = 1080 - 60;
+
+				}
+				randomposx += 20;
+			}
+			else if (!randomxy) {
+				for (; randomposy % 40 != 0; randomposy--) {
+					int LeftRight = rand() % 1 + 0;
+					if (LeftRight)
+						randomposx = 60;
+					else
+						randomposx = 1920 - 60;
+
+				}
+				randomposy += 30;
+			}
+			ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");//백신 왼쪽위
+		}
 	m_CreatePlayer = true;
 }
 
