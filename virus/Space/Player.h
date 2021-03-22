@@ -27,6 +27,10 @@ class Player : public Object
 	float limit; // 움직임 제한시간
 	float itime; // 아이템 지속시간
 
+	float m_Invincible; // 무적
+	float m_hit; // 맞을때 무적
+
+
 	float xlimit;
 	float ylimit;
 
@@ -46,6 +50,7 @@ class Player : public Object
 	bool _Invincible;
 	bool _Heal;
 	bool _Ammor;
+	bool _Hit; // 맞을때 무적
 
 	//LineMgr* m_Vertex;
 public:
@@ -55,6 +60,7 @@ public:
 	void CheatKey();
 	void Buff();
 	void Move();
+	void Hp();
 
 	void Update(float deltaTime, float Time);
 	void Render();

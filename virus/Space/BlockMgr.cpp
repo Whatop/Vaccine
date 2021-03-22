@@ -55,6 +55,8 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		//enemy 
 		if (tag == "fast") { //크기 1 
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Fast.png");
+			type_enemy = true;
+			m_Hp = 1;
 		}
 		if (tag == "flash") {//크기 1~2
 			int random = rand() % 2 + 1;
@@ -63,12 +65,18 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 
 			if (random == 2)
 				m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/FlashLong.png");
+			m_Hp = 1;
+			type_enemy = true;
 		}
 		if (tag == "giant") {//크기 4
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Giant.png");
+			type_enemy = true;
+			m_Hp = 1;
 		}
 		if (tag == "toxino") {//크기 4
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Toxino.png");
+			type_enemy = true;
+			m_Hp = 3;
 		}
 	}
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
@@ -112,18 +120,22 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 		if (tag == "fast") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Fast.png");
 			 type_enemy = true;
+			 m_Hp = 1;
 		}
 		if (tag == "flash") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Flash.png");
 			type_enemy = true;
+			m_Hp = 1;
 		}
 		if (tag == "giant") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Giant.png");
 			type_enemy = true;
+			m_Hp = 1;
 		}
 		if (tag == "toxino") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Toxino.png");
 			type_enemy = true;
+			m_Hp = 3;
 		}
 	}
 	m_Blocks->SetParent(this);
@@ -156,19 +168,7 @@ void BlockMgr::Update(float deltaTime, float time)
 					Translate(0, -m_Speed);
 				}
 			}
-			else if(m_Position.x < 1080 - m_Speed && m_Position.y > 0 + m_Speed && m_Position.x > 0 + m_Speed && m_Position.x < 1920 - m_Speed){ //랜덤이동
-
-				int move_xy= rand() % 3 % 0;
-
-				if(!move_xy)
-					Translate(0, -m_Speed);
-				else if(move_xy)
-					Translate(0, m_Speed);
-				else if (move_xy + 1)
-					Translate(m_Speed, 0);
-				else if (move_xy + 2)
-					Translate(-m_Speed, 0);
-			}
+		
 			MoveTime = 0;
 		}
 	}
@@ -241,9 +241,12 @@ void BlockMgr::Update(float deltaTime, float time)
 	}
 
 	if (_tag == "clone") { // 
-		ObjMgr->CollisionCheak(this, "Player");
-		//여따가 if문 넣어서 
 		ObjMgr->CollisionCheak(this, "Fill");
+	}
+	if (type_enemy) {
+		ObjMgr->CollisionCheak(this, "ColBox");
+		if(m_Hp <= 0)
+			ObjMgr->RemoveObject(this);
 	}
 }
 
@@ -268,7 +271,7 @@ void BlockMgr::OnCollision(Object* other)
 	}
 	if (type_enemy) {
 		if (other->m_Tag == "ColBox") {
-			//ObjMgr->RemoveObject(this);
+			
 			//이팩트 넣어야지
 			m_Hp -= 1; //피 달고 저거 불 판정 넣고 
 		}

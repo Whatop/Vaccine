@@ -83,17 +83,40 @@ void Player::Buff()
 			limit = 0.2f;
 		}
 	}
-	else if (_Ammor) {
+	//else if (_Ammor) { OnCollison에 해놈
 
-	}
+	//}_Hit
 	else if (_Invincible) {
-
+		m_Invincible += dt;
+		if (m_Invincible >= 5.f) {
+			_Invincible = false;
+			m_Invincible = 0;
+		}
 	}
 	else if (_Heal) {
 		if (m_Hp < 5)
 			m_Hp += 1;
 		//else
 		//score 오르도록
+	}
+	if (_Hit) {
+		m_hit += dt;
+		if (m_hit > 0.2)
+			m_Player->A = 130;
+		else if (m_hit > 0.4)
+			m_Player->A = 255;
+		else if (m_hit > 0.6)
+			m_Player->A = 130;
+		else if (m_hit > 0.6)
+			m_Player->A = 255;
+		else if (m_hit > 0.6)
+			m_Player->A = 130;
+
+		if (m_hit >= 1.f) {
+			_Hit = false;
+			m_hit = 0;
+			m_Player->A = 255;
+		}
 	}
 	UI::GetInst()->m_Hp = m_Hp;
 }
@@ -184,20 +207,48 @@ void Player::Move()
 	}
 }
 
+void Player::Hp()
+{
+	if (m_Hp == 5) {
+		m_Player->R = 116;
+		m_Player->G = 192;
+		m_Player->B = 99;
+	}
+	if (m_Hp == 4) {
+		m_Player->R = 145;
+		m_Player->G = 237;
+		m_Player->B = 89;
+	}
+	if (m_Hp == 3) {
+		m_Player->R = 211;
+		m_Player->G = 237;
+		m_Player->B = 89;
+	}
+	if (m_Hp == 2) {
+		m_Player->R = 237;
+		m_Player->G = 197;
+		m_Player->B = 89;
+	}
+	if (m_Hp == 1) {
+		m_Player->R = 237;
+		m_Player->G = 123;
+		m_Player->B = 61;
+	}
+}
+
 void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직일대마다 한개씩 조건 더 추가해야 될수도있음
 {
 	GameMgr::GetInst()->m_PlayerPos = m_Position;
 	Move();
 	CheatKey();
 	Buff();
+	Hp();
 	create = false;
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
 		m_Speed = 60;
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 		m_Speed = 40;
 
-	if(GameMgr::GetInst()->arr < 4)
-	GameMgr::GetInst()->PlayerPos(m_Position);
 
 	//if (INPUT->GetKey('O') == KeyState::DOWN) //클론에게 닿거나 FULL 하고 나서 바로
 	if (INPUT->GetKey('P') == KeyState::DOWN) //클론, 치료된 부분이랑 만나면 안하도록 설정
@@ -207,13 +258,17 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 		GameMgr::GetInst()->Draw();
 		GameMgr::GetInst()->PlayerPos(m_Position);
 	}
+	//
 	ObjMgr->CollisionCheak(this, "Speed");
 	ObjMgr->CollisionCheak(this, "Ammor");
 	ObjMgr->CollisionCheak(this, "Heal");
 	ObjMgr->CollisionCheak(this, "Invincible");
 	ObjMgr->CollisionCheak(this, "Random");
-	ObjMgr->CollisionCheak(this, "Pull");
+	ObjMgr->CollisionCheak(this, "Fill");
 	ObjMgr->CollisionCheak(this, "Clone");
+	if (!m_Invincible) { //무적 몬스터 판정
+		ObjMgr->CollisionCheak(this, "Monster");
+	}
 
 
 
@@ -241,14 +296,24 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Heal") {
 		_Heal = true;
 	}
-	if (obj->m_Tag == "Pull") {  //클론을 Pull로 아예 바꾸는 형식으로 해야겠음 지금 그냥 클론 발바도 실행되서, Clone이 완성되면 그냥 Pull로 바꾸기
+	if (obj->m_Tag == "Fill") {
 		create = true;
 		m_State = MoveState::NONE;
 		GameMgr::GetInst()->PlayerPos(m_Position);
+		GameMgr::GetInst()->arr = 0;
 	}
-	if (obj->m_Tag == "Clone") {  //클론을 Pull로 아예 바꾸는 형식으로 해야겠음 지금 그냥 클론 발바도 실행되서, Clone이 완성되면 그냥 Pull로 바꾸기
+	if (obj->m_Tag == "Clone") {
 		create = true;
 		GameMgr::GetInst()->PlayerPos(m_Position);
-	} // 만약 정말로 사각형이라면 그냥 큰 사진을 불러오는 것이 좋을 것 같음 렉이 너무 걸림
+	}
+	if (obj->m_Tag == "Monster") {
 
+		if (!_Hit) {
+			if (!_Ammor) {
+				m_Hp -= 1;
+			}
+			else
+				_Ammor = false;
+		}
+	}
 }

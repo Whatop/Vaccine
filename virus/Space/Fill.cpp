@@ -8,7 +8,7 @@ Fill::Fill(Vec2 MyPos, Vec2 Scale,int type)
 	SetPosition(MyPos.x,MyPos.y);
 	SetScale(Scale.x,Scale.y);
 	m_Type = type;
-
+	m_Layer = -1;
 }
 
 Fill::~Fill()
@@ -19,20 +19,16 @@ void Fill::Update(float deltaTime, float Time)
 {
 	type += dt;
 	if (m_Type) {
-		m_Fill->A = 130;
-		m_Fill->R = 30;
-		m_Fill->G = 122;
-		m_Fill->B = 30;
+		m_Fill->R = 116;
+		m_Fill->G = 192;
+		m_Fill->B = 99;
 	}
 	else{
 		m_Fill->A = 0;
-		if (type > 1)
+		//»ý¼º
+		if (type > 1) {
 			ObjMgr->RemoveObject(this);
-
-		std::cout << m_Collision.left << std::endl;
-		std::cout << m_Collision.right << std::endl;
-		std::cout << m_Collision.top << std::endl;
-		std::cout << m_Collision.bottom << std::endl;
+		}
 	}
 	
 
