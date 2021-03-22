@@ -28,6 +28,10 @@ void Fill::Update(float deltaTime, float Time)
 		//积己
 		if (type > 1) {
 			ObjMgr->RemoveObject(this);
+			std::cout << "哭率 :" <<   m_Collision.left << std::endl;
+			std::cout << "坷弗率 :" << m_Collision.right << std::endl;
+			std::cout << "困率 :" <<   m_Collision.top << std::endl;
+			std::cout << "酒贰率 :" << m_Collision.bottom << std::endl;
 		}
 	}
 	

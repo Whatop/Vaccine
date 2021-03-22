@@ -56,21 +56,21 @@ void GameMgr::CreatePlayer()
 
 		int randomposx = rand() % 1920 + 90;
 		int randomposy = rand() % 1080 + 90;
-		int randomxy = rand() % 1 + 0;
+		int randomxy = rand() % 2 + 0;
 		if (randomxy) {
 			for (; randomposx % 60 != 0; randomposx--) {
-				int LeftRight = rand() % 1 + 0;
+				int LeftRight = rand() % 2 + 0;
 				if(LeftRight)
-				randomposy = 90;
+					randomposy = 90;
 				else
 					randomposy = 1080-90;
 
 			}
 			randomposx += 30;
 		}
-		else if (!randomxy) {
+		else  {
 			for (; randomposy % 60 != 0; randomposy--) {
-				int LeftRight = rand() % 1 + 0;
+				int LeftRight = rand() % 2 + 0;
 				if (LeftRight)
 					randomposx = 90;
 				else
@@ -79,15 +79,16 @@ void GameMgr::CreatePlayer()
 			}
 			randomposy += 30;
 		}
-		ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");//백신 왼쪽위
+		//ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
+		ObjMgr->AddObject(new Player(Vec2(90, 90)), "Player");//백신 왼쪽위
 	}
-		if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
+	else if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
 			int randomposx = rand() % 1920 + 60;
 			int randomposy = rand() % 1080 + 60;
-			int randomxy = rand() % 1 + 0;
+			int randomxy = rand() % 2 + 0;
 			if (randomxy) {
 				for (; randomposx % 40 != 0; randomposx--) {
-					int LeftRight = rand() % 1 + 0;
+					int LeftRight = rand() % 2 + 0;
 					if (LeftRight)
 						randomposy = 60;
 					else
@@ -96,19 +97,21 @@ void GameMgr::CreatePlayer()
 				}
 				randomposx += 20;
 			}
-			else if (!randomxy) {
+			else  {
 				for (; randomposy % 40 != 0; randomposy--) {
-					int LeftRight = rand() % 1 + 0;
+					int LeftRight = rand() % 2 + 0;
 					if (LeftRight)
 						randomposx = 60;
 					else
 						randomposx = 1920 - 60;
 
 				}
-				randomposy += 30;
+				randomposy += 20;
 			}
-			ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");//백신 왼쪽위
+			//ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
+			ObjMgr->AddObject(new Player(Vec2(60, 60)), "Player");//백신 왼쪽위
 		}
+
 	m_CreatePlayer = true;
 }
 
@@ -147,7 +150,7 @@ void GameMgr::GameEnd()
 void GameMgr::PlayerPos(Vec2 playerpos)
 {
 	m_LinePos[0] = playerpos;
-	m_LinePos[4] = m_LinePos[0];
+	m_LinePos[5] = m_LinePos[0];
 }
 
 void GameMgr::LinePos(Vec2 linepos)
@@ -187,7 +190,6 @@ void GameMgr::SetLimit()
 	}
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 	{
-		ObjMgr->AddObject(new Player(Vec2(60, 60)), "Player");//백신 왼쪽위
 		for (int a = 20; a < 1920; a += 40) {
 			ObjMgr->AddObject(new BlockMgr(Vec2(a, 20), "ground"), "Ground");//
 			ObjMgr->AddObject(new BlockMgr(Vec2(a, 1060), "ground"), "Ground");//벽

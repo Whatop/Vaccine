@@ -16,8 +16,10 @@ Stage2::~Stage2()
 void Stage2::Init() // 스테이지 1 배경 신체로 하고, 스테이지 2의 배경을 숲으로 한다. 근대 숲이라고 초록초록하면 분위기가 안사니 
 {
 	ObjMgr->Release();
+
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE2);
 	m_Pause = false;
+	GameMgr::GetInst()->ReleasePlayer();
 	GameMgr::GetInst()->CreateUI();
 	GameMgr::GetInst()->CreatePlayer();
 	GameMgr::GetInst()->SetLimit();

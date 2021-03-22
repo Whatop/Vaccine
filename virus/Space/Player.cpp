@@ -266,7 +266,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	ObjMgr->CollisionCheak(this, "Random");
 	ObjMgr->CollisionCheak(this, "Fill");
 	ObjMgr->CollisionCheak(this, "Clone");
-	if (!m_Invincible) { //무적 몬스터 판정
+	if (!m_Invincible && !_Hit) { //무적 몬스터 판정
 		ObjMgr->CollisionCheak(this, "Monster");
 	}
 
@@ -299,8 +299,8 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Fill") {
 		create = true;
 		m_State = MoveState::NONE;
-		GameMgr::GetInst()->PlayerPos(m_Position);
 		GameMgr::GetInst()->arr = 0;
+		GameMgr::GetInst()->PlayerPos(m_Position);
 	}
 	if (obj->m_Tag == "Clone") {
 		create = true;
@@ -314,6 +314,8 @@ void Player::OnCollision(Object* obj)
 			}
 			else
 				_Ammor = false;
+
+			_Hit = true;
 		}
 	}
 }

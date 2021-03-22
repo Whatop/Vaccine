@@ -17,6 +17,9 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 {
 	ObjMgr->Release();
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE1);
+	GameMgr::GetInst()->ReleasePlayer();
+	GameMgr::GetInst()->ReleaseUI();
+	GameMgr::GetInst()->CreatePlayer();
 	GameMgr::GetInst()->CreateUI();
 	GameMgr::GetInst()->SetLimit();
 	GameMgr::GetInst()->SpawnItem(Vec2(0, 0));
@@ -40,7 +43,6 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 		m_Vertical.push_back(v);
 		m_Horizontal.push_back(h);
 	}
-	GameMgr::GetInst()->CreatePlayer();
 
 
 
