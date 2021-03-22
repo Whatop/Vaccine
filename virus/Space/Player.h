@@ -50,7 +50,9 @@ class Player : public Object
 	bool _Invincible;
 	bool _Heal;
 	bool _Ammor;
+	bool _Random;
 	bool _Hit; // 嘎阑锭 公利
+	bool GODMODE; // 公利
 
 	//LineMgr* m_Vertex;
 public:

@@ -56,8 +56,8 @@ void GameMgr::CreatePlayer()
 
 		int randomposx = rand() % 1920 + 90;
 		int randomposy = rand() % 1080 + 90;
-		int randomxy = rand() % 2 + 0;
-		if (randomxy) {
+		int randomxy = rand() % 1 + 0;
+		if (randomxy == 1) {
 			for (; randomposx % 60 != 0; randomposx--) {
 				int LeftRight = rand() % 2 + 0;
 				if(LeftRight)
@@ -79,14 +79,14 @@ void GameMgr::CreatePlayer()
 			}
 			randomposy += 30;
 		}
-		//ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
-		ObjMgr->AddObject(new Player(Vec2(90, 90)), "Player");//¹é½Å ¿ÞÂÊÀ§
+		ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
+		//ObjMgr->AddObject(new Player(Vec2(90, 90)), "Player");//¹é½Å ¿ÞÂÊÀ§
 	}
 	else if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
 			int randomposx = rand() % 1920 + 60;
 			int randomposy = rand() % 1080 + 60;
-			int randomxy = rand() % 2 + 0;
-			if (randomxy) {
+			int randomxy = rand() % 1 + 0;
+			if (randomxy == 1) {
 				for (; randomposx % 40 != 0; randomposx--) {
 					int LeftRight = rand() % 2 + 0;
 					if (LeftRight)
@@ -108,8 +108,8 @@ void GameMgr::CreatePlayer()
 				}
 				randomposy += 20;
 			}
-			//ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
-			ObjMgr->AddObject(new Player(Vec2(60, 60)), "Player");//¹é½Å ¿ÞÂÊÀ§
+			ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
+			//ObjMgr->AddObject(new Player(Vec2(60, 60)), "Player");//¹é½Å ¿ÞÂÊÀ§
 		}
 
 	m_CreatePlayer = true;
@@ -247,32 +247,23 @@ void GameMgr::Draw()
 	dtime += dt;
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
 	{
-		if (m_LinePos[0].x == m_LinePos[2].x || m_LinePos[2].y == m_LinePos[0].y) {
-			float posx = (m_LinePos[0].x + m_LinePos[3].x) / 2;
-			float posy = (m_LinePos[0].y + m_LinePos[3].y) / 2;
-			float scalex = (m_LinePos[3].x - m_LinePos[0].x + 60) / 60;
-			float scaley = (m_LinePos[3].y - m_LinePos[0].y + 60) / 60;
-			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
-			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
-		}
-		else {
 			float posx = (m_LinePos[0].x + m_LinePos[2].x) / 2;
 			float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
 			float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
 			float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
 			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
 			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
-		}
+		
 	}
 
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 	{
 		float posx = (m_LinePos[0].x + m_LinePos[2].x) / 2;
 		float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
-		float scalex = (m_LinePos[2].x - m_LinePos[0].x + 30) / 60;
-		float scaley = (m_LinePos[2].y - m_LinePos[0].y + 30) / 60;
-		ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "Fill");
-			ObjMgr->AddObject(new Fill(Vec2(posx , posy), Vec2(scalex, scaley), 1), "ColBox");
+		float scalex = (m_LinePos[2].x - m_LinePos[0].x + 40) / 40;
+		float scaley = (m_LinePos[2].y - m_LinePos[0].y + 40) / 40;
+		ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
+			ObjMgr->AddObject(new Fill(Vec2(posx , posy), Vec2(scalex, scaley), 0), "ColBox");
 	}
 	arr = 0;
 }

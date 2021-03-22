@@ -36,6 +36,8 @@ Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 	_Heal = false;
 	_Invincible = false;
 	_Ammor = false;
+	_Random = false;
+	GODMODE = false;
 	m_Layer = 3;
 	m_State = MoveState::NONE;
 
@@ -57,13 +59,36 @@ void Player::CheatKey()
 {
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN) // 무적
 	{
-		std::cout << m_Position.x << std::endl;
-		std::cout << m_Position.y << std::endl;
+		if (GODMODE) {
+			GODMODE = false;
+			std::cout << "무적off" << std::endl;
+		}
+		else {
+			GODMODE = true;
+			std::cout << "무적on" << std::endl;
+		}
 	}
 	else if (INPUT->GetKey(VK_F2) == KeyState::DOWN) // 아이템 랜덤 사용
 	{
-		std::cout << m_Position.x << std::endl;
-		std::cout << m_Position.y << std::endl;
+		int random = rand() % 4 + 1;
+
+
+		if (random == 1) {
+			_Speed = true;
+			std::cout << "스피드" << std::endl;
+		}
+		else if (random == 2) {
+			_Invincible = true;
+			std::cout << "잠시무적" << std::endl;
+		}
+		else if (random == 3) {
+			_Heal = true;
+			std::cout << "회복" << std::endl;
+		}
+		else if (random == 4) {
+			_Ammor = true;
+			std::cout << "방어" << std::endl;
+		}
 	}
 	else if (INPUT->GetKey(VK_F3) == KeyState::DOWN) // 생명력 증가
 	{
@@ -266,7 +291,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	ObjMgr->CollisionCheak(this, "Random");
 	ObjMgr->CollisionCheak(this, "Fill");
 	ObjMgr->CollisionCheak(this, "Clone");
-	if (!m_Invincible && !_Hit) { //무적 몬스터 판정
+	if (!m_Invincible && !_Hit && !GODMODE) { //무적 몬스터 판정
 		ObjMgr->CollisionCheak(this, "Monster");
 	}
 

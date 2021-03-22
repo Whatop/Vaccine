@@ -70,15 +70,8 @@ void Stage2::Update(float deltaTime, float time)
 	m_PrevSize = m_GridSize;
 
 
-	if (INPUT->GetKey(VK_TAB) == KeyState::DOWN)
-	{
-		if (m_Pause)
-			m_Pause = false;
-		else
-			m_Pause = true;
-	}
 
-	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
+	if (INPUT->GetKey(VK_F7) == KeyState::DOWN)
 	{
 		if (m_HideGrid)
 		{

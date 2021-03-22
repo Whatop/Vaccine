@@ -55,7 +55,6 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 
 void Stage1::Release()
 {
-	GameMgr::GetInst()->ReleaseUI();
 }
 
 void Stage1::Update(float deltaTime, float time)

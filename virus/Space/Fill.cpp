@@ -3,7 +3,10 @@
 
 Fill::Fill(Vec2 MyPos, Vec2 Scale,int type)
 {
-	m_Fill = Sprite::Create(L"Painting/Pill.png");
+	if(SceneDirector::GetInst()->GetScene()==SceneState::STAGE1)
+	m_Fill = Sprite::Create(L"Painting/Pill1.png");
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
+		m_Fill = Sprite::Create(L"Painting/Pill2.png");
 	m_Fill->SetParent(this);
 	SetPosition(MyPos.x,MyPos.y);
 	SetScale(Scale.x,Scale.y);
