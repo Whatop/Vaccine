@@ -45,10 +45,8 @@ Player::Player(Vec2 Pos) // 생명력에 따라 캐릭터 색깔이 변한다네요
 
 	GameMgr::GetInst()->PlayerPos(m_Position);
 
-	std::cout << m_Player->m_Rect.left << std::endl;
-	std::cout << m_Player->m_Rect.right << std::endl;
-	std::cout << m_Player->m_Rect.top << std::endl;
-	std::cout << m_Player->m_Rect.bottom << std::endl;
+	std::cout << m_Position.x << std::endl;
+	std::cout << m_Position.y << std::endl;
 }
 
 Player::~Player()
@@ -144,6 +142,7 @@ void Player::Buff()
 		}
 	}
 	UI::GetInst()->m_Hp = m_Hp;
+
 }
 
 void Player::Move()
@@ -279,7 +278,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	if (INPUT->GetKey('P') == KeyState::DOWN) //클론, 치료된 부분이랑 만나면 안하도록 설정
 		GameMgr::GetInst()->LinePos(m_Position);
 	if (INPUT->GetKey('F') == KeyState::DOWN) {
-		//돌아가거나 벽에 닿는다면 실행 클론과 닿았을때 초기위치를 초기화한다면? 
+	 	//돌아가거나 벽에 닿는다면 실행 클론과 닿았을때 초기위치를 초기화한다면? 
 		GameMgr::GetInst()->Draw();
 		GameMgr::GetInst()->PlayerPos(m_Position);
 	}
@@ -329,8 +328,9 @@ void Player::OnCollision(Object* obj)
 	}
 	if (obj->m_Tag == "Clone") {
 		create = true;
-		GameMgr::GetInst()->PlayerPos(m_Position);
-	}
+	//	GameMgr::GetInst()->LinePos(m_Position);
+	GameMgr::GetInst()->PlayerPos(m_Position);
+}
 	if (obj->m_Tag == "Monster") {
 
 		if (!_Hit) {

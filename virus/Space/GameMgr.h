@@ -50,7 +50,6 @@ public:
 
 	Vec2 m_PlayerPos;
 	Vec2 m_LinePos[256] = {};
-	LineMgr* m_Line;
 
 	//
 	Vec2 m_vPoint[256] = {};

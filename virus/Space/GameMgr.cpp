@@ -54,59 +54,64 @@ void GameMgr::CreatePlayer()
 
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1) {
 
-		int randomposx = rand() % 1920 + 90;
-		int randomposy = rand() % 1080 + 90;
-		int randomxy = rand() % 1 + 0;
+		int randomposx = rand() % 1830;
+		int randomposy = rand() % 990;
+		int randomxy = rand() % 2 + 1;
 		if (randomxy == 1) {
 			for (; randomposx % 60 != 0; randomposx--) {
-				int LeftRight = rand() % 2 + 0;
-				if(LeftRight)
+				int LeftRight = rand() % 2 + 1;
+				if(LeftRight ==1)
 					randomposy = 90;
 				else
 					randomposy = 1080-90;
 
 			}
-			randomposx += 30;
+			randomposx += 90;
 		}
-		else  {
+		else if(randomxy == 2) {
 			for (; randomposy % 60 != 0; randomposy--) {
-				int LeftRight = rand() % 2 + 0;
-				if (LeftRight)
+				int LeftRight = rand() % 2 + 1;
+				if (LeftRight==1)
 					randomposx = 90;
 				else
 					randomposx = 1920 - 90;
 
 			}
-			randomposy += 30;
+			randomposy += 90;
 		}
+		if (randomposy > 990)
+			randomposy = 990;
+		if (randomposx > 1830)
+			randomposx = 1830;
+
 		ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
 		//ObjMgr->AddObject(new Player(Vec2(90, 90)), "Player");//백신 왼쪽위
 	}
 	else if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2) {
-			int randomposx = rand() % 1920 + 60;
-			int randomposy = rand() % 1080 + 60;
-			int randomxy = rand() % 1 + 0;
+			int randomposx = rand() % 1860;
+			int randomposy = rand() % 1020;
+			int randomxy = rand() % 2 + 1;
 			if (randomxy == 1) {
 				for (; randomposx % 40 != 0; randomposx--) {
-					int LeftRight = rand() % 2 + 0;
-					if (LeftRight)
+					int LeftRight = rand() % 2 + 1;
+					if (LeftRight==1)
 						randomposy = 60;
 					else
 						randomposy = 1080 - 60;
 
 				}
-				randomposx += 20;
+				randomposx += 60;
 			}
 			else  {
 				for (; randomposy % 40 != 0; randomposy--) {
-					int LeftRight = rand() % 2 + 0;
-					if (LeftRight)
+					int LeftRight = rand() % 2 + 1;
+					if (LeftRight==1)
 						randomposx = 60;
 					else
 						randomposx = 1920 - 60;
 
 				}
-				randomposy += 20;
+				randomposy += 60;
 			}
 			ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
 			//ObjMgr->AddObject(new Player(Vec2(60, 60)), "Player");//백신 왼쪽위
@@ -150,7 +155,6 @@ void GameMgr::GameEnd()
 void GameMgr::PlayerPos(Vec2 playerpos)
 {
 	m_LinePos[0] = playerpos;
-	m_LinePos[5] = m_LinePos[0];
 }
 
 void GameMgr::LinePos(Vec2 linepos)
@@ -249,10 +253,28 @@ void GameMgr::Draw()
 	{
 			float posx = (m_LinePos[0].x + m_LinePos[2].x) / 2;
 			float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
-			float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
-			float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
-			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
-			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
+
+			if (m_LinePos[2].x > m_LinePos[0].x) {
+				float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
+				float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
+
+				ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
+				ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
+			}
+			else if (m_LinePos[2].x < m_LinePos[0].x) {
+				m_PlayerPos = m_LinePos[2];
+				m_LinePos[2] = m_LinePos[0];
+				m_LinePos[0] = m_PlayerPos;
+
+				float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
+				float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
+				//그냥 값을 반대로 넣어주면 되는거 아닌가?
+				//m_LinePos[2]값을 0으로 만들어주고
+				//m_LinePos[0]값을 2로 만들어주면 모든것이 완벽해진다.
+
+				ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
+				ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
+			}
 		
 	}
 
@@ -266,4 +288,6 @@ void GameMgr::Draw()
 			ObjMgr->AddObject(new Fill(Vec2(posx , posy), Vec2(scalex, scaley), 0), "ColBox");
 	}
 	arr = 0;
+	m_LinePos[3].x = -100;
+	m_LinePos[3].y = -100;
 }

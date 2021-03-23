@@ -50,7 +50,7 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	//Àå¾Ö¹°°ú Àû
 	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 540 + 30), "column"), "Column");//Àå¾Ö¹°
 
-	//ObjMgr->AddObject(new BackGround(L"Painting/BackGround/Stage1-", 1, 1, 2, Vec2(1920/2, 1080/2)), "BackGround");
+	ObjMgr->AddObject(new BackGround(L"Painting//Stage", 1, 1, 2, Vec2(1920/2, 1080/2)), "BackGround");
 }
 
 void Stage1::Release()
