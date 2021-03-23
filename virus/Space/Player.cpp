@@ -124,18 +124,18 @@ void Player::Buff()
 	}
 	if (_Hit) {
 		m_hit += dt;
-		if (m_hit > 0.2)
+		if (m_hit > 0.1f)
 			m_Player->A = 130;
-		else if (m_hit > 0.4)
+		else if (m_hit > 0.2f)
 			m_Player->A = 255;
-		else if (m_hit > 0.6)
+		else if (m_hit > 0.3f)
 			m_Player->A = 130;
-		else if (m_hit > 0.6)
+		else if (m_hit > 0.4f)
 			m_Player->A = 255;
-		else if (m_hit > 0.6)
+		else if (m_hit > 0.5f)
 			m_Player->A = 130;
 
-		if (m_hit >= 1.f) {
+		if (m_hit >= 0.6f) {
 			_Hit = false;
 			m_hit = 0;
 			m_Player->A = 255;
@@ -277,7 +277,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	//if (INPUT->GetKey('O') == KeyState::DOWN) //클론에게 닿거나 FULL 하고 나서 바로
 	if (INPUT->GetKey('P') == KeyState::DOWN) //클론, 치료된 부분이랑 만나면 안하도록 설정
 		GameMgr::GetInst()->LinePos(m_Position);
-	if (INPUT->GetKey('F') == KeyState::DOWN) {
+	if (INPUT->GetKey('F') == KeyState::DOWN || GameMgr::GetInst()->m_LinePos[0]==GameMgr::GetInst()->m_LinePos[4]||GameMgr::GetInst()->arr > 5) {
 	 	//돌아가거나 벽에 닿는다면 실행 클론과 닿았을때 초기위치를 초기화한다면? 
 		GameMgr::GetInst()->Draw();
 		GameMgr::GetInst()->PlayerPos(m_Position);
@@ -328,8 +328,8 @@ void Player::OnCollision(Object* obj)
 	}
 	if (obj->m_Tag == "Clone") {
 		create = true;
-	//	GameMgr::GetInst()->LinePos(m_Position);
-	GameMgr::GetInst()->PlayerPos(m_Position);
+		GameMgr::GetInst()->LinePos(m_Position);
+	//GameMgr::GetInst()->PlayerPos(m_Position);
 }
 	if (obj->m_Tag == "Monster") {
 

@@ -233,12 +233,18 @@ void GameMgr::SpawnFast(Vec2 Pos)
 
 void GameMgr::SpawnFlash(Vec2 Pos)
 {
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 420 + 60), "flash"), "Monster");//점멸 적 1~ 2칸? 사이즈가 랜덤이라 위치조정이 따로 필요함 BlockMgr에서 조정해야됨
+	int random = rand() % 2 + 1;
+
+	if (random == 1)
+		ObjMgr->AddObject(new BlockMgr(Vec2(1170 + 30, 660 + 60), "flash"), "Monster");// 큰 적 2칸으로?
+	else if (random == 2)
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 420 + 60), "flashgiant"), "Monster");//점멸 적 1~ 4칸? 사이즈가 랜덤이라 위치조정이 따로 필요함 BlockMgr에서 조정해야됨
 }
 
 void GameMgr::SpawnGiant(Vec2 Pos)
 {
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170 + 30, 660 + 60), "giant"), "Monster");// 큰 적 2칸으로?
+	
+		ObjMgr->AddObject(new BlockMgr(Vec2(1170 + 30, 660 + 60), "giant"), "Monster");// 큰 적 2칸으로?
 }
 
 void GameMgr::SpawnToxino(Vec2 Pos)
@@ -255,37 +261,82 @@ void GameMgr::Draw()
 			float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
 
 			if (m_LinePos[2].x > m_LinePos[0].x) {
-				float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
-				float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
+				if (m_LinePos[2].y < m_LinePos[0].y) {
 
-				ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
-				ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
+					m_PlayerPos.y = m_LinePos[2].y;
+					m_LinePos[2].y = m_LinePos[0].y;
+					m_LinePos[0].y = m_PlayerPos.y;
+				}
+
+			//	else if (m_LinePos[2].y > m_LinePos[0].y) {
+//				정상적
+			//	}
 			}
 			else if (m_LinePos[2].x < m_LinePos[0].x) {
-				m_PlayerPos = m_LinePos[2];
-				m_LinePos[2] = m_LinePos[0];
-				m_LinePos[0] = m_PlayerPos;
 
-				float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
-				float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
-				//그냥 값을 반대로 넣어주면 되는거 아닌가?
-				//m_LinePos[2]값을 0으로 만들어주고
-				//m_LinePos[0]값을 2로 만들어주면 모든것이 완벽해진다.
+				if (m_LinePos[2].y < m_LinePos[0].y) {
 
-				ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
-				ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
+					m_PlayerPos = m_LinePos[2];
+					m_LinePos[2] = m_LinePos[0];
+					m_LinePos[0] = m_PlayerPos;
+				}
+				else if (m_LinePos[2].y > m_LinePos[0].y) {
+					m_PlayerPos.x = m_LinePos[2].x;
+					m_LinePos[2].x = m_LinePos[0].x;
+					m_LinePos[0].x = m_PlayerPos.x;
+				}
 			}
-		
+
+			float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
+			float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
+			//그냥 값을 반대로 넣어주면 되는거 아닌가?
+			//m_LinePos[2]값을 0으로 만들어주고
+			//m_LinePos[0]값을 2로 만들어주면 모든것이 완벽해진다.
+
+			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
+			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
 	}
 
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 	{
 		float posx = (m_LinePos[0].x + m_LinePos[2].x) / 2;
 		float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
+
+		if (m_LinePos[2].x > m_LinePos[0].x) {
+			if (m_LinePos[2].y < m_LinePos[0].y) {
+
+				m_PlayerPos.y = m_LinePos[2].y;
+				m_LinePos[2].y = m_LinePos[0].y;
+				m_LinePos[0].y = m_PlayerPos.y;
+			}
+
+			//	else if (m_LinePos[2].y > m_LinePos[0].y) {
+//				정상적
+			//	}
+		}
+		else if (m_LinePos[2].x < m_LinePos[0].x) {
+
+			if (m_LinePos[2].y < m_LinePos[0].y) {
+
+				m_PlayerPos = m_LinePos[2];
+				m_LinePos[2] = m_LinePos[0];
+				m_LinePos[0] = m_PlayerPos;
+			}
+			else if (m_LinePos[2].y > m_LinePos[0].y) {
+				m_PlayerPos.x = m_LinePos[2].x;
+				m_LinePos[2].x = m_LinePos[0].x;
+				m_LinePos[0].x = m_PlayerPos.x;
+			}
+		}
+
 		float scalex = (m_LinePos[2].x - m_LinePos[0].x + 40) / 40;
 		float scaley = (m_LinePos[2].y - m_LinePos[0].y + 40) / 40;
+		//그냥 값을 반대로 넣어주면 되는거 아닌가?
+		//m_LinePos[2]값을 0으로 만들어주고
+		//m_LinePos[0]값을 2로 만들어주면 모든것이 완벽해진다.
+
 		ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
-			ObjMgr->AddObject(new Fill(Vec2(posx , posy), Vec2(scalex, scaley), 0), "ColBox");
+		ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
 	}
 	arr = 0;
 	m_LinePos[3].x = -100;

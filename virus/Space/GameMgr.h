@@ -48,12 +48,9 @@ public:
 
 	PlayerStatus m_PlayerStatus;
 
+	Vec2 PrevPos;
 	Vec2 m_PlayerPos;
 	Vec2 m_LinePos[256] = {};
-
-	//
-	Vec2 m_vPoint[256] = {};
-	Vec2 m_vecTown[5] = {};
 
 	int arr;
 	int m_Score;

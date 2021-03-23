@@ -5,6 +5,8 @@ BlockMgr::BlockMgr(Vec2 Pos,std::string tag)
 {
 	type_item = false;
 	type_enemy = false;
+	flashstack = 0;
+	flashtime = 0;
 	BlockType(tag,Pos);
 }
 
@@ -55,15 +57,18 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 			type_enemy = true;
 			m_Hp = 1;
 		}
-		if (tag == "flash") {//크기 1~2
-			int random = rand() % 2 + 1;
-			if (random == 1)
-			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Flash.png");
 
-			if (random == 2)
-				m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/FlashLong.png");
+		if (tag == "flash") {//크기 1~2
+			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Flash.png");
 			m_Hp = 1;
 			type_enemy = true;
+			Moveif = 0.75f;
+		}
+		if (tag == "flashgiant") {//크기 1~2
+			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/FlashGiant.png");
+			m_Hp = 1;
+			type_enemy = true;
+			Moveif = 0.75f;
 		}
 		if (tag == "giant") {//크기 4
 			m_Blocks = Sprite::Create(L"Painting/Stage1/Enemy/Giant.png");
@@ -117,10 +122,17 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 			 type_enemy = true;
 			 m_Hp = 1;
 		}
-		if (tag == "flash") {
+		if (tag == "flash") {//크기 1~2
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Flash.png");
-			type_enemy = true;
 			m_Hp = 1;
+			type_enemy = true;
+			Moveif = 0.75f;
+		}
+		if (tag == "flashgiant") {//크기 1~2
+			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/FlashGiant.png");
+			m_Hp = 1;
+			type_enemy = true;
+			Moveif = 0.75f;
 		}
 		if (tag == "giant") {
 			m_Blocks = Sprite::Create(L"Painting/Stage2/Enemy/Giant.png");
@@ -145,51 +157,103 @@ void BlockMgr::Update(float deltaTime, float time)
 	if (_tag == "fast") { // Fill이랑 닿으면 속도 업 + Clone이랑 닿으면 플레이어 피해 입음
 		// 백신선이나 백신에 붙이치면 붉은 Effect나오며 사라짐
 		if (MoveTime > 0.5f) {
-			int XorY = rand() % 2 + 0;
 
-			if (XorY) { // X
 				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
 					Translate(m_Speed, 0);
 				}
-				else if(GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed){
+				else if( GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed){
 					Translate(-m_Speed, 0);
 				}
-			}
-			else if (!XorY) { // Y
-				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				else if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
 					Translate(0, m_Speed);
 				}
 				else if(GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed){
 					Translate(0, -m_Speed);
 				}
-			}
 		
 			MoveTime = 0;
 		}
 	}
 	
 	if (_tag == "flash") {
-		if (MoveTime > 0.75f) {
-			int XorY = rand() % 1 + 0;
+		if (MoveTime > Moveif) {
 
-			if (XorY) { // X
-				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x) {
-					Translate(m_Speed*2, 0);
+				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+					Translate(m_Speed, 0);
+					if (flashstack != 3)
+						flashstack++;
 				}
-				else {
-					Translate(-m_Speed*2, 0);
+				else if (GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed) {
+					Translate(-m_Speed, 0);
+					if (flashstack != 3)
+						flashstack++;
+				}
+				else if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+					Translate(0, m_Speed);
+					if (flashstack != 3)
+						flashstack++;
+				}
+				else if (GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed) {
+					Translate(0, -m_Speed);
+					if (flashstack != 3)
+						flashstack++;
+			}
+			if (flashstack == 3) {
+				flashtime += 1;
+				m_Blocks->A = 0;
+				Moveif = 0.2f;
+				if (flashtime > 5) {
+					m_Blocks->A = 255;
+					flashstack = 0;
+					flashtime = 0;
+					Moveif = 0.75f;
 				}
 			}
-			if (!XorY) { // Y
-				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y) {
-					Translate(0, m_Speed*2);
-				}
-				else {
-					Translate(0, -m_Speed*2);
-				}
-			}
+
+			MoveTime = 0;
 		}
 	}
+
+	if (_tag == "flashgiant") {
+		if (MoveTime > Moveif) {
+
+				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+					Translate(m_Speed, 0);
+					if (flashstack != 3)
+						flashstack++;
+				}
+				else if (GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed) {
+					Translate(-m_Speed, 0);
+					if (flashstack != 3)
+						flashstack++;
+				}
+				else if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+					Translate(0, m_Speed);
+					if (flashstack != 3)
+						flashstack++;
+				}
+				else if (GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed) {
+					Translate(0, -m_Speed);
+					if (flashstack != 3)
+						flashstack++;
+				}
+			
+			if (flashstack == 3) {
+				flashtime += 1;
+				m_Blocks->A = 0;
+				Moveif = 0.2f;
+				if (flashtime > 5) {
+					m_Blocks->A = 255;
+					flashtime = 0;
+					flashstack = 0;
+					Moveif = 0.75f;
+				}
+			}
+
+			MoveTime = 0;
+		}
+	}  
+
 	if (_tag == "giant") {
 		if (MoveTime > 1) {
 			int XorY = rand() % 1 + 0;
@@ -238,7 +302,7 @@ void BlockMgr::Update(float deltaTime, float time)
 	if (_tag == "clone") { // 
 		ObjMgr->CollisionCheak(this, "Fill");
 	}
-	if (type_enemy) {
+	if (type_enemy && flashstack != 3) {
 		ObjMgr->CollisionCheak(this, "ColBox");
 		if(m_Hp <= 0)
 			ObjMgr->RemoveObject(this);

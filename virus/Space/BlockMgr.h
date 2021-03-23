@@ -6,6 +6,7 @@ class BlockMgr : public Object
 	bool type_item;
 	bool type_enemy;
 
+
 public:
 	BlockMgr(Vec2, std::string tag);
 	~BlockMgr();
@@ -19,6 +20,12 @@ public:
 
 	float m_Speed;
 	float MoveTime;
+	float Moveif;
+
+	//flash
+	bool bigger;
+	int flashstack;//Ω∫≈√
+	int flashtime;//
 
 
 	bool left;

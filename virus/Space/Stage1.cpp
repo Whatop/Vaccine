@@ -23,7 +23,10 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	GameMgr::GetInst()->CreateUI();
 	GameMgr::GetInst()->SetLimit();
 	GameMgr::GetInst()->SpawnItem(Vec2(0, 0));
-	GameMgr::GetInst()->SpawnFast(Vec2(630, 90));
+//	GameMgr::GetInst()->SpawnFast(Vec2(630, 90));
+	GameMgr::GetInst()->SpawnFlash(Vec2(630, 90));
+//	GameMgr::GetInst()->SpawnGiant(Vec2(630, 90));
+//	GameMgr::GetInst()->SpawnToxino(Vec2(630, 90));
 	m_HideGrid = false;
 
 	m_TileSize = Vec2(60, 60);
