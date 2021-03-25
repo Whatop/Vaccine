@@ -26,18 +26,6 @@ public:
 	GameMgr();
 	~GameMgr();
 
-	struct stVECTORsort
-	{
-		bool operator() (const RankingPlayer* pObject1, const RankingPlayer* pObject2) const
-		{
-			if (pObject1->score > pObject2->score)
-				return TRUE;
-
-			return FALSE;
-		}
-	};
-
-
 	std::vector<RankingPlayer*> Ranks;
 
 	bool m_CreatePlayer;

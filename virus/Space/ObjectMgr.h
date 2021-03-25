@@ -7,16 +7,6 @@ class ObjectMgr : public Singleton<ObjectMgr>
 public:
 	std::list<Object*> m_Objects;
 
-	struct stLISTsort
-	{
-		bool operator() (const Object* pObject1, const Object* pObject2) const
-		{
-			if (pObject1->m_Layer < pObject2->m_Layer)
-				return TRUE;
-
-			return FALSE;
-		}
-	};
 
 public:
 	ObjectMgr();

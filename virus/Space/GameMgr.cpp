@@ -165,14 +165,14 @@ void GameMgr::LinePos(Vec2 linepos)
 }
 
 
-//bool Sort(const RankingPlayer* pSour, const RankingPlayer* pDest)
-//{
-//	return (pSour->score > pDest->score);
-//} 이걸로 해도 가능함
+bool Sort(const RankingPlayer* pSour, const RankingPlayer* pDest)
+{
+	return (pSour->score > pDest->score);
+} 
 
 void GameMgr::SortRanking()
 {
-	std::sort(Ranks.begin(), Ranks.end(), GameMgr::stVECTORsort());
+	std::sort(Ranks.begin(), Ranks.end(), Sort);
 }
 
 void GameMgr::SetPlayerStatus(int hp, float speed)
