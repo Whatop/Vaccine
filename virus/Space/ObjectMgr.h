@@ -1,5 +1,5 @@
 #pragma once
-#include <algorithm>
+//#include <algorithm>
 
 #define ObjMgr ObjectMgr::GetInst()
 class ObjectMgr : public Singleton<ObjectMgr>

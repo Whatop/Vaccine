@@ -4,6 +4,7 @@
 #include "UI.h"
 #include "BlockMgr.h"
 #include "Fill.h"
+#include <algorithm>
 
 GameMgr::GameMgr()
 {

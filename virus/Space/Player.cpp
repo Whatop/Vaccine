@@ -119,8 +119,10 @@ void Player::Buff()
 	else if (_Heal) {
 		if (m_Hp < 5)
 			m_Hp += 1;
+		
 		//else
 		//score 오르도록
+		_Heal = false;
 	}
 	if (_Hit) {
 		m_hit += dt;
