@@ -33,7 +33,7 @@ bool TextMgr::Init(int height, bool bold, bool italic, const std::string& fontna
 	if (FAILED(hr))
 		return false;
 
-	D3DXMatrixTransformation2D(&m_wMat, 0, 0.0f, 0, 0, 0.0f, 0);
+	D3DXMatrixTransformation2D(&m_wMat, NULL, 0.0f, NULL, NULL, 0.0f, NULL);
 
 	return true;
 }
@@ -49,7 +49,7 @@ int TextMgr::print(const std::string& str, int x, int y)
 	Vec2 rCenter = Vec2((float)x, (float)y);
 	D3DXMatrixTransformation2D(&m_wMat, NULL, 0.0f, NULL, &rCenter, m_Angle, NULL);
 	Renderer::GetInst()->GetSprite()->SetTransform(&m_wMat);
-	return m_pFont->DrawTextA(Renderer::GetInst()->GetSprite(), str.c_str(), -50, &m_FontRect, DT_LEFT, m_Color);
+	return m_pFont->DrawTextA(Renderer::GetInst()->GetSprite(), str.c_str(), -1, &m_FontRect, DT_LEFT, m_Color);
 }
 
 void TextMgr::SetColor(int a, int r, int g, int b)

@@ -1,18 +1,5 @@
 #pragma once
-struct Vertex {
-	float x, y, z, w;
-	D3DCOLOR color;
-};
-struct vecTown {
-	Vec2 vPos;
-	Vec2 vSize;
-};
-struct PlayerStatus
-{
-public:
-	int m_HP;
-	float m_Speed;
-};
+
 struct RankingPlayer
 {
 public:
@@ -34,7 +21,6 @@ public:
 	int scalex;
 	int scaley;
 
-	PlayerStatus m_PlayerStatus;
 
 	Vec2 PrevPos;
 	Vec2 m_PlayerPos;
