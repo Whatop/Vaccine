@@ -13,7 +13,7 @@ IntroScene::~IntroScene()
 
 void IntroScene::Init()
 {
-	SoundMgr::GetInst()->Play(L"Intro.wav", false);
+	//SoundMgr::GetInst()->Play(L"Intro.wav", false);
 	m_IntroCut1 = Sprite::Create(L"Painting/Intro/1.png");
 	m_IntroCut1->SetPosition(1920 / 2, 1080 / 2);
 
@@ -192,7 +192,7 @@ void IntroScene::Update(float deltaTime, float time) //백그라운드클래스 써서 간�
 	}
 	if (INPUT->GetKey(VK_SPACE) == KeyState::DOWN)
 	{
-		SoundMgr::GetInst()->Stop();
+		//SoundMgr::GetInst()->Stop();
 		m_IntroCut13->A = 0;
 		m_IntroCut12->A = 0;
 		m_IntroCut11->A = 0;
@@ -211,7 +211,7 @@ void IntroScene::Update(float deltaTime, float time) //백그라운드클래스 써서 간�
 	}
 	if (start == true) {
 		m_Start += dt;
-		SoundMgr::GetInst()->Play(L"Start.wav", false);
+	//	SoundMgr::GetInst()->Play(L"Start.wav", false);
 		if (m_Start > 1.f) {
 			SceneDirector::GetInst()->ChangeScene(new MenuScene());
 		}

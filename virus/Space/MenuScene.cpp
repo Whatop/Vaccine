@@ -17,6 +17,9 @@ MenuScene::~MenuScene()
 }
 void MenuScene::Init() 
 {
+    m_MainScene = Sprite::Create(L"Painting/MainScene.png");
+    m_MainScene->SetPosition(1920/2, 1080/2);
+
     m_Start = Sprite::Create(L"Painting/Button/start.png");
     m_Start->SetPosition(300, 100);
 
@@ -67,6 +70,7 @@ void MenuScene::Update(float deltaTime, float time)
 
 void MenuScene::Render()
 {
+    m_MainScene->Render();
     m_Start->Render();
     m_Report->Render();
     m_Way->Render();

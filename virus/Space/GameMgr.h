@@ -30,6 +30,11 @@ public:
 	int m_Score;
 	float dtime;
 
+	bool _Hit; //클론이 맞음
+	bool hit;
+	float hitime;
+	; //클론이 맞음
+
 	void Init();
 	void RankInit();
 	void Release();
@@ -46,7 +51,6 @@ public:
 
 	void SortRanking();
 
-	void SetPlayerStatus(int hp, float speed);
 	void SetLimit();
 
 	void SpawnItem(Vec2 Pos);
@@ -56,5 +60,6 @@ public:
 	void SpawnGiant(Vec2 Pos);
 	void SpawnToxino(Vec2 Pos);
 	void Draw();
+	void HitCheak();
 };
 

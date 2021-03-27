@@ -26,6 +26,7 @@ public:
 	bool bigger;
 	int flashstack;//╫╨ец
 	int flashtime;//
+	bool efttect;
 
 
 	bool left;

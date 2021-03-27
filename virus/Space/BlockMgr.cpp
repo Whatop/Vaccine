@@ -148,6 +148,7 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 	m_Blocks->SetParent(this);
 	SetPosition(Pos.x, Pos.y);
 	_tag = tag;
+	efttect = true;
 }
 
 void BlockMgr::Update(float deltaTime, float time)
@@ -164,7 +165,8 @@ void BlockMgr::Update(float deltaTime, float time)
 				else if( GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed){
 					Translate(-m_Speed, 0);
 				}
-				else if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				
+				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
 					Translate(0, m_Speed);
 				}
 				else if(GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed){
@@ -178,27 +180,33 @@ void BlockMgr::Update(float deltaTime, float time)
 	if (_tag == "flash") {
 		if (MoveTime > Moveif) {
 
-				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+				if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
 					Translate(m_Speed, 0);
 					if (flashstack != 3)
 						flashstack++;
 				}
-				else if (GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed) {
+				else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
 					Translate(-m_Speed, 0);
 					if (flashstack != 3)
 						flashstack++;
 				}
-				else if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
 					Translate(0, m_Speed);
 					if (flashstack != 3)
 						flashstack++;
 				}
-				else if (GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed) {
+				else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
 					Translate(0, -m_Speed);
 					if (flashstack != 3)
 						flashstack++;
 			}
 			if (flashstack == 3) {
+
+				if (efttect) {
+					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 2, 2, m_Position), "Effect");
+					efttect = false;
+				}
+
 				flashtime += 1;
 				m_Blocks->A = 0;
 				Moveif = 0.2f;
@@ -207,6 +215,8 @@ void BlockMgr::Update(float deltaTime, float time)
 					flashstack = 0;
 					flashtime = 0;
 					Moveif = 0.75f;
+					efttect = true;
+					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 2, 2, m_Position), "Effect");
 				}
 			}
 
@@ -217,28 +227,32 @@ void BlockMgr::Update(float deltaTime, float time)
 	if (_tag == "flashgiant") {
 		if (MoveTime > Moveif) {
 
-				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+				if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
 					Translate(m_Speed, 0);
 					if (flashstack != 3)
 						flashstack++;
 				}
-				else if (GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed) {
+				else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
 					Translate(-m_Speed, 0);
 					if (flashstack != 3)
 						flashstack++;
 				}
-				else if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				else if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
 					Translate(0, m_Speed);
 					if (flashstack != 3)
 						flashstack++;
 				}
-				else if (GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed) {
+				else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
 					Translate(0, -m_Speed);
 					if (flashstack != 3)
 						flashstack++;
 				}
 			
 			if (flashstack == 3) {
+				if (efttect) {
+					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
+					efttect = false;
+				}
 				flashtime += 1;
 				m_Blocks->A = 0;
 				Moveif = 0.2f;
@@ -247,6 +261,8 @@ void BlockMgr::Update(float deltaTime, float time)
 					flashtime = 0;
 					flashstack = 0;
 					Moveif = 0.75f;
+					efttect = true;
+					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
 				}
 			}
 
@@ -301,6 +317,47 @@ void BlockMgr::Update(float deltaTime, float time)
 
 	if (_tag == "clone") { // 
 		ObjMgr->CollisionCheak(this, "Fill");
+		if (!(GameMgr::GetInst()->hit)) { // 맞지 않았을때
+			ObjMgr->CollisionCheak(this, "Monster");
+			std::cout << GameMgr::GetInst()->hit << std::endl; 
+			//m_Blocks->R = 255;
+			//m_Blocks->G = 255;
+			//m_Blocks->B = 255;
+		}
+		else {
+			m_Blocks->A = 155;
+			m_Blocks->R = 237;
+			m_Blocks->G = 123;
+			m_Blocks->B = 61;
+		}
+		if (!(GameMgr::GetInst()->hit)) {
+			if (UI::GetInst()->m_Hp == 5) {
+				m_Blocks->R = 116;
+				m_Blocks->G = 192;
+				m_Blocks->B = 99;
+			}
+			if (UI::GetInst()->m_Hp == 4) {
+				m_Blocks->R = 145;
+				m_Blocks->G = 237;
+				m_Blocks->B = 89;
+			}
+			if (UI::GetInst()->m_Hp == 3) {
+				m_Blocks->R = 211;
+				m_Blocks->G = 237;
+				m_Blocks->B = 89;
+			}
+			if (UI::GetInst()->m_Hp == 2) {
+				m_Blocks->R = 237;
+				m_Blocks->G = 197;
+				m_Blocks->B = 89;
+			}
+			if (UI::GetInst()->m_Hp == 1) {
+				m_Blocks->R = 237;
+				m_Blocks->G = 123;
+				m_Blocks->B = 61;
+			}
+			//낮아지면 다시 이어하기 / 시간이 0초 이하면 죽도록
+		}
 	}
 	if (type_enemy && flashstack != 3) {
 		ObjMgr->CollisionCheak(this, "ColBox");
@@ -327,6 +384,10 @@ void BlockMgr::OnCollision(Object* other)
 				ObjMgr->RemoveObject(this);
 			//이팩트 넣어야지
 		} 
+		if (other->m_Tag == "Monster") {
+			GameMgr::GetInst()->_Hit = true;
+			GameMgr::GetInst()->hit = true;
+		}
 	}
 	if (type_enemy) {
 		if (other->m_Tag == "ColBox") {

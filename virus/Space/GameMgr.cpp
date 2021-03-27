@@ -19,7 +19,6 @@ void GameMgr::Init()
 	m_CreatePlayer = false;
 	m_CreateUI = false;
 
-	SetPlayerStatus(0, 0);
 	arr = 0;
 	
 	memset(m_LinePos, 90, sizeof(m_LinePos));
@@ -176,11 +175,6 @@ void GameMgr::SortRanking()
 	std::sort(Ranks.begin(), Ranks.end(), Sort);
 }
 
-void GameMgr::SetPlayerStatus(int hp, float speed)
-{
-	m_PlayerStatus = { hp,speed };
-}
-
 void GameMgr::SetLimit()
 {
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1) {
@@ -237,9 +231,9 @@ void GameMgr::SpawnFlash(Vec2 Pos)
 	int random = rand() % 2 + 1;
 
 	if (random == 1)
-		ObjMgr->AddObject(new BlockMgr(Vec2(1170 + 30, 660 + 60), "flash"), "Monster");// 큰 적 2칸으로?
+		ObjMgr->AddObject(new BlockMgr(Vec2(1170 , 660 + 30), "flash"), "Monster");// 큰 적 2칸으로?
 	else if (random == 2)
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 420 + 60), "flashgiant"), "Monster");//점멸 적 1~ 4칸? 사이즈가 랜덤이라 위치조정이 따로 필요함 BlockMgr에서 조정해야됨
+		ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 420 + 60), "flashgiant"), "Monster");//점멸 적 1~ 4칸? 사이즈가 랜덤이라 위치조정이 따로 필요함 BlockMgr에서 조정해야됨
 }
 
 void GameMgr::SpawnGiant(Vec2 Pos)
@@ -342,4 +336,15 @@ void GameMgr::Draw()
 	arr = 0;
 	m_LinePos[3].x = -100;
 	m_LinePos[3].y = -100;
+}
+
+void GameMgr::HitCheak()
+{
+	if (hit) {
+		hitime += dt;
+		if (hitime > 3) {
+			GameMgr::GetInst()->hit = false;
+			hitime = 0;
+		}
+	}
 }

@@ -7,7 +7,7 @@ class ObjectMgr : public Singleton<ObjectMgr>
 public:
 	std::list<Object*> m_Objects;
 
-
+	RECT rc;
 public:
 	ObjectMgr();
 	~ObjectMgr();

@@ -33,8 +33,6 @@ void CreditScene::Update(float deltaTime, float Time)
 	if(stoptime >= 0.5f&& m_BG->m_Position.y >= -1500)
 	m_BG->Translate(0, -200 * dt);
 
-	std::cout << m_BG->m_Position.y << std::endl;
-
 
 }
 

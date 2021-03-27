@@ -29,7 +29,7 @@ void Fill::Update(float deltaTime, float Time)
 	else{
 		m_Fill->A = 0;
 		//积己
-		if (type > 1) {
+		if (type > dt*3) {
 			ObjMgr->RemoveObject(this);
 			std::cout << "哭率 :" <<   m_Collision.left << std::endl;
 			std::cout << "坷弗率 :" << m_Collision.right << std::endl;

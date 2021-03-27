@@ -116,7 +116,7 @@ void Player::Buff()
 			m_Invincible = 0;
 		}
 	}
-	else if (_Heal) {
+	if (_Heal) {
 		if (m_Hp < 5)
 			m_Hp += 1;
 		
@@ -126,6 +126,10 @@ void Player::Buff()
 	}
 	if (_Hit) {
 		m_hit += dt;
+		m_Player->R = 255;
+		m_Player->G = 0;
+		m_Player->B = 0;
+
 		if (m_hit > 0.1f)
 			m_Player->A = 130;
 		else if (m_hit > 0.2f)
@@ -141,6 +145,9 @@ void Player::Buff()
 			_Hit = false;
 			m_hit = 0;
 			m_Player->A = 255;
+			m_Player->R = 255;
+			m_Player->G = 255;
+			m_Player->B = 255;
 		}
 	}
 	UI::GetInst()->m_Hp = m_Hp;
@@ -235,35 +242,39 @@ void Player::Move()
 
 void Player::Hp()
 {
-	if (m_Hp == 5) {
-		m_Player->R = 116;
-		m_Player->G = 192;
-		m_Player->B = 99;
-	}
-	if (m_Hp == 4) {
-		m_Player->R = 145;
-		m_Player->G = 237;
-		m_Player->B = 89;
-	}
-	if (m_Hp == 3) {
-		m_Player->R = 211;
-		m_Player->G = 237;
-		m_Player->B = 89;
-	}
-	if (m_Hp == 2) {
-		m_Player->R = 237;
-		m_Player->G = 197;
-		m_Player->B = 89;
-	}
-	if (m_Hp == 1) {
-		m_Player->R = 237;
-		m_Player->G = 123;
-		m_Player->B = 61;
+	if (!_Hit) {
+		if (m_Hp == 5) {
+			m_Player->R = 116;
+			m_Player->G = 192;
+			m_Player->B = 99;
+		}
+		if (m_Hp == 4) {
+			m_Player->R = 145;
+			m_Player->G = 237;
+			m_Player->B = 89;
+		}
+		if (m_Hp == 3) {
+			m_Player->R = 211;
+			m_Player->G = 237;
+			m_Player->B = 89;
+		}
+		if (m_Hp == 2) {
+			m_Player->R = 237;
+			m_Player->G = 197;
+			m_Player->B = 89;
+		}
+		if (m_Hp == 1) {
+			m_Player->R = 237;
+			m_Player->G = 123;
+			m_Player->B = 61;
+		}
+		//낮아지면 다시 이어하기 / 시간이 0초 이하면 죽도록
 	}
 }
 
 void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직일대마다 한개씩 조건 더 추가해야 될수도있음
 {
+	GameMgr::GetInst()->HitCheak();
 	GameMgr::GetInst()->m_PlayerPos = m_Position;
 	Move();
 	CheatKey();
@@ -296,7 +307,11 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 		ObjMgr->CollisionCheak(this, "Monster");
 	}
 
-
+	if (GameMgr::GetInst()->_Hit) {
+		m_Hp--;
+		GameMgr::GetInst()->_Hit = false;
+		_Hit = true;
+	}
 
 	//
 }
