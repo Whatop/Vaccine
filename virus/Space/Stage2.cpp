@@ -22,6 +22,8 @@ void Stage2::Init() // ╫╨евюлаЖ 1 ╧Х╟Ф ╫ец╪╥н го╟М, ╫╨евюлаЖ 2юг ╧Х╟Фю╩ ╫ёю╦╥н г
 	GameMgr::GetInst()->ReleasePlayer();
 	GameMgr::GetInst()->CreateUI();
 	GameMgr::GetInst()->CreatePlayer();
+	GameMgr::GetInst()->SpawnGiant(Vec2(300,300));
+	GameMgr::GetInst()->SpawnFast(Vec2(300,300));
 	GameMgr::GetInst()->SetLimit();
 	GameMgr::GetInst()->SpawnItem(Vec2(0, 0)); // ╬хабг╔╢б ╠вЁи юс╫цабг╔ юлдё╠╦╟║ ©╣гБаы╪Ж юж╢б╟мю╨ ╬Ь╢ы
 
