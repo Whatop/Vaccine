@@ -19,7 +19,7 @@ void RankScene::Init()
 	m_Rank = Sprite::Create(L"Painting/Scene/Rank.png");
 	m_Rank->SetPosition(1920 / 2, 100);
 
-	m_Back = Sprite::Create(L"Painting/Scene/BackButton.png");
+	m_Back = Sprite::Create(L"Painting/Button/ReturnTitle.png");
 	m_Back->SetPosition(1700, 900);
 
 	m_First = new TextMgr();

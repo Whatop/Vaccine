@@ -15,8 +15,8 @@ void ReportScene::Init()
 	m_BG = Sprite::Create(L"Painting/Scene/Report.png");
 	m_BG->SetPosition(1920 / 2, 1080 / 2);
 
-	m_Back = Sprite::Create(L"Painting/Scene/BackButton.png");
-	m_Back->SetPosition(1700, 900);
+	m_Back = Sprite::Create(L"Painting/Button/ReturnTitle.png");
+	m_Back->SetPosition(1700, 950);
 }
 
 void ReportScene::Release()

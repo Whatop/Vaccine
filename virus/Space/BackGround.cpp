@@ -20,10 +20,10 @@ BackGround::~BackGround()
 
 void BackGround::Update(float deltaTime, float time)
 {
-	//if (m_BackGround->m_CurrentFrame >= End - 1)
-	//{
-	//	ObjMgr->RemoveObject(this);
-	//}
+	if (m_BackGround->m_CurrentFrame >= End - 1)
+	{
+		ObjMgr->RemoveObject(this);
+	}
 	m_BackGround->Update(deltaTime, time);
 }
 

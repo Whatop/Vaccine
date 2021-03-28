@@ -318,8 +318,7 @@ void BlockMgr::Update(float deltaTime, float time)
 	if (_tag == "clone") { // 
 		ObjMgr->CollisionCheak(this, "Fill");
 		if (!(GameMgr::GetInst()->hit)) { // 맞지 않았을때
-			ObjMgr->CollisionCheak(this, "Monster");
-			std::cout << GameMgr::GetInst()->hit << std::endl; 
+			//ObjMgr->CollisionCheak(this, "Monster");
 			//m_Blocks->R = 255;
 			//m_Blocks->G = 255;
 			//m_Blocks->B = 255;
@@ -360,6 +359,12 @@ void BlockMgr::Update(float deltaTime, float time)
 		}
 	}
 	if (type_enemy && flashstack != 3) {
+		if (!(GameMgr::GetInst()->hit)) { // 맞지 않았을때
+		ObjMgr->CollisionCheak(this, "Clone");
+			//m_Blocks->R = 255;
+			//m_Blocks->G = 255;
+			//m_Blocks->B = 255;
+		}
 		ObjMgr->CollisionCheak(this, "ColBox");
 		if(m_Hp <= 0)
 			ObjMgr->RemoveObject(this);

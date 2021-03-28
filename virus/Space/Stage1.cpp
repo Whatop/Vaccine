@@ -15,6 +15,12 @@ Stage1::~Stage1()
 //ÀÎÆ®·Î ¸¸µé±â -> ¸Þ´º¿¡¼± °ÔÀÓ¼Ò°³, °ÔÀÓ¹æ¹ý, °ÔÀÓ·©Å·. Å©·¡µð ¼±ÅÃ
 void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î ÇÑ´Ù. ±Ù´ë ½£ÀÌ¶ó°í ÃÊ·ÏÃÊ·ÏÇÏ¸é ºÐÀ§±â°¡ ¾È»ç´Ï 
 {
+	m_BG = Sprite::Create(L"Patring/Stage1/Stage1.png");
+	m_BG->SetPosition(1920 / 2, 1080 / 2);
+	m_Virus = Sprite::Create(L"Patring/Stage1/Virus.png");
+	m_Virus->SetPosition(1920 / 2, 1080 / 2);
+
+
 	ObjMgr->Release();
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE1);
 	GameMgr::GetInst()->ReleasePlayer();
@@ -53,7 +59,7 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	//Àå¾Ö¹°°ú Àû
 	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 540 + 30), "column"), "Column");//Àå¾Ö¹°
 
-	//ObjMgr->AddObject(new BackGround(L"Painting/Stage", 1, 1, 2, Vec2(1920/2, 1080/2)), "BackGround");
+	ObjMgr->AddObject(new BackGround(L"Painting/Stage", 1, 1, 2, Vec2(1920/2, 1080/2)), "BackGround");
 }
 
 void Stage1::Release()
@@ -122,6 +128,8 @@ void Stage1::Update(float deltaTime, float time)
 
 void Stage1::Render()
 {
+	m_BG->Render();
+	m_Virus->Render();
 	for (auto& iter : m_Vertical)
 	{
 		if (abs(iter->m_Position.x - Camera::GetInst()->m_Position.x) > App::GetInst()->m_Width)
