@@ -15,9 +15,9 @@ Stage1::~Stage1()
 //인트로 만들기 -> 메뉴에선 게임소개, 게임방법, 게임랭킹. 크래디 선택
 void Stage1::Init() // 스테이지 1 배경 신체로 하고, 스테이지 2의 배경을 숲으로 한다. 근대 숲이라고 초록초록하면 분위기가 안사니 
 {
-	m_BG = Sprite::Create(L"Patring/Stage1/Stage1.png");
+	m_BG = Sprite::Create(L"Painting/Stage1/Stage1.png");
 	m_BG->SetPosition(1920 / 2, 1080 / 2);
-	m_Virus = Sprite::Create(L"Patring/Stage1/Virus.png");
+	m_Virus = Sprite::Create(L"Painting/Stage1/Virus.png");
 	m_Virus->SetPosition(1920 / 2, 1080 / 2);
 
 
