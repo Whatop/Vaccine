@@ -38,6 +38,7 @@ public:
 
 	void Update(float deltaTime, float time);
 	void Render();
+	void Move();
 	void OnCollision(Object* other);
 };
 

@@ -153,52 +153,89 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 
 void BlockMgr::Update(float deltaTime, float time)
 {
+	Move();
+}
+
+void BlockMgr::Render()
+{
+	m_Blocks->Render();
+}
+
+void BlockMgr::OnCollision(Object* other)
+{
+	//item
+	if (type_item) {
+		if (other->m_Tag == "Player") {
+			ObjMgr->RemoveObject(this);
+		}
+	}
+	if (_tag == "clone") {
+		if (other->m_Tag == "Fill") {
+				ObjMgr->RemoveObject(this);
+			//이팩트 넣어야지
+		} 
+		if (other->m_Tag == "Monster") {
+			GameMgr::GetInst()->_Hit = true;
+			GameMgr::GetInst()->hit = true;
+		}
+	}
+	if (type_enemy) {
+		if (other->m_Tag == "ColBox") {
+			
+			//이팩트 넣어야지
+			m_Hp -= 1; //피 달고 저거 불 판정 넣고 
+		}
+	}
+}
+
+void BlockMgr::Move()
+{
 	MoveTime += dt;
 	//enemy 움직임, 2스테이지로 넘어가면 성능향상
 	if (_tag == "fast") { // Fill이랑 닿으면 속도 업 + Clone이랑 닿으면 플레이어 피해 입음
 		// 백신선이나 백신에 붙이치면 붉은 Effect나오며 사라짐
 		if (MoveTime > 0.5f) {
 
-				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
-					Translate(m_Speed, 0);
-				}
-				else if( GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed){
-					Translate(-m_Speed, 0);
-				}
-				
-				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
-					Translate(0, m_Speed);
-				}
-				else if(GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed){
-					Translate(0, -m_Speed);
-				}
-		
+			if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+				Translate(m_Speed, 0);
+			}
+			else if (GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed) {
+				Translate(-m_Speed, 0);
+			}
+
+			if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				Translate(0, m_Speed);
+			}
+			else if (GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed) {
+				Translate(0, -m_Speed);
+			}
+
 			MoveTime = 0;
 		}
 	}
-	
+
 	if (_tag == "flash") {
 		if (MoveTime > Moveif) {
 
-				if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
-					Translate(m_Speed, 0);
-					if (flashstack != 3)
-						flashstack++;
-				}
-				else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
-					Translate(-m_Speed, 0);
-					if (flashstack != 3)
-						flashstack++;
-				}
-				if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
-					Translate(0, m_Speed);
-					if (flashstack != 3)
-						flashstack++;
-				}
-				else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
-					Translate(0, -m_Speed);
-					if (flashstack != 3)
-						flashstack++;
+			if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+				Translate(m_Speed, 0);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
+				Translate(-m_Speed, 0);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				Translate(0, m_Speed);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
+				Translate(0, -m_Speed);
+				if (flashstack != 3)
+					flashstack++;
 			}
 			if (flashstack == 3) {
 
@@ -227,27 +264,27 @@ void BlockMgr::Update(float deltaTime, float time)
 	if (_tag == "flashgiant") {
 		if (MoveTime > Moveif) {
 
-				if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
-					Translate(m_Speed, 0);
-					if (flashstack != 3)
-						flashstack++;
-				}
-				else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
-					Translate(-m_Speed, 0);
-					if (flashstack != 3)
-						flashstack++;
-				}
-				else if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
-					Translate(0, m_Speed);
-					if (flashstack != 3)
-						flashstack++;
-				}
-				else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
-					Translate(0, -m_Speed);
-					if (flashstack != 3)
-						flashstack++;
-				}
-			
+			if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+				Translate(m_Speed, 0);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
+				Translate(-m_Speed, 0);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				Translate(0, m_Speed);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
+				Translate(0, -m_Speed);
+				if (flashstack != 3)
+					flashstack++;
+			}
+
 			if (flashstack == 3) {
 				if (efttect) {
 					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
@@ -268,7 +305,7 @@ void BlockMgr::Update(float deltaTime, float time)
 
 			MoveTime = 0;
 		}
-	}  
+	}
 
 	if (_tag == "giant") {
 		if (MoveTime > 1) {
@@ -310,7 +347,7 @@ void BlockMgr::Update(float deltaTime, float time)
 				}
 				else {
 					Translate(0, -m_Speed);
-				}
+				}	
 			}
 		}
 	}
@@ -360,45 +397,13 @@ void BlockMgr::Update(float deltaTime, float time)
 	}
 	if (type_enemy && flashstack != 3) {
 		if (!(GameMgr::GetInst()->hit)) { // 맞지 않았을때
-		ObjMgr->CollisionCheak(this, "Clone");
+			ObjMgr->CollisionCheak(this, "Clone");
 			//m_Blocks->R = 255;
 			//m_Blocks->G = 255;
 			//m_Blocks->B = 255;
 		}
 		ObjMgr->CollisionCheak(this, "ColBox");
-		if(m_Hp <= 0)
+		if (m_Hp <= 0)
 			ObjMgr->RemoveObject(this);
-	}
-}
-
-void BlockMgr::Render()
-{
-	m_Blocks->Render();
-}
-
-void BlockMgr::OnCollision(Object* other)
-{
-	//item
-	if (type_item) {
-		if (other->m_Tag == "Player") {
-			ObjMgr->RemoveObject(this);
-		}
-	}
-	if (_tag == "clone") {
-		if (other->m_Tag == "Fill") {
-				ObjMgr->RemoveObject(this);
-			//이팩트 넣어야지
-		} 
-		if (other->m_Tag == "Monster") {
-			GameMgr::GetInst()->_Hit = true;
-			GameMgr::GetInst()->hit = true;
-		}
-	}
-	if (type_enemy) {
-		if (other->m_Tag == "ColBox") {
-			
-			//이팩트 넣어야지
-			m_Hp -= 1; //피 달고 저거 불 판정 넣고 
-		}
 	}
 }
