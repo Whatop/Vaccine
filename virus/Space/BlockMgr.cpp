@@ -367,27 +367,27 @@ void BlockMgr::Move()
 			m_Blocks->B = 61;
 		}
 		if (!(GameMgr::GetInst()->hit)) {
-			if (UI::GetInst()->m_Hp == 5) {
+			if (GameMgr::GetInst()->m_Hp == 5) {
 				m_Blocks->R = 116;
 				m_Blocks->G = 192;
 				m_Blocks->B = 99;
 			}
-			if (UI::GetInst()->m_Hp == 4) {
+			if (GameMgr::GetInst()->m_Hp == 4) {
 				m_Blocks->R = 145;
 				m_Blocks->G = 237;
 				m_Blocks->B = 89;
 			}
-			if (UI::GetInst()->m_Hp == 3) {
+			if (GameMgr::GetInst()->m_Hp == 3) {
 				m_Blocks->R = 211;
 				m_Blocks->G = 237;
 				m_Blocks->B = 89;
 			}
-			if (UI::GetInst()->m_Hp == 2) {
+			if (GameMgr::GetInst()->m_Hp == 2) {
 				m_Blocks->R = 237;
 				m_Blocks->G = 197;
 				m_Blocks->B = 89;
 			}
-			if (UI::GetInst()->m_Hp == 1) {
+			if (GameMgr::GetInst()->m_Hp == 1) {
 				m_Blocks->R = 237;
 				m_Blocks->G = 123;
 				m_Blocks->B = 61;

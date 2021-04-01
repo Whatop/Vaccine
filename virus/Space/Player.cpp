@@ -150,8 +150,6 @@ void Player::Buff()
 			m_Player->B = 255;
 		}
 	}
-	UI::GetInst()->m_Hp = m_Hp;
-
 }
 
 void Player::Move()
@@ -242,6 +240,7 @@ void Player::Move()
 
 void Player::Hp()
 {
+	GameMgr::GetInst()->m_Hp = m_Hp;
 	if (!_Hit) {
 		if (m_Hp == 5) {
 			m_Player->R = 116;

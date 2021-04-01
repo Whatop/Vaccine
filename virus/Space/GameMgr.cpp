@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameMgr.h"
 #include "Player.h"
-#include "UI.h"
 #include "BlockMgr.h"
 #include "Fill.h"
 #include <algorithm>
@@ -119,36 +118,9 @@ void GameMgr::CreatePlayer()
 	m_CreatePlayer = true;
 }
 
-void GameMgr::CreateUI()
-{
-	UI::GetInst()->Init();
-	m_CreateUI = true;
-}
 
-void GameMgr::ReleasePlayer()
-{
-	ObjMgr->DeleteObject("Player");
-	m_CreatePlayer = false;
-}
-
-void GameMgr::ReleaseUI()
-{
-	UI::GetInst()->Release();
-	UI::GetInst()->ReleaseInst();
-	m_CreateUI = false;
-}
-//	0-------1
-//	|		|
-//	3-------2	
-//
-//
 void GameMgr::GameEnd()
 {
-	//ReleaseUI();
-	//ObjMgr->Release();
-	//Init();
-	//SceneDirector::GetInst()->ChangeScene(new InputScoreScene());
-	//죽었을때 이어하기가 나와야됨
 }
 
 void GameMgr::PlayerPos(Vec2 playerpos)

@@ -19,37 +19,21 @@ void Stage2::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE2);
 	m_Pause = false;
-	GameMgr::GetInst()->ReleasePlayer();
-	GameMgr::GetInst()->CreateUI();
 	GameMgr::GetInst()->CreatePlayer();
 	GameMgr::GetInst()->SpawnGiant(Vec2(300,300));
 	GameMgr::GetInst()->SpawnFast(Vec2(300,300));
 	GameMgr::GetInst()->SetLimit();
 	GameMgr::GetInst()->SpawnItem(Vec2(0, 0)); // ¾ÈÁÂÇ¥´Â ±×³É ÀÓ½ÃÁÂÇ¥ ÀÌÄ£±¸°¡ ¿µÇâÁÙ¼ö ÀÖ´Â°ÍÀº ¾ø´Ù
 
-	m_TileSize = Vec2(40, 40);
-	m_GridSize = Vec2(40, 40);
 
-	//m_Text = new TextMgr();
-	//m_Text->Init(32, true, false, "Determination Mono");
-	//m_Text->SetColor(255, 255, 255, 255);
-
-	for (int i = 0; i < 100; i++)
-	{
-		Sprite* v = Sprite::Create(L"Painting/Map/Vertical.png");
-		v->SetPosition(m_GridSize.x * i, App::GetInst()->m_Height / 2);
-		Sprite* h = Sprite::Create(L"Painting/Map/Horizontal.png");
-		h->SetPosition(App::GetInst()->m_Width / 2, m_GridSize.y * i);
-
-		m_Vertical.push_back(v);
-		m_Horizontal.push_back(h);
-	}
+	m_Text = new TextMgr();
+	m_Text->Init(32, true, false, "Determination Mono");
+	m_Text->SetColor(255, 255, 255, 255);
 
 }
 
 void Stage2::Release()
 {
-	GameMgr::GetInst()->ReleaseUI();
 }
 
 void Stage2::Update(float deltaTime, float time)
@@ -69,79 +53,13 @@ void Stage2::Update(float deltaTime, float time)
 		SceneDirector::GetInst()->ChangeScene(new Stage2());
 		std::cout << "2·ÎÀÌµ¿" << std::endl;
 	}
-	m_PrevSize = m_GridSize;
 
-
-
-	if (INPUT->GetKey(VK_F7) == KeyState::DOWN)
-	{
-		if (m_HideGrid)
-		{
-			for (auto& iter : m_Vertical)
-			{
-				iter->m_Visible = true;
-			}
-			for (auto& iter : m_Horizontal)
-			{
-				iter->m_Visible = true;
-			}
-
-			m_HideGrid = false;
-		}
-		else
-		{
-			for (auto& iter : m_Vertical)
-			{
-				iter->m_Visible = false;
-			}
-			for (auto& iter : m_Horizontal)
-			{
-				iter->m_Visible = false;
-			}
-
-			m_HideGrid = true;
-		}
-	}
-	if (m_PrevSize != m_GridSize)
-	{
-		for (int i = 0; i < 100; i++)
-		{
-			m_Vertical.at(i)->SetPosition(m_GridSize.x * i, App::GetInst()->m_Height / 2);
-			m_Horizontal.at(i)->SetPosition(App::GetInst()->m_Width / 2, m_GridSize.y * i);
-		}
-	}
 }
 
 void Stage2::Render()
 {
-	for (auto& iter : m_Vertical)
-	{
-		if (abs(iter->m_Position.x - Camera::GetInst()->m_Position.x) > App::GetInst()->m_Width)
-			iter->m_Position.x -= m_GridSize.x * 100;
-
-		if (iter->m_Position.x < Camera::GetInst()->m_Position.x)
-			iter->m_Position.x += m_GridSize.x * 100;
-
-		iter->m_Position.y = Camera::GetInst()->m_Position.y + iter->m_Size.y / 2;
-
-		iter->Render();
-	}
-	for (auto& iter : m_Horizontal)
-	{
-		if (abs(iter->m_Position.y - Camera::GetInst()->m_Position.y) > App::GetInst()->m_Height)
-			iter->m_Position.y -= m_GridSize.y * 100;
-
-		if (iter->m_Position.y < Camera::GetInst()->m_Position.y)
-			iter->m_Position.y += m_GridSize.y * 100;
-
-		iter->m_Position.x = Camera::GetInst()->m_Position.x + iter->m_Size.x / 2;
-
-		iter->Render();
-	}/*
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y)
-		+ "\n" + std::to_string(dt) + "  " + std::to_string(gt), 250, 900);
+	m_Text->print("HP : " + std::to_string(GameMgr::GetInst()->m_Hp), 1750, 980);
+	m_Text->print("Score : " + std::to_string(GameMgr::GetInst()->m_Score), 1920 / 2 - 100, 0);
 	Renderer::GetInst()->GetSprite()->End();
-
-	*/
 }

@@ -53,7 +53,6 @@
     </ClCompile>
     <ClCompile Include="TextMgr.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UI.cpp" />
     <ClCompile Include="WayScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -89,7 +88,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextMgr.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="UI.h" />
     <ClInclude Include="WayScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

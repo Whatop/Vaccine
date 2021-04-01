@@ -18,7 +18,6 @@ MenuScene::~MenuScene()
 void MenuScene::Init() 
 {
     ObjMgr->Release();
-    GameMgr::GetInst()->ReleaseUI();
     m_MainScene = Sprite::Create(L"Painting/MainScene.png");
     m_MainScene->SetPosition(1920/2, 1080/2);
 

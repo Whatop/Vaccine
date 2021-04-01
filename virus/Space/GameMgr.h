@@ -28,21 +28,17 @@ public:
 
 	int arr;
 	int m_Score;
+	int m_Hp;
 	float dtime;
 
 	bool _Hit; //클론이 맞음
 	bool hit;
-	float hitime;
-	; //클론이 맞음
+	float hitime;//클론이 맞음
 
 	void Init();
 	void RankInit();
 
 	void CreatePlayer();
-	void CreateUI();
-
-	void ReleasePlayer();
-	void ReleaseUI();
 	void GameEnd();
 
 	void PlayerPos(Vec2 playerpos);

@@ -96,9 +96,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Game\Mgrs</Filter>
-    </ClCompile>
     <ClCompile Include="IntroScene.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
@@ -199,9 +196,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game\Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Game\Mgrs</Filter>
     </ClInclude>
     <ClInclude Include="IntroScene.h">
       <Filter>Game\Object\Scene</Filter>

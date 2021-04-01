@@ -40,7 +40,6 @@ inline void SafeDelete(T*& x);
 #include"Sprite.h"
 #include"Animation.h"
 #include"EffectMgr.h"
-#include"UI.h"
 #include"BackGround.h"
 #include"LineMgr.h"
 #include"GameMgr.h"
