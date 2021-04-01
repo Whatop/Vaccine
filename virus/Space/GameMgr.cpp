@@ -19,7 +19,7 @@ void GameMgr::Init()
 	m_CreatePlayer = false;
 	m_CreateUI = false;
 
-	arr = 0;
+	arr = 1;
 	
 	memset(m_LinePos, 90, sizeof(m_LinePos));
 }
@@ -44,9 +44,7 @@ void GameMgr::RankInit()
 	m_Score = 0;
 }
 
-void GameMgr::Release()
-{
-}
+
 
 void GameMgr::CreatePlayer()
 {
@@ -111,6 +109,7 @@ void GameMgr::CreatePlayer()
 						randomposx = 1920 - 60;
 
 				}
+				randomposy += 60;
 				randomposy += 60;
 			}
 			ObjMgr->AddObject(new Player(Vec2(randomposx, randomposy)), "Player");
@@ -252,86 +251,58 @@ void GameMgr::Draw()
 	dtime += dt;
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
 	{
-			float posx = (m_LinePos[0].x + m_LinePos[2].x) / 2;
-			float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
+		Vec2 Pos;
+		Pos.x = (m_LinePos[0].x + m_LinePos[2].x) / 2;
+		Pos.y = (m_LinePos[0].y + m_LinePos[2].y) / 2;
 
-			if (m_LinePos[2].x > m_LinePos[0].x) {
-				if (m_LinePos[2].y < m_LinePos[0].y) {
-
-					m_PlayerPos.y = m_LinePos[2].y;
-					m_LinePos[2].y = m_LinePos[0].y;
-					m_LinePos[0].y = m_PlayerPos.y;
-				}
-
-			//	else if (m_LinePos[2].y > m_LinePos[0].y) {
-//				정상적
-			//	}
-			}
-			else if (m_LinePos[2].x < m_LinePos[0].x) {
-
-				if (m_LinePos[2].y < m_LinePos[0].y) {
-
-					m_PlayerPos = m_LinePos[2];
-					m_LinePos[2] = m_LinePos[0];
-					m_LinePos[0] = m_PlayerPos;
-				}
-				else if (m_LinePos[2].y > m_LinePos[0].y) {
-					m_PlayerPos.x = m_LinePos[2].x;
-					m_LinePos[2].x = m_LinePos[0].x;
-					m_LinePos[0].x = m_PlayerPos.x;
-				}
-			}
-
-			float scalex = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
-			float scaley = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
-			//그냥 값을 반대로 넣어주면 되는거 아닌가?
-			//m_LinePos[2]값을 0으로 만들어주고
-			//m_LinePos[0]값을 2로 만들어주면 모든것이 완벽해진다.
-
-			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
-			ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
-	}
-
-	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
-	{
-		float posx = (m_LinePos[0].x + m_LinePos[2].x) / 2;
-		float posy = (m_LinePos[0].y + m_LinePos[2].y) / 2;
-
-		if (m_LinePos[2].x > m_LinePos[0].x) {
-			if (m_LinePos[2].y < m_LinePos[0].y) {
-
-				m_PlayerPos.y = m_LinePos[2].y;
-				m_LinePos[2].y = m_LinePos[0].y;
-				m_LinePos[0].y = m_PlayerPos.y;
-			}
-
-			//	else if (m_LinePos[2].y > m_LinePos[0].y) {
-//				정상적
-			//	}
+		Vec2 Scale;
+		if (m_LinePos[0].x > m_LinePos[2].x) {
+			float temp = m_LinePos[0].x;
+			m_LinePos[0].x = m_LinePos[2].x;
+			m_LinePos[2].x = temp;
 		}
-		else if (m_LinePos[2].x < m_LinePos[0].x) {
-
-			if (m_LinePos[2].y < m_LinePos[0].y) {
-
-				m_PlayerPos = m_LinePos[2];
-				m_LinePos[2] = m_LinePos[0];
-				m_LinePos[0] = m_PlayerPos;
-			}
-			else if (m_LinePos[2].y > m_LinePos[0].y) {
-				m_PlayerPos.x = m_LinePos[2].x;
-				m_LinePos[2].x = m_LinePos[0].x;
-				m_LinePos[0].x = m_PlayerPos.x;
-			}
+		if (m_LinePos[0].y > m_LinePos[2].y) {
+			float temp = m_LinePos[0].y;
+			m_LinePos[0].y = m_LinePos[2].y;
+			m_LinePos[2].y = temp;
 		}
 
-		float scalex = (m_LinePos[2].x - m_LinePos[0].x + 40) / 40;
-		float scaley = (m_LinePos[2].y - m_LinePos[0].y + 40) / 40;
+		Scale.x = (m_LinePos[2].x - m_LinePos[0].x + 60) / 60;
+		Scale.y = (m_LinePos[2].y - m_LinePos[0].y + 60) / 60;
 		//그냥 값을 반대로 넣어주면 되는거 아닌가?
 		//m_LinePos[2]값을 0으로 만들어주고
 		//m_LinePos[0]값을 2로 만들어주면 모든것이 완벽해진다.
 
-		ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 1), "Fill");
-		ObjMgr->AddObject(new Fill(Vec2(posx, posy), Vec2(scalex, scaley), 0), "ColBox");
+		ObjMgr->AddObject(new Fill(Pos, Scale, 1), "Fill");
+		ObjMgr->AddObject(new Fill(Pos, Scale, 0), "ColBox");
+	}
+
+	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
+	{
+		Vec2 Pos;
+		Pos.x = (m_LinePos[0].x + m_LinePos[2].x) / 2;
+		Pos.y = (m_LinePos[0].y + m_LinePos[2].y) / 2;
+
+		Vec2 Scale;
+		if (m_LinePos[0].x > m_LinePos[2].x) {
+			float temp = m_LinePos[0].x;
+			m_LinePos[0].x = m_LinePos[2].x;
+			m_LinePos[2].x = temp;
+		}
+		if (m_LinePos[0].y > m_LinePos[2].y) {
+			float temp = m_LinePos[0].y;
+			m_LinePos[0].y = m_LinePos[2].y;
+			m_LinePos[2].y = temp;
+		}
+
+		Scale.x = (m_LinePos[2].x - m_LinePos[0].x + 40) / 40;
+		Scale.y = (m_LinePos[2].y - m_LinePos[0].y + 40) / 40;
+		//그냥 값을 반대로 넣어주면 되는거 아닌가?
+		//m_LinePos[2]값을 0으로 만들어주고
+		//m_LinePos[0]값을 2로 만들어주면 모든것이 완벽해진다.
+
+		ObjMgr->AddObject(new Fill(Pos, Scale, 1), "Fill");
+		ObjMgr->AddObject(new Fill(Pos, Scale, 0), "ColBox");
 	}
 	arr = 0;
 	m_LinePos[3].x = -100;

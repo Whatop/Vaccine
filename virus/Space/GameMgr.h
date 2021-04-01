@@ -37,7 +37,6 @@ public:
 
 	void Init();
 	void RankInit();
-	void Release();
 
 	void CreatePlayer();
 	void CreateUI();

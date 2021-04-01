@@ -315,7 +315,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 
 	//
 }
-void Player::Render()
+void Player::Render() 
 {
 	m_Player->Render();
 	//GameMgr::GetInst()->Draw();
@@ -346,7 +346,7 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Clone") {
 		create = true;
 		GameMgr::GetInst()->LinePos(m_Position);
-	//GameMgr::GetInst()->PlayerPos(m_Position);
+	//GameMgr::GetInst()->PlayerPos(m_Position); 
 }
 	if (obj->m_Tag == "Monster") {
 

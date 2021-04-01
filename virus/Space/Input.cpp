@@ -38,13 +38,13 @@ KeyState Input::GetKey(int key)
 	m_bPrevState = m_PrevState[key];
 	m_bCurrentState = m_CurrentState[key];
 
-	if (m_bPrevState == true && m_bCurrentState == true)
+	if (m_bPrevState  && m_bCurrentState)
 		return KeyState::PRESS;
 
-	else if (m_bPrevState == true && m_bCurrentState == false)
+	else if (m_bPrevState  &&! m_bCurrentState)
 		return KeyState::UP;
 
-	else if (m_bPrevState == false && m_bCurrentState == true)
+	else if (!m_bPrevState && m_bCurrentState)
 		return KeyState::DOWN;
 
 	return KeyState::NONE;
