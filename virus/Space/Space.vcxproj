@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BlockMgr.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
@@ -33,6 +32,7 @@
     <ClCompile Include="InputScoreScene.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="LineMgr.cpp" />
+    <ClCompile Include="Loading.cpp" />
     <ClCompile Include="RankScene.cpp" />
     <ClCompile Include="ReportScene.cpp" />
     <ClCompile Include="Stage2.cpp" />
@@ -58,7 +58,6 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="App.h" />
-    <ClInclude Include="BackGround.h" />
     <ClInclude Include="BlockMgr.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionMgr.h" />
@@ -70,6 +69,7 @@
     <ClInclude Include="InputScoreScene.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="LineMgr.h" />
+    <ClInclude Include="Loading.h" />
     <ClInclude Include="RankScene.h" />
     <ClInclude Include="ReportScene.h" />
     <ClInclude Include="Stage2.h" />

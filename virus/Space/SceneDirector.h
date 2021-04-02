@@ -9,6 +9,10 @@ enum class SceneState {
 	ENDING,
 	STAGE1,
 	STAGE2,
+	REPORT,
+	WAY,
+	CREDIT,
+	RANK,
 	NONE
 };
 

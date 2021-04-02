@@ -73,6 +73,24 @@ void App::Run()
 				App::GetInst()->Release();
 				exit(0);
 			}
+			if (INPUT->GetKey(VK_F4) == KeyState::DOWN) // 메뉴화면 이동
+			{
+				SceneDirector::GetInst()->SetScene(SceneState::MENU);
+				ObjMgr->AddObject(new Loading(0), "SceneChange");
+				std::cout << "메뉴로이동" << std::endl;
+			}
+			else if (INPUT->GetKey(VK_F5) == KeyState::DOWN) // 스테이지 1 이동
+			{
+				SceneDirector::GetInst()->SetScene(SceneState::STAGE1);
+				ObjMgr->AddObject(new Loading(0), "SceneChange");
+				std::cout << "1로이동" << std::endl;
+			}
+			else if (INPUT->GetKey(VK_F6) == KeyState::DOWN) // 스테이지 2 이동
+			{
+				SceneDirector::GetInst()->SetScene(SceneState::STAGE2);
+				ObjMgr->AddObject(new Loading(0), "SceneChange");
+				std::cout << "2로이동" << std::endl;
+			}
 
 
 		}

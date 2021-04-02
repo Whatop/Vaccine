@@ -1,8 +1,5 @@
 #include "stdafx.h"
-#include "Stage1.h"
 #include "Stage2.h"
-#include "MenuScene.h"03
-#include "BlockMgr.h"
 #include "Player.h"
 
 Stage2::Stage2()
@@ -18,7 +15,6 @@ void Stage2::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	ObjMgr->Release();
 
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE2);
-	m_Pause = false;
 	GameMgr::GetInst()->CreatePlayer();
 	GameMgr::GetInst()->SpawnGiant(Vec2(300,300));
 	GameMgr::GetInst()->SpawnFast(Vec2(300,300));
@@ -27,7 +23,7 @@ void Stage2::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 
 
 	m_Text = new TextMgr();
-	m_Text->Init(32, true, false, "Determination Mono");
+	m_Text->Init(50, true, false, "Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
 
 }
@@ -38,28 +34,37 @@ void Stage2::Release()
 
 void Stage2::Update(float deltaTime, float time)
 {
-	if (INPUT->GetKey(VK_F4) == KeyState::DOWN) // ¸Þ´ºÈ­¸é ÀÌµ¿
-	{
-		SceneDirector::GetInst()->ChangeScene(new MenuScene());
-		std::cout << "¸Þ´º·ÎÀÌµ¿" << std::endl;
+	m_Move += dt;
+	if (m_Move > 1) {
+		switch (m_Cut) {
+		case 1:
+			m_Virus->Translate(1000 * dt, 0);
+			m_Cut++;
+			m_Move = 0;
+			break;
+		case 2:
+			m_Virus->Translate(0, -1000 * dt);
+			m_Cut++;
+			m_Move = 0;
+			break;
+		case 3:
+			m_Virus->Translate(-1000 * dt, 0);
+			m_Cut++;
+			m_Move = 0;
+			break;
+		case 4:
+			m_Virus->Translate(0, 1000 * dt);
+			m_Cut = 1;
+			m_Move = 0;
+			break;
+		}
 	}
-	else if (INPUT->GetKey(VK_F5) == KeyState::DOWN) // ½ºÅ×ÀÌÁö 1 ÀÌµ¿
-	{
-		SceneDirector::GetInst()->ChangeScene(new Stage1());
-		std::cout << "1·ÎÀÌµ¿" << std::endl;
-	}
-	else if (INPUT->GetKey(VK_F6) == KeyState::DOWN) // ½ºÅ×ÀÌÁö 2 ÀÌµ¿
-	{
-		SceneDirector::GetInst()->ChangeScene(new Stage2());
-		std::cout << "2·ÎÀÌµ¿" << std::endl;
-	}
-
 }
 
 void Stage2::Render()
 {
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print("HP : " + std::to_string(GameMgr::GetInst()->m_Hp), 1750, 980);
-	m_Text->print("Score : " + std::to_string(GameMgr::GetInst()->m_Score), 1920 / 2 - 100, 0);
+	m_Text->print("HP : " + std::to_string(GameMgr::GetInst()->m_Hp), 160, 0);
+	m_Text->print("Score : " + std::to_string(GameMgr::GetInst()->m_Score),1920/2, 0);
 	Renderer::GetInst()->GetSprite()->End();
 }

@@ -40,9 +40,9 @@ inline void SafeDelete(T*& x);
 #include"Sprite.h"
 #include"Animation.h"
 #include"EffectMgr.h"
-#include"BackGround.h"
 #include"LineMgr.h"
 #include"GameMgr.h"
+#include"Loading.h"
 //
 
 template<class T>

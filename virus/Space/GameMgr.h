@@ -48,7 +48,7 @@ public:
 
 	void SetLimit();
 
-	void SpawnItem(Vec2 Pos);
+	void SpawnItem();
 
 	void SpawnFast(Vec2 Pos);
 	void SpawnFlash(Vec2 Pos);

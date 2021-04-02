@@ -1,12 +1,5 @@
 #include "stdafx.h"
 #include "MenuScene.h"
-#include "Stage1.h"
-#include "Stage2.h"
-#include "MenuScene.h"
-#include "RankScene.h"
-#include "CreditScene.h"
-#include "WayScene.h"
-#include "ReportScene.h"
 
 MenuScene::MenuScene()
 {
@@ -47,25 +40,30 @@ void MenuScene::Release()
 void MenuScene::Update(float deltaTime, float time)
 {
     //게임시작, 게임소개, 게임방법, 게임랭킹(score), 크래딧(credit)
-    if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Start) && INPUT->GetButtonDown() == true)
+    if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Start) && INPUT->GetButtonDown())
     {
-        SceneDirector::GetInst()->ChangeScene(new Stage1());
+        SceneDirector::GetInst()->SetScene(SceneState::STAGE1);
+        ObjMgr->AddObject(new Loading(0), "SceneChange");
     }
-    else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Report) && INPUT->GetButtonDown() == true)
+    else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Report) && INPUT->GetButtonDown())
     {
-        SceneDirector::GetInst()->ChangeScene(new ReportScene());
+        SceneDirector::GetInst()->SetScene(SceneState::REPORT);
+        ObjMgr->AddObject(new Loading(0), "SceneChange");
     }
-    else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Way) && INPUT->GetButtonDown() == true)
+    else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Way) && INPUT->GetButtonDown())
     {
-        SceneDirector::GetInst()->ChangeScene(new WayScene());
+        SceneDirector::GetInst()->SetScene(SceneState::WAY);
+        ObjMgr->AddObject(new Loading(0), "SceneChange");
     }
-    else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Rank) && INPUT->GetButtonDown() == true)
+    else if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Rank) && INPUT->GetButtonDown())
     {
-        SceneDirector::GetInst()->ChangeScene(new RankScene());
+        SceneDirector::GetInst()->SetScene(SceneState::RANK);
+        ObjMgr->AddObject(new Loading(0), "SceneChange");
     }
-    else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Credit) && INPUT->GetButtonDown() == true)
+    else if ( CollisionMgr::GetInst()->MouseWithBoxSize(m_Credit) && INPUT->GetButtonDown())
     {
-        SceneDirector::GetInst()->ChangeScene(new CreditScene());
+        SceneDirector::GetInst()->SetScene(SceneState::CREDIT);
+        ObjMgr->AddObject(new Loading(0), "SceneChange");
     }
 }
 

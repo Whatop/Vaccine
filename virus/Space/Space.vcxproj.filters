@@ -120,9 +120,6 @@
     <ClCompile Include="Stage2.cpp">
       <Filter>Game\Object\Scene\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>Game\Object\Scene\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="CreditScene.cpp">
       <Filter>Game\Object\Scene\Menu</Filter>
     </ClCompile>
@@ -138,6 +135,7 @@
     <ClCompile Include="RankScene.cpp">
       <Filter>Game\Object\Scene\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="Loading.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -221,9 +219,6 @@
     <ClInclude Include="Stage2.h">
       <Filter>Game\Object\Scene\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>Game\Object\Scene\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="CreditScene.h">
       <Filter>Game\Object\Scene\Menu</Filter>
     </ClInclude>
@@ -239,5 +234,6 @@
     <ClInclude Include="RankScene.h">
       <Filter>Game\Object\Scene\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="Loading.h" />
   </ItemGroup>
 </Project>

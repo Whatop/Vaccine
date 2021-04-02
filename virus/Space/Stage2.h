@@ -1,11 +1,13 @@
 #pragma once
 class Stage2 : public Scene
 {
-	bool m_HideGrid;
-	bool m_Pause;
-
+	Sprite* m_BG;
+	Sprite* m_Virus;
 	TextMgr* m_Text;
 public:
+	float m_Move;
+	int m_Cut;
+
 	Stage2();
 	~Stage2();
 

@@ -157,6 +157,7 @@ void GameMgr::SetLimit()
 			ObjMgr->AddObject(new BlockMgr(Vec2(30, a), "ground"), "Ground");//º®
 			ObjMgr->AddObject(new BlockMgr(Vec2(1890, a), "ground"), "Ground");//º®
 		}
+
 	}
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 	{
@@ -172,7 +173,7 @@ void GameMgr::SetLimit()
 	}
 }
 
-void GameMgr::SpawnItem(Vec2 Pos) //Item¿¡ ¹é½ÅÀÌ¶û ´ê¾ÒÀ»¶§ visible 
+void GameMgr::SpawnItem() //Item¿¡ ¹é½ÅÀÌ¶û ´ê¾ÒÀ»¶§ visible 
 {
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE1)
 	{
