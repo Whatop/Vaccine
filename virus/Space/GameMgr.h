@@ -36,11 +36,8 @@ public:
 	float hitime;//클론이 맞음
 
 	bool _Hit; //클론이 맞음
-	bool _Speed;
 	bool _Invincible;
-	bool _Heal;
 	bool _Ammor;
-	bool _Random;
 
 	void Init();
 	void RankInit();

@@ -109,15 +109,15 @@ void Player::Buff()
 			limit = 0.2f;
 		}
 	}
-	else if (_Ammor) {
+	if (_Ammor) {
 		//ObjMgr->AddObject(new EffectMgr())
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Defence", 1, 1, 2, m_Position), "Effect");
 	}
 	//}_Hit
-	else if (_Invincible) {
+	if (_Invincible) {
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
 		m_Invincible += dt;
-		if (m_Invincible >= 5.f) {
+		if (m_Invincible >= 3.f) {
 			_Invincible = false;	 
 			m_Invincible = 0;
 		}
@@ -133,7 +133,9 @@ void Player::Buff()
 	}
 	if (_Hit) {
 		m_hit += dt;
-		m_Player->R = 255;
+		if (!_Ammor) {
+			m_Player->R = 255;
+		}
 		if (m_hit > 0.1f)
 			m_Player->A = 130;
 		else if (m_hit > 0.2f)
@@ -147,6 +149,7 @@ void Player::Buff()
 
 		if (m_hit >= 0.6f) {
 			_Hit = false;
+			_Ammor = false;
 			m_hit = 0;
 			m_Player->A = 255;
 			m_Player->R = 255;
@@ -246,7 +249,7 @@ void Player::Hp()
 {
 	GameMgr::GetInst()->m_Hp = m_Hp;
 	UI::GetInst()->m_Hp = m_Hp;
-	if (!_Hit && !_Ammor && !_Invincible && !_Speed) {
+	if (!_Hit) {
 		if (m_Hp == 5) {
 			m_Player->R = 116;
 			m_Player->G = 192;
@@ -280,6 +283,8 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 {
 	GameMgr::GetInst()->HitCheak();
 	GameMgr::GetInst()->m_PlayerPos = m_Position;
+	GameMgr::GetInst()->_Ammor = _Ammor;
+	GameMgr::GetInst()->_Invincible = _Invincible;
 	Move();
 	CheatKey();
 	Buff();
@@ -297,21 +302,20 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 		GameMgr::GetInst()->Draw();
 		GameMgr::GetInst()->PlayerPos(m_Position);
 	}
-	ObjMgr->CollisionCheak(this, "Speed");
-	ObjMgr->CollisionCheak(this, "Ammor");
-	ObjMgr->CollisionCheak(this, "Heal");
-	ObjMgr->CollisionCheak(this, "Invincible");
-	ObjMgr->CollisionCheak(this, "Random");
+	
 	ObjMgr->CollisionCheak(this, "Fill");
 	ObjMgr->CollisionCheak(this, "Clone");
 	if (!m_Invincible && !_Hit && !GODMODE) { 
 		ObjMgr->CollisionCheak(this, "Monster");
 	}
 
-	if (GameMgr::GetInst()->_Hit) {
-		m_Hp--;
+	if (GameMgr::GetInst()->_Hit&&!_Hit) {
+		if(!_Ammor)
+			m_Hp--;
+			
 		GameMgr::GetInst()->_Hit = false;
-		_Hit = true;
+			_Hit = true;
+		
 	}
 
 	//

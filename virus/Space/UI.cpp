@@ -45,8 +45,8 @@ void UI::Render()
 {
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_Text->print("HP : " + std::to_string(m_Hp), 50, 0);
-	m_Text->print("Score : " + std::to_string(m_Score), 250, 0);
-	m_Text->print("제한시간 : " + std::to_string(int(TimeLimit)), 450, 0);
+	m_Text->print("Score : " + std::to_string(GameMgr::GetInst()->m_Score), 250, 0);
+	m_Text->print("제한시간 : " + std::to_string(int(TimeLimit)), 1920/2-150, 0);
 	m_Text->print("치료진행도 : " + std::to_string(int(TimeLimit)), 1550, 0);
 	Renderer::GetInst()->GetSprite()->End();
 }

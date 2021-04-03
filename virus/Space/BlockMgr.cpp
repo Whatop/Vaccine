@@ -158,10 +158,18 @@ void BlockMgr::Update(float deltaTime, float time)
 {
 	Move();
 	if (type_item) {
-		if (m_Visible == true) {
+		if (m_Blocks->m_Visible == true) {
 			ObjMgr->CollisionCheak(this, "Player");
 		}
 		ObjMgr->CollisionCheak(this, "Fill");
+	}
+	if (_tag == "clone") {
+		if (GameMgr::GetInst()->_Invincible) {
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 0.5f, 2, m_Position), "Effect");
+		}
+		else if (GameMgr::GetInst()->_Ammor) {
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Defence", 1, 0.5f, 2, m_Position), "Effect");
+		}
 	}
 }
 
@@ -187,8 +195,10 @@ void BlockMgr::OnCollision(Object* other)
 			//이팩트 넣어야지
 		} 
 		if (other->m_Tag == "Monster") {
-			GameMgr::GetInst()->_Hit = true;
-			GameMgr::GetInst()->hit = true;
+			if (!GameMgr::GetInst()->_Invincible) {
+				GameMgr::GetInst()->_Hit = true;
+				GameMgr::GetInst()->hit = true;
+			}
 		}
 	}
 	if (type_enemy) {
@@ -368,12 +378,12 @@ void BlockMgr::Move()
 		ObjMgr->CollisionCheak(this, "Fill");
 		if (!(GameMgr::GetInst()->hit)) { // 맞지 않았을때
 			//ObjMgr->CollisionCheak(this, "Monster");
-			//m_Blocks->R = 255;
-			//m_Blocks->G = 255;
-			//m_Blocks->B = 255;
+			m_Blocks->R = 255;
+			m_Blocks->G = 255;
+			m_Blocks->B = 255;
 		}
 		else {
-			m_Blocks->A = 155;
+			m_Blocks->A = 255;
 			m_Blocks->R = 237;
 			m_Blocks->G = 123;
 			m_Blocks->B = 61;
