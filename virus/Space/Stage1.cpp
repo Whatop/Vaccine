@@ -21,18 +21,12 @@ void Stage1::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 	m_Virus->SetPosition(1920 / 2, 1080 / 2);
 
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE1);
+	GameMgr::GetInst()->ReleaseUI();
 	GameMgr::GetInst()->CreatePlayer();
 	GameMgr::GetInst()->SetLimit();
+	GameMgr::GetInst()->CreateUI();
 	GameMgr::GetInst()->SpawnItem();
-//	GameMgr::GetInst()->SpawnFast(Vec2(630, 90));
-	GameMgr::GetInst()->SpawnFlash(Vec2(630, 90));
-//	GameMgr::GetInst()->SpawnGiant(Vec2(630, 90));
-//	GameMgr::GetInst()->SpawnToxino(Vec2(630, 90));
-
-	
-	m_Text = new TextMgr();
-	m_Text->Init(50, true, false, "Determination Mono");
-	m_Text->SetColor(255, 255, 255, 255);
+	GameMgr::GetInst()->SpawnEnemy();
 
 
 	//Àå¾Ö¹°°ú Àû
@@ -75,10 +69,6 @@ void Stage1::Update(float deltaTime, float time)
 
 void Stage1::Render()
 {
-	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print("HP : " + std::to_string(GameMgr::GetInst()->m_Hp), 160, 0);
-	m_Text->print("Score : " + std::to_string(GameMgr::GetInst()->m_Score), 1920 / 2, 0);
-	Renderer::GetInst()->GetSprite()->End();
 	m_BG->Render();
 	m_Virus->Render();
 }

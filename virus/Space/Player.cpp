@@ -66,10 +66,9 @@ void Player::CheatKey()
 			std::cout << "¹«Àûon" << std::endl;
 		}
 	}
-	else if (INPUT->GetKey(VK_F2) == KeyState::DOWN) // ¾ÆÀÌÅÛ ·£´ý »ç¿ë
+	else if (INPUT->GetKey(VK_F2) == KeyState::DOWN || _Random) // ¾ÆÀÌÅÛ ·£´ý »ç¿ë
 	{
 		int random = rand() % 4 + 1;
-
 
 		if (random == 1) {
 			_Speed = true;
@@ -87,11 +86,15 @@ void Player::CheatKey()
 			_Ammor = true;
 			std::cout << "¹æ¾î" << std::endl;
 		}
+		_Random = false;
 	}
 	else if (INPUT->GetKey(VK_F3) == KeyState::DOWN) // »ý¸í·Â Áõ°¡
 	{
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Invincible", 1, 1, 2, m_Position), "Effect");
 		if (m_Hp < 5)
 			m_Hp += 1;
+		else
+			GameMgr::GetInst()->AddScore(100);
 	}
 }
 
@@ -99,37 +102,38 @@ void Player::Buff()
 {
 	if (_Speed) {
 		itime += dt;
-		limit = 0.1f;
+		limit = 0.1f;	
 		if (itime >= 5.f) {
 			_Speed = false;
 			itime = 0;
 			limit = 0.2f;
 		}
 	}
-	//else if (_Ammor) { OnCollison¿¡ ÇØ³ð
-
+	else if (_Ammor) {
+		//ObjMgr->AddObject(new EffectMgr())
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Defence", 1, 1, 2, m_Position), "Effect");
+	}
 	//}_Hit
 	else if (_Invincible) {
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
 		m_Invincible += dt;
 		if (m_Invincible >= 5.f) {
-			_Invincible = false;
+			_Invincible = false;	 
 			m_Invincible = 0;
 		}
 	}
 	if (_Heal) {
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Invincible", 1, 1, 2, m_Position), "Effect");
 		if (m_Hp < 5)
 			m_Hp += 1;
-		
-		//else
-		//score ¿À¸£µµ·Ï
+
+		else
+			GameMgr::GetInst()->AddScore(100);
 		_Heal = false;
 	}
 	if (_Hit) {
 		m_hit += dt;
 		m_Player->R = 255;
-		m_Player->G = 0;
-		m_Player->B = 0;
-
 		if (m_hit > 0.1f)
 			m_Player->A = 130;
 		else if (m_hit > 0.2f)
@@ -241,7 +245,8 @@ void Player::Move()
 void Player::Hp()
 {
 	GameMgr::GetInst()->m_Hp = m_Hp;
-	if (!_Hit) {
+	UI::GetInst()->m_Hp = m_Hp;
+	if (!_Hit && !_Ammor && !_Invincible && !_Speed) {
 		if (m_Hp == 5) {
 			m_Player->R = 116;
 			m_Player->G = 192;
@@ -286,15 +291,12 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 		m_Speed = 40;
 
 
-	//if (INPUT->GetKey('O') == KeyState::DOWN) //Å¬·Ð¿¡°Ô ´ê°Å³ª FULL ÇÏ°í ³ª¼­ ¹Ù·Î
-	if (INPUT->GetKey('P') == KeyState::DOWN) //Å¬·Ð, Ä¡·áµÈ ºÎºÐÀÌ¶û ¸¸³ª¸é ¾ÈÇÏµµ·Ï ¼³Á¤
+	if (INPUT->GetKey('P') == KeyState::DOWN) 
 		GameMgr::GetInst()->LinePos(m_Position);
 	if (INPUT->GetKey('F') == KeyState::DOWN || GameMgr::GetInst()->m_LinePos[0]==GameMgr::GetInst()->m_LinePos[4]||GameMgr::GetInst()->arr > 5) {
-	 	//µ¹¾Æ°¡°Å³ª º®¿¡ ´ê´Â´Ù¸é ½ÇÇà Å¬·Ð°ú ´ê¾ÒÀ»¶§ ÃÊ±âÀ§Ä¡¸¦ ÃÊ±âÈ­ÇÑ´Ù¸é? 
 		GameMgr::GetInst()->Draw();
 		GameMgr::GetInst()->PlayerPos(m_Position);
 	}
-	//
 	ObjMgr->CollisionCheak(this, "Speed");
 	ObjMgr->CollisionCheak(this, "Ammor");
 	ObjMgr->CollisionCheak(this, "Heal");
@@ -302,7 +304,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 	ObjMgr->CollisionCheak(this, "Random");
 	ObjMgr->CollisionCheak(this, "Fill");
 	ObjMgr->CollisionCheak(this, "Clone");
-	if (!m_Invincible && !_Hit && !GODMODE) { //¹«Àû ¸ó½ºÅÍ ÆÇÁ¤
+	if (!m_Invincible && !_Hit && !GODMODE) { 
 		ObjMgr->CollisionCheak(this, "Monster");
 	}
 
@@ -317,13 +319,11 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool ¸¸µé¾î¼­ ¿òÁ÷À
 void Player::Render() 
 {
 	m_Player->Render();
-	//GameMgr::GetInst()->Draw();
 
 }
 
 void Player::OnCollision(Object* obj)
 {
-	//¾ÆÀÌÅÛ±¸Çö
 	if (obj->m_Tag == "Speed") {
 		_Speed = true;
 	}
@@ -336,6 +336,9 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Heal") {
 		_Heal = true;
 	}
+	if (obj->m_Tag == "Random") {
+		_Random = true;
+	}
 	if (obj->m_Tag == "Fill") {
 		create = true;
 		m_State = MoveState::NONE;
@@ -345,7 +348,6 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Clone") {
 		create = true;
 		GameMgr::GetInst()->LinePos(m_Position);
-	//GameMgr::GetInst()->PlayerPos(m_Position); 
 }
 	if (obj->m_Tag == "Monster") {
 
@@ -353,7 +355,7 @@ void Player::OnCollision(Object* obj)
 			if (!_Ammor) {
 				m_Hp -= 1;
 			}
-			else
+			else if(_Ammor)
 				_Ammor = false;
 
 			_Hit = true;

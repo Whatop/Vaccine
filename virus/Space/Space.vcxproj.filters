@@ -136,6 +136,9 @@
       <Filter>Game\Object\Scene\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Loading.cpp" />
+    <ClCompile Include="UI.cpp">
+      <Filter>Game\Object\MGR</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -235,5 +238,8 @@
       <Filter>Game\Object\Scene\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Loading.h" />
+    <ClInclude Include="UI.h">
+      <Filter>Game\Object\MGR</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

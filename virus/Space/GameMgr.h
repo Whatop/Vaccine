@@ -29,17 +29,26 @@ public:
 	int arr;
 	int m_Score;
 	int m_Hp;
+	int m_Cure;
 	float dtime;
 
-	bool _Hit; //클론이 맞음
 	bool hit;
 	float hitime;//클론이 맞음
+
+	bool _Hit; //클론이 맞음
+	bool _Speed;
+	bool _Invincible;
+	bool _Heal;
+	bool _Ammor;
+	bool _Random;
 
 	void Init();
 	void RankInit();
 
 	void CreatePlayer();
 	void GameEnd();
+	void CreateUI();
+	void ReleaseUI();
 
 	void PlayerPos(Vec2 playerpos);
 	void LinePos(Vec2 linepos);
@@ -50,10 +59,10 @@ public:
 
 	void SpawnItem();
 
-	void SpawnFast(Vec2 Pos);
-	void SpawnFlash(Vec2 Pos);
-	void SpawnGiant(Vec2 Pos);
-	void SpawnToxino(Vec2 Pos);
+	void SpawnEnemy();
+	void AddScore(int score);
+	void AddCure(int cure);
+
 	void Draw();
 	void HitCheak();
 };

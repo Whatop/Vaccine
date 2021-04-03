@@ -14,17 +14,21 @@ void Stage2::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 {
 	ObjMgr->Release();
 
+	m_BG = Sprite::Create(L"Painting/Stage1/Stage1.png");
+	m_BG->SetPosition(1920 / 2, 1080 / 2);
+	m_Virus = Sprite::Create(L"Painting/Stage1/Virus.png");
+	m_Virus->SetPosition(1920 / 2, 1080 / 2);
+
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE2);
+	GameMgr::GetInst()->ReleaseUI();
 	GameMgr::GetInst()->CreatePlayer();
-	GameMgr::GetInst()->SpawnGiant(Vec2(300,300));
-	GameMgr::GetInst()->SpawnFast(Vec2(300,300));
 	GameMgr::GetInst()->SetLimit();
-	GameMgr::GetInst()->SpawnItem(Vec2(0, 0)); // ¾ÈÁÂÇ¥´Â ±×³É ÀÓ½ÃÁÂÇ¥ ÀÌÄ£±¸°¡ ¿µÇâÁÙ¼ö ÀÖ´Â°ÍÀº ¾ø´Ù
+	GameMgr::GetInst()->CreateUI();
+	GameMgr::GetInst()->SpawnItem();
+	GameMgr::GetInst()->SpawnEnemy();
 
-
-	m_Text = new TextMgr();
-	m_Text->Init(50, true, false, "Determination Mono");
-	m_Text->SetColor(255, 255, 255, 255);
+	m_Cut = 0;
+	m_Move = 0;
 
 }
 
@@ -63,8 +67,6 @@ void Stage2::Update(float deltaTime, float time)
 
 void Stage2::Render()
 {
-	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print("HP : " + std::to_string(GameMgr::GetInst()->m_Hp), 160, 0);
-	m_Text->print("Score : " + std::to_string(GameMgr::GetInst()->m_Score),1920/2, 0);
-	Renderer::GetInst()->GetSprite()->End();
+	m_BG->Render();
+	m_Virus->Render();
 }

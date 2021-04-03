@@ -18,9 +18,22 @@ void GameMgr::Init()
 	m_CreatePlayer = false;
 	m_CreateUI = false;
 
-	arr = 1;
+	arr = 0;
 	
 	memset(m_LinePos, 90, sizeof(m_LinePos));
+}
+
+void GameMgr::CreateUI()
+{
+	UI::GetInst()->Init();
+	m_CreateUI = true;
+}
+
+void GameMgr::ReleaseUI()
+{
+	UI::GetInst()->Release();
+	UI::GetInst()->ReleaseInst();
+	m_CreateUI = false;
 }
 
 void GameMgr::RankInit()
@@ -42,8 +55,6 @@ void GameMgr::RankInit()
 	Ranks.push_back(sans);
 	m_Score = 0;
 }
-
-
 
 void GameMgr::CreatePlayer()
 {
@@ -181,7 +192,7 @@ void GameMgr::SpawnItem() //Item에 백신이랑 닿았을때 visible
 		ObjMgr->AddObject(new BlockMgr(Vec2(270, 300 + 30), "ammor"), "Ammor");//아이템 방어 3회
 		ObjMgr->AddObject(new BlockMgr(Vec2(270, 360 + 30), "invincible"), "Invincible");//아이템 무적 1회
 		ObjMgr->AddObject(new BlockMgr(Vec2(270, 420 + 30), "heal"), "Heal");//아이템 체력회복 +1 풀리면 점수 오름 2회
-		ObjMgr->AddObject(new BlockMgr(Vec2(270, 480) + 30, "random"), "Random");//아이템 랜덤 5회
+		ObjMgr->AddObject(new BlockMgr(Vec2(270, 480 + 30), "random"), "Random");//아이템 랜덤 5회
 	}
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 	{
@@ -193,30 +204,28 @@ void GameMgr::SpawnItem() //Item에 백신이랑 닿았을때 visible
 	}
 }
 
-void GameMgr::SpawnFast(Vec2 Pos)
-{
-	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 300 + 30), "fast"), "Monster");//스피드 적 1칸
-}
-
-void GameMgr::SpawnFlash(Vec2 Pos)
+void GameMgr::SpawnEnemy()
 {
 	int random = rand() % 2 + 1;
 
 	if (random == 1)
-		ObjMgr->AddObject(new BlockMgr(Vec2(1170 , 660 + 30), "flash"), "Monster");// 큰 적 2칸으로?
+		ObjMgr->AddObject(new BlockMgr(Vec2(1170, 660 + 30), "flash"), "Monster");// 큰 적 2칸으로?
 	else if (random == 2)
-		ObjMgr->AddObject(new BlockMgr(Vec2(1170+30, 420 + 60), "flashgiant"), "Monster");//점멸 적 1~ 4칸? 사이즈가 랜덤이라 위치조정이 따로 필요함 BlockMgr에서 조정해야됨
-}
+		ObjMgr->AddObject(new BlockMgr(Vec2(1170 + 30, 420 + 60), "flashgiant"), "Monster");//점멸 적 1~ 4칸? 사이즈가 랜덤이라 위치조정이 따로 필요함 BlockMgr에서 조정해야됨
 
-void GameMgr::SpawnGiant(Vec2 Pos)
-{
-	
-		ObjMgr->AddObject(new BlockMgr(Vec2(1170 + 30, 660 + 60), "giant"), "Monster");// 큰 적 2칸으로?
-}
-
-void GameMgr::SpawnToxino(Vec2 Pos)
-{
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170, 300 + 30), "fast"), "Monster");//스피드 적 1칸
+	ObjMgr->AddObject(new BlockMgr(Vec2(1170 + 30, 660 + 60), "giant"), "Monster");// 큰 적 2칸으로?
 	ObjMgr->AddObject(new BlockMgr(Vec2(1170 + 30, 780 + 60), "toxino"), "Monster");// 톡시노 4칸?
+}
+
+void GameMgr::AddScore(int score)
+{
+	m_Score += score;
+}
+
+void GameMgr::AddCure(int cure)
+{
+	m_Cure += cure;
 }
 
 void GameMgr::Draw()
@@ -278,8 +287,8 @@ void GameMgr::Draw()
 		ObjMgr->AddObject(new Fill(Pos, Scale, 0), "ColBox");
 	}
 	arr = 0;
-	m_LinePos[3].x = -100;
-	m_LinePos[3].y = -100;
+	m_LinePos[4].x = -100;
+	m_LinePos[4].y = -100;
 }
 
 void GameMgr::HitCheak()

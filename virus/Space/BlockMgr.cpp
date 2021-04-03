@@ -147,13 +147,22 @@ void BlockMgr::BlockType(std::string tag,Vec2 Pos) // Clone ,아이템(속도,방어력,
 	}
 	m_Blocks->SetParent(this);
 	SetPosition(Pos.x, Pos.y);
-	_tag = tag;
+	if (type_item) {
+		m_Blocks->m_Visible = false;
+	}
+		_tag = tag;
 	efttect = true;
 }
 
 void BlockMgr::Update(float deltaTime, float time)
 {
 	Move();
+	if (type_item) {
+		if (m_Visible == true) {
+			ObjMgr->CollisionCheak(this, "Player");
+		}
+		ObjMgr->CollisionCheak(this, "Fill");
+	}
 }
 
 void BlockMgr::Render()
@@ -167,6 +176,9 @@ void BlockMgr::OnCollision(Object* other)
 	if (type_item) {
 		if (other->m_Tag == "Player") {
 			ObjMgr->RemoveObject(this);
+		}
+		if (other->m_Tag == "Fill") {
+			m_Blocks->m_Visible = true;
 		}
 	}
 	if (_tag == "clone") {

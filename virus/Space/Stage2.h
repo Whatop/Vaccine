@@ -3,7 +3,6 @@ class Stage2 : public Scene
 {
 	Sprite* m_BG;
 	Sprite* m_Virus;
-	TextMgr* m_Text;
 public:
 	float m_Move;
 	int m_Cut;
