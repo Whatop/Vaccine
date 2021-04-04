@@ -1,0 +1,111 @@
+// 백신선이나 백신에 붙이치면 붉은 Effect나오며 사라짐 fast
+		if (MoveTime > 0.5f) {
+
+			if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+				Translate(m_Speed, 0);
+			}
+			else if (GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed) {
+				Translate(-m_Speed, 0);
+			}
+
+			if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				Translate(0, m_Speed);
+			}
+			else if (GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed) {
+				Translate(0, -m_Speed);
+			}
+
+			MoveTime = 0;
+		}
+//flash
+if (MoveTime > Moveif) {
+
+			if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+				Translate(m_Speed, 0);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
+				Translate(-m_Speed, 0);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				Translate(0, m_Speed);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
+				Translate(0, -m_Speed);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			if (flashstack == 3) {
+
+				if (efttect) {
+					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 2, 2, m_Position), "Effect");
+					efttect = false;
+				}
+
+				flashtime += 1;
+				m_Blocks->A = 0;
+				Moveif = 0.2f;
+				if (flashtime > 5) {
+					m_Blocks->A = 255;
+					flashstack = 0;
+					flashtime = 0;
+					Moveif = 0.75f;
+					efttect = true;
+					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 2, 2, m_Position), "Effect");
+				}
+//자이언트
+if (MoveTime > Moveif) {
+
+			if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
+				Translate(m_Speed, 0);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
+				Translate(-m_Speed, 0);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
+				Translate(0, m_Speed);
+				if (flashstack != 3)
+					flashstack++;
+			}
+			else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
+				Translate(0, -m_Speed);
+				if (flashstack != 3)
+					flashstack++;
+			}
+
+			if (flashstack == 3) {
+				if (efttect) {
+					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
+					efttect = false;
+				}
+				flashtime += 1;
+				m_Blocks->A = 0;
+				Moveif = 0.2f;
+				if (flashtime > 5) {
+					m_Blocks->A = 255;
+					flashtime = 0;
+					flashstack = 0;
+					Moveif = 0.75f;
+					efttect = true;
+					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
+				}
+			}
+
+			MoveTime = 0;
+		}
+			}
+
+			MoveTime = 0;
+		}
+
+
+
