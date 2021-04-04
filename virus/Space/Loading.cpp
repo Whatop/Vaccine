@@ -7,6 +7,7 @@
 #include "RankScene.h"
 #include "CreditScene.h"
 #include "WayScene.h"
+#include "InputScoreScene.h"
 
 Loading::Loading(int type)
 {
@@ -60,7 +61,8 @@ void Loading::Update(float deltaTime, float Time)
 
 		else if (SceneDirector::GetInst()->GetScene() == SceneState::CREDIT)
 			SceneDirector::GetInst()->ChangeScene(new CreditScene);
-
+		else if (SceneDirector::GetInst()->GetScene() == SceneState::ENDING)
+			SceneDirector::GetInst()->ChangeScene(new InputScoreScene());
 	}
 	m_Loding->Update(deltaTime, Time);
 }

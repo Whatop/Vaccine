@@ -169,6 +169,21 @@ void GameMgr::SetLimit()
 			ObjMgr->AddObject(new BlockMgr(Vec2(1890, a), "ground"), "Ground");//벽
 		}
 
+		ObjMgr->AddObject(new BlockMgr(Vec2(300 + 30, 300 + 30), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(360 + 30, 300 + 30), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(300 + 30, 360 + 30), "column"), "Column");//장애물
+
+		ObjMgr->AddObject(new BlockMgr(Vec2(300 + 30, 660 + 30), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(360 + 30, 720 + 30), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(300 + 30, 720 + 30), "column"), "Column");//장애물
+
+		ObjMgr->AddObject(new BlockMgr(Vec2(1500 + 30, 300 + 30), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(1560 + 30, 300 + 30), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(1560 + 30, 360 + 30), "column"), "Column");//장애물
+
+		ObjMgr->AddObject(new BlockMgr(Vec2(1560 + 30, 660 + 30), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(1560 + 30, 720 + 30), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(1500 + 30, 720 + 30), "column"), "Column");//장애물
 	}
 	if (SceneDirector::GetInst()->GetScene() == SceneState::STAGE2)
 	{
@@ -180,8 +195,28 @@ void GameMgr::SetLimit()
 			ObjMgr->AddObject(new BlockMgr(Vec2(20, a), "ground"), "Ground");//벽
 			ObjMgr->AddObject(new BlockMgr(Vec2(1900, a), "ground"), "Ground");//벽
 		}
+		ObjMgr->AddObject(new BlockMgr(Vec2(320 + 40, 320 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(360 + 40, 320 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(360 + 40, 320 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(320 + 40, 360 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(320 + 40, 400 + 40), "column"), "Column");//장애물
 
+		ObjMgr->AddObject(new BlockMgr(Vec2(320 + 40, 680 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(360 + 40, 720 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(320 + 40, 720 + 40), "column"), "Column");//장애물
+
+		ObjMgr->AddObject(new BlockMgr(Vec2(1520 + 40, 320 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(1560 + 40, 320 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(1560 + 40, 360 + 40), "column"), "Column");//장애물
+
+		ObjMgr->AddObject(new BlockMgr(Vec2(1560 + 40, 680 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(1560 + 40, 720 + 40), "column"), "Column");//장애물
+		ObjMgr->AddObject(new BlockMgr(Vec2(1520 + 40, 720 + 40), "column"), "Column");//장애물
 	}
+
+	
+
+
 }
 
 void GameMgr::SpawnItem() //Item에 백신이랑 닿았을때 visible 

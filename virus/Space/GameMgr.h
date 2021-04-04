@@ -26,6 +26,10 @@ public:
 	Vec2 m_PlayerPos;
 	Vec2 m_LinePos[256] = {};
 
+	bool Visible; // 몬스터움직임
+	bool Keep; //이어하기
+
+
 	int arr;
 	int m_Score;
 	int m_Hp;

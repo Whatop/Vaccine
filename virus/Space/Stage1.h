@@ -3,6 +3,10 @@ class Stage1 : public Scene
 {
 	Sprite* m_BG;
 	Sprite* m_Virus;
+
+	Sprite* Menu;
+	Sprite* Game;
+
 	TextMgr* m_Text;
 public:
 	float m_Move;

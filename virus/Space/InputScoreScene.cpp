@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "InputScoreScene.h"
-#include"MenuScene.h"
+#include "Loading.h"
 
 InputScoreScene::InputScoreScene()
 {
@@ -12,6 +12,8 @@ InputScoreScene::~InputScoreScene()
 
 void InputScoreScene::Init()
 {
+	ObjMgr->Release();
+	GameMgr::GetInst()->ReleaseUI();
 	m_BG = Sprite::Create(L"Painting/Scene/Black.png");
 	m_BG->SetPosition(1920 / 2, 1080 / 2);
 
@@ -85,7 +87,8 @@ void InputScoreScene::Update(float deltaTime, float Time)
 			player->name = name;
 			player->score = GameMgr::GetInst()->m_Score;
 			GameMgr::GetInst()->Ranks.push_back(player);
-			SceneDirector::GetInst()->ChangeScene(new MenuScene());
+			SceneDirector::GetInst()->SetScene(SceneState::MENU);
+			ObjMgr->AddObject(new Loading(0), "SceneChange");
 		}
 	}
 }

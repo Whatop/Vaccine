@@ -91,7 +91,13 @@ void App::Run()
 				ObjMgr->AddObject(new Loading(0), "SceneChange");
 				std::cout << "2로이동" << std::endl;
 			}
-
+			else if (INPUT->GetKey(VK_F7) == KeyState::DOWN) // 스테이지 2 이동
+			{
+				SceneDirector::GetInst()->SetScene(SceneState::ENDING);
+				ObjMgr->AddObject(new Loading(0), "SceneChange");
+				std::cout << "엔딩으로" << std::endl;
+			}
+			
 
 		}
 	}

@@ -275,17 +275,31 @@ void Player::Hp()
 			m_Player->G = 123;
 			m_Player->B = 61;
 		}
-		//낮아지면 다시 이어하기 / 시간이 0초 이하면 죽도록
+		if (m_Hp <= 0) {
+			m_Player->m_Visible = false;
+			ObjMgr->DeleteObject("Clone");
+			if (UI::GetInst()->TimeLimit < 0)
+				ObjMgr->RemoveObject(this);
+
+		}
+		else
+		{
+			m_Player->m_Visible = true;
+		}
+		
 	}
 }
 
-void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직일대마다 한개씩 조건 더 추가해야 될수도있음
+void Player::Update(float deltaTime, float Time) 
 {
 	GameMgr::GetInst()->HitCheak();
 	GameMgr::GetInst()->m_PlayerPos = m_Position;
 	GameMgr::GetInst()->_Ammor = _Ammor;
 	GameMgr::GetInst()->_Invincible = _Invincible;
-	Move();
+	GameMgr::GetInst()->Visible = m_Player->m_Visible;
+	if (m_Hp > 0) 
+		Move();
+
 	CheatKey();
 	Buff();
 	Hp();
@@ -305,6 +319,7 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	
 	ObjMgr->CollisionCheak(this, "Fill");
 	ObjMgr->CollisionCheak(this, "Clone");
+	ObjMgr->CollisionCheak(this, "Column");
 	if (!m_Invincible && !_Hit && !GODMODE) { 
 		ObjMgr->CollisionCheak(this, "Monster");
 	}
@@ -319,6 +334,12 @@ void Player::Update(float deltaTime, float Time) // BlockMgr bool 만들어서 움직�
 	}
 
 	//
+	if (GameMgr::GetInst()->Keep) {
+		m_Hp = 5;
+		m_Player->m_Visible = true;
+		GameMgr::GetInst()->Keep = false;
+
+	}
 }
 void Player::Render() 
 {
@@ -352,7 +373,23 @@ void Player::OnCollision(Object* obj)
 	if (obj->m_Tag == "Clone") {
 		create = true;
 		GameMgr::GetInst()->LinePos(m_Position);
-}
+	}
+	if (obj->m_Tag == "Column") {
+		if (Movement == _up)		 {
+			m_Position.y += m_Size.y;
+		}
+		else if (Movement == _down)  {
+			m_Position.y -= m_Size.y;
+		}
+		else if (Movement == _right) {
+			m_Position.x -= m_Size.x;
+		}
+		else if (Movement == _left)  {
+			m_Position.x += m_Size.x;
+		}
+		m_Hp -= 1;
+		_Hit = true;
+	}
 	if (obj->m_Tag == "Monster") {
 
 		if (!_Hit) {

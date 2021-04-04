@@ -171,6 +171,10 @@ void BlockMgr::Update(float deltaTime, float time)
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Defence", 1, 0.5f, 2, m_Position), "Effect");
 		}
 	}
+	if (GameMgr::GetInst()->Visible) 
+		m_Blocks->m_Visible = true;
+	else
+		m_Blocks->m_Visible = false;
 }
 
 void BlockMgr::Render()
@@ -214,166 +218,19 @@ void BlockMgr::Move()
 {
 	MoveTime += dt;
 	//enemy 움직임, 2스테이지로 넘어가면 성능향상
-	if (_tag == "fast") { // Fill이랑 닿으면 속도 업 + Clone이랑 닿으면 플레이어 피해 입음
-		// 백신선이나 백신에 붙이치면 붉은 Effect나오며 사라짐
-		if (MoveTime > 0.5f) {
-
-			if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x && m_Position.x < 1920 - m_Speed) {
-				Translate(m_Speed, 0);
-			}
-			else if (GameMgr::GetInst()->m_LinePos[0].x < m_Position.x && m_Position.x > 0 + m_Speed) {
-				Translate(-m_Speed, 0);
-			}
-
-			if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y && m_Position.x < 1080 - m_Speed) {
-				Translate(0, m_Speed);
-			}
-			else if (GameMgr::GetInst()->m_LinePos[0].y < m_Position.y && m_Position.y > 0 + m_Speed) {
-				Translate(0, -m_Speed);
-			}
-
-			MoveTime = 0;
+	if (GameMgr::GetInst()->Visible) {
+		if (_tag == "fast") { // Fill이랑 닿으면 속도 업 + Clone이랑 닿으면 플레이어 피해 입음
+			std::cout << "움직임" << std::endl;
+		}
+		if (_tag == "flash") {
+		}
+		if (_tag == "flashgiant") {
+		}
+		if (_tag == "giant") {
+		}
+		if (_tag == "toxino") {
 		}
 	}
-
-	if (_tag == "flash") {
-		if (MoveTime > Moveif) {
-
-			if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
-				Translate(m_Speed, 0);
-				if (flashstack != 3)
-					flashstack++;
-			}
-			else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
-				Translate(-m_Speed, 0);
-				if (flashstack != 3)
-					flashstack++;
-			}
-			if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
-				Translate(0, m_Speed);
-				if (flashstack != 3)
-					flashstack++;
-			}
-			else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
-				Translate(0, -m_Speed);
-				if (flashstack != 3)
-					flashstack++;
-			}
-			if (flashstack == 3) {
-
-				if (efttect) {
-					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 2, 2, m_Position), "Effect");
-					efttect = false;
-				}
-
-				flashtime += 1;
-				m_Blocks->A = 0;
-				Moveif = 0.2f;
-				if (flashtime > 5) {
-					m_Blocks->A = 255;
-					flashstack = 0;
-					flashtime = 0;
-					Moveif = 0.75f;
-					efttect = true;
-					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 2, 2, m_Position), "Effect");
-				}
-			}
-
-			MoveTime = 0;
-		}
-	}
-
-	if (_tag == "flashgiant") {
-		if (MoveTime > Moveif) {
-
-			if (GameMgr::GetInst()->m_PlayerPos.x > m_Position.x && m_Position.x < 1920 - m_Speed) {
-				Translate(m_Speed, 0);
-				if (flashstack != 3)
-					flashstack++;
-			}
-			else if (GameMgr::GetInst()->m_PlayerPos.x < m_Position.x && m_Position.x > 0 + m_Speed) {
-				Translate(-m_Speed, 0);
-				if (flashstack != 3)
-					flashstack++;
-			}
-			else if (GameMgr::GetInst()->m_PlayerPos.y > m_Position.y && m_Position.x < 1080 - m_Speed) {
-				Translate(0, m_Speed);
-				if (flashstack != 3)
-					flashstack++;
-			}
-			else if (GameMgr::GetInst()->m_PlayerPos.y < m_Position.y && m_Position.y > 0 + m_Speed) {
-				Translate(0, -m_Speed);
-				if (flashstack != 3)
-					flashstack++;
-			}
-
-			if (flashstack == 3) {
-				if (efttect) {
-					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
-					efttect = false;
-				}
-				flashtime += 1;
-				m_Blocks->A = 0;
-				Moveif = 0.2f;
-				if (flashtime > 5) {
-					m_Blocks->A = 255;
-					flashtime = 0;
-					flashstack = 0;
-					Moveif = 0.75f;
-					efttect = true;
-					ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/flash", 1, 1, 2, m_Position), "Effect");
-				}
-			}
-
-			MoveTime = 0;
-		}
-	}
-
-	if (_tag == "giant") {
-		if (MoveTime > 1) {
-			int XorY = rand() % 1 + 0;
-
-			if (XorY) { // X
-				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x) {
-					Translate(m_Speed, 0);
-				}
-				else {
-					Translate(-m_Speed, 0);
-				}
-			}
-			if (!XorY) { // Y
-				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y) {
-					Translate(0, m_Speed);
-				}
-				else {
-					Translate(0, -m_Speed);
-				}
-			}
-		}
-	}
-	if (_tag == "toxino") {
-		if (MoveTime > 0.5f) {
-			int XorY = rand() % 1 + 0;
-
-			if (XorY) { // X
-				if (GameMgr::GetInst()->m_LinePos[0].x > m_Position.x) {
-					Translate(m_Speed, 0);
-				}
-				else {
-					Translate(-m_Speed, 0);
-				}
-			}
-			if (!XorY) { // Y
-				if (GameMgr::GetInst()->m_LinePos[0].y > m_Position.y) {
-					Translate(0, m_Speed);
-				}
-				else {
-					Translate(0, -m_Speed);
-				}	
-			}
-		}
-	}
-
 	if (_tag == "clone") { // 
 		ObjMgr->CollisionCheak(this, "Fill");
 		if (!(GameMgr::GetInst()->hit)) { // 맞지 않았을때

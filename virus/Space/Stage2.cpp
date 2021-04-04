@@ -16,8 +16,17 @@ void Stage2::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 
 	m_BG = Sprite::Create(L"Painting/Stage1/Stage1.png");
 	m_BG->SetPosition(1920 / 2, 1080 / 2);
+
 	m_Virus = Sprite::Create(L"Painting/Stage1/Virus.png");
 	m_Virus->SetPosition(1920 / 2, 1080 / 2);
+
+	Menu = Sprite::Create(L"Painting/Button/ReturnTitle.png");
+	Menu->SetPosition(640, 1080 / 2); 
+	Menu->m_Visible = false;
+
+	Game = Sprite::Create(L"Painting/Button/ReturnGame.png");
+	Game->SetPosition(1280, 1080 / 2);
+	Game->m_Visible = false;
 
 	SceneDirector::GetInst()->SetScene(SceneState::STAGE2);
 	GameMgr::GetInst()->ReleaseUI();
@@ -29,7 +38,6 @@ void Stage2::Init() // ½ºÅ×ÀÌÁö 1 ¹è°æ ½ÅÃ¼·Î ÇÏ°í, ½ºÅ×ÀÌÁö 2ÀÇ ¹è°æÀ» ½£À¸·Î Ç
 
 	m_Cut = 0;
 	m_Move = 0;
-
 }
 
 void Stage2::Release()
@@ -63,10 +71,36 @@ void Stage2::Update(float deltaTime, float time)
 			break;
 		}
 	}
+	if (GameMgr::GetInst()->Visible == false) {
+		m_BG->A = 200;
+		m_Virus->A = 200;
+		Menu->m_Visible = true;
+		Game->m_Visible = true;
+
+		if (CollisionMgr::GetInst()->MouseWithBoxSize(Menu) && INPUT->GetButtonDown())
+		{
+			SceneDirector::GetInst()->SetScene(SceneState::MENU);
+			ObjMgr->AddObject(new Loading(0), "SceneChange");
+		}
+
+		if (CollisionMgr::GetInst()->MouseWithBoxSize(Game) && INPUT->GetButtonDown())
+		{
+			GameMgr::GetInst()->Keep = true;
+		}
+	}
+	else {
+		m_BG->A = 255;
+		m_Virus->A = 255;
+		Menu->m_Visible = false;
+		Game->m_Visible = false;
+	}
+
 }
 
 void Stage2::Render()
 {
 	m_BG->Render();
 	m_Virus->Render();
+	Menu->Render();
+	Game->Render();
 }

@@ -29,6 +29,8 @@ public:
 	bool efttect;
 
 
+	bool PlayerVisible;
+
 	bool left;
 	bool right;
 	bool down;

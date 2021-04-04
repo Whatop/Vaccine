@@ -90,7 +90,7 @@ void IntroScene::Update(float deltaTime, float time)
 			}
 			break;
 		case 5:
-			m_IntroCut6->A +=7;
+			m_IntroCut6->A +=5;
 			if (m_IntroCut6->A == 255)
 			{
 				m_Cut = 6;
@@ -117,7 +117,8 @@ void IntroScene::Update(float deltaTime, float time)
 		m_Start += dt;
 	//	SoundMgr::GetInst()->Play(L"Start.wav", false);
 		if (m_Start > 1.f) {
-			SceneDirector::GetInst()->ChangeScene(new MenuScene());
+			SceneDirector::GetInst()->SetScene(SceneState::MENU);
+			ObjMgr->AddObject(new Loading(0), "SceneChange");
 		}
 	}
 }
